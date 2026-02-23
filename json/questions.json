@@ -44,8 +44,8 @@
     },
     {
         "questionId": "d6060e08-4d54-4eb1-9e65-961e5f4ebdc6",
-        "title": "Handling conflict between coworkers",
-        "description": "Two employees are constantly fighting with one another. How do you proceed?",
+        "title": "Detecting duplicates in an array",
+        "description": "Given an integer array, explain an efficient approach to determine whether the array contains any duplicate values. What is the time complexity of your solution?",
         "difficulty": "MEDIUM",
         "type": "SHORT_ANSWER",
         "category": "ARRAY",
@@ -68,7 +68,7 @@
             {
                 "answerId": "0e1c4803-d3f4-4701-bf71-b6eab340ad1e",
                 "codeSnippet": "",
-                "explanation": "I would first meet with each employee individually to understand their perspectives. Then, I would bring them together to try and find common ground.",
+                "explanation": "A common approach is to iterate through the array while inserting elements into a HashSet. If an element already exists in the set, a duplicate has been found. This solution runs in O(n) time because each insertion and lookup in a HashSet is O(1) on average. The space complexity is O(n) due to storing elements in the set.",
                 "upvoteCount": 0,
                 "downvoteCount": 0,
                 "author": {
@@ -86,7 +86,7 @@
         ],
         "comment": [
             {
-                "text": "Consider mentioning documentation or involving HR if the conflict continues.",
+                "text": "Consider discussing how the solution would change if additional space was not allowed.",
                 "author": {
                     "userId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
                     "email": "grant.smith@example.com",
