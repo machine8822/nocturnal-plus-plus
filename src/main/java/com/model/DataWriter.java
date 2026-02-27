@@ -1,7 +1,5 @@
-package model;
+package com.model;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 public class DataWriter {
@@ -13,20 +11,20 @@ public class DataWriter {
     }
 
     public boolean saveUsers(ArrayList<User> users) {
-        try (FileWriter writer = new FileWriter(basePath + "/users.json")) {
-            writer.write(users.toString()); // placeholder
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+        // TODO: Implement JSON writing later
+        System.out.println("Stub: saveUsers called");
+        return true;
     }
 
     public boolean saveQuestions(ArrayList<InterviewQuestion> questions) {
-        try (FileWriter writer = new FileWriter(basePath + "/questions.json")) {
-            writer.write(questions.toString());
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
+        // TODO: Implement JSON writing later
+        System.out.println("Stub: saveQuestions called");
+        return true;
+    }
+
+    public boolean saveSubmissions(ArrayList<QuestionSubmission> subs) {
+        // TODO: Implement JSON writing later
+        System.out.println("Stub: saveSubmissions called");
+        return true;
     }
 }
