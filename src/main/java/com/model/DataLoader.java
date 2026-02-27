@@ -21,10 +21,4 @@ public class DataLoader {
         System.out.println("Stub: loadQuestions called");
         return new ArrayList<>();
     }
-
-    public ArrayList<QuestionSubmission> loadSubmissions() {
-        // TODO: Implement JSON reading later
-        System.out.println("Stub: loadSubmissions called");
-        return new ArrayList<>();
-    }
 }

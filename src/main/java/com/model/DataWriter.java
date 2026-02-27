@@ -22,9 +22,4 @@ public class DataWriter {
         return true;
     }
 
-    public boolean saveSubmissions(ArrayList<QuestionSubmission> subs) {
-        // TODO: Implement JSON writing later
-        System.out.println("Stub: saveSubmissions called");
-        return true;
-    }
 }
