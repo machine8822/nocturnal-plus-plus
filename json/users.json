@@ -1,26 +1,36 @@
 [
-    {
-        "userId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-        "email": "grant.smith@example.com",
-        "passwordHash": "$2a$12$dOHvtvzLflQ8cC4hR50Z3.lMcJXDsAwMZD9sfy4gWthw2zWI6vDKe",
-        "name": "Grant Smith",
-        "createdAt": "2024-01-15T10:30:00",
-        "lastLogin": "2026-02-16T14:45:00",
-        "isAdmin": true,
-        "isContributor": true
-        "school": "Universtiy of South Carolina",
-        "major": "Computer Science",
-        "total upvotes": '0',
-        "resumeURL":
-    },
-    {
-        "userId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
-        "email": "theodore.johnson@example.com",
-        "passwordHash": "$2a$12$ED.krIEIAy97TmhHuIcMWuTMuyifEYlEbH7xNpfpEXxKHgP5MQGXO",
-        "name": "Theodore Johnson",
-        "createdAt": "2024-01-26T10:30:00",
-        "lastLogin": "2026-02-20T14:45:00",
-        "isAdmin": false,
-        "isContributor": true
+  {
+    "userId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+    "email": "grant.smith@example.com",
+    "passwordHash": "$2a$12$dOHvtvzLflQ8cC4hR50Z3.lMcJXDsAwMZD9sfy4gWthw2zWI6vDKe",
+    "firstName": "Grant",
+    "lastName": "Smith",
+    "createdAt": "2024-01-15T10:30:00",
+    "lastLogin": "2026-02-16T14:45:00",
+    "isAdmin": true,
+    "isContributor": true,
+    "profile": {
+      "school": "University of South Carolina",
+      "major": "Computer Science",
+      "totalUpvotes": 0,
+      "resumeURL": ""
     }
+  },
+  {
+    "userId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "email": "theodore.johnson@example.com",
+    "passwordHash": "$2a$12$ED.krIEIAy97TmhHuIcMWuTMuyifEYlEbH7xNpfpEXxKHgP5MQGXO",
+    "firstName": "Theodore",
+    "lastName": "Johnson",
+    "createdAt": "2024-01-26T10:30:00",
+    "lastLogin": "2026-02-20T14:45:00",
+    "isAdmin": false,
+    "isContributor": true,
+    "profile": {
+      "school": "University of North Carolina",
+      "major": "Computer Engineering",
+      "totalUpvotes": 0,
+      "resumeURL": ""
+    }
+  }
 ]
