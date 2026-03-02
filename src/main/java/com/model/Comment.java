@@ -24,6 +24,15 @@ public class Comment {
         this.replies = new ArrayList<>();
     }
 
+    // ── Getters ──
+
+    public String getText()              { return text; }
+    public UUID getAuthorId()            { return authorId; }
+    public LocalDateTime getTimestamp()   { return timestamp; }
+    public boolean isEdited()            { return isEdited; }
+    public int getUpvoteCount()          { return upvoteCount; }
+    public int getDownvoteCount()        { return downvoteCount; }
+
     public void edit(String newText) {
         this.text = newText;
         this.isEdited = true;

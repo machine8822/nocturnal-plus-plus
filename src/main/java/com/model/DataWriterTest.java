@@ -3,9 +3,9 @@ package com.model;
 import java.util.ArrayList;
 
 /**
- * Simple test for DataWriter - no UI needed!
+ * Simple test for DataWriter to check if it can save users and questions to JSON files.
  * 
- * Just run this as a Java program to test if saveUsers() and saveQuestions() work.
+ * Run this to test if saveUsers() and saveQuestions() work.
  * Check the json/ folder to see if the files were created.
  */
 public class DataWriterTest {

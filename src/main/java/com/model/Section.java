@@ -10,6 +10,7 @@ public class Section {
     private SectionType sectionType;
     private DataType dataType;
     private List<Answer> answers;
+    private List<Comment> comments;
 
     public Section(String title, String body, DataType dataType, SectionType sectionType)
     {
@@ -18,6 +19,15 @@ public class Section {
         this.dataType = dataType;
         this.sectionType = sectionType;
         this.answers = new ArrayList<>();
+        this.comments = new ArrayList<>();
+    }
+
+    /**
+     * Convenience constructor used by DataLoader (string-based section type, no data type).
+     */
+    public Section(String title, String body, String sectionType)
+    {
+        this(title, body, null, SectionType.valueOf(sectionType));
     }
 
     public String getTitle()
@@ -52,5 +62,17 @@ public class Section {
             answers.add(answer);
         }
     }
-    
+
+    public List<Comment> getComments()
+    {
+        return comments;
+    }
+
+    public void addComment(Comment comment)
+    {
+        if (comment != null)
+        {
+            comments.add(comment);
+        }
+    }
 }

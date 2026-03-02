@@ -3,6 +3,7 @@ package com.model;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -52,13 +53,13 @@ public class DataWriter {
 
 		// Fill in each field from the user object
 		// Each put() is like: name → "John", email → "john@example.com", etc.
-		userDetails.put("userId", user.getUserId());
+		userDetails.put("userId", user.getUserId().toString());
 		userDetails.put("email", user.getEmail());
 		userDetails.put("passwordHash", user.getPasswordHash());
 		userDetails.put("firstName", user.getFirstName());
 		userDetails.put("lastName", user.getLastName());
-		userDetails.put("createdAt", user.getCreatedAt());
-		userDetails.put("lastLogin", user.getLastLogin());
+		userDetails.put("createdAt", user.getCreatedAt().toString());
+		userDetails.put("lastLogin", user.getLastLogin() != null ? user.getLastLogin().toString() : null);
 		userDetails.put("isAdmin", user.isAdmin());
 		userDetails.put("isContributor", user.isContributor());
 
@@ -105,20 +106,18 @@ public class DataWriter {
 		JSONObject questionDetails = new JSONObject();
 
 		// Fill in the basic question fields
-		questionDetails.put("questionId", question.getQuestionId());
+		questionDetails.put("questionId", question.getQuestionId().toString());
 		questionDetails.put("title", question.getTitle());
 		questionDetails.put("description", question.getDescription());
-		questionDetails.put("difficulty", question.getDifficulty());
-		questionDetails.put("type", question.getType());
-		questionDetails.put("category", question.getCategory());
+		questionDetails.put("difficulty", question.getDifficulty().toString());
+		questionDetails.put("type", question.getType().toString());
+		questionDetails.put("category", question.getCategory().toString());
 		questionDetails.put("imageURL", question.getImageURL());
-		questionDetails.put("authorId", question.getAuthorId());
+		questionDetails.put("authorId", question.getAuthorId().toString());
 		questionDetails.put("totalAttempts", question.getTotalAttempts());
 		questionDetails.put("totalSuccesses", question.getTotalSuccesses());
-		questionDetails.put("createdAt", question.getCreatedAt());
-		questionDetails.put("lastUpdated", question.getLastUpdated());
-		// include comments list (currently empty)
-		questionDetails.put("comments", new JSONArray());
+		questionDetails.put("createdAt", question.getCreatedAt().toString());
+		questionDetails.put("lastUpdated", question.getLastUpdated().toString());
 		
 
 		// Handle sections (a list of section objects)
@@ -144,16 +143,68 @@ public class DataWriter {
 		JSONObject sectionDetails = new JSONObject();
 
 		sectionDetails.put("title", section.getTitle());
-		sectionDetails.put("content", section.getContent());
-		sectionDetails.put("type", section.getType());
+		sectionDetails.put("content", section.getBody());
+		sectionDetails.put("type", section.getSectionType().toString());
 
 		// Handle answers (a list of Answer objects)
-		// TODO: add answers conversion when Answer class is ready
+		JSONArray answersJSON = new JSONArray();
+		List<Answer> answers = section.getAnswers();
+		for (int i = 0; i < answers.size(); i++) {
+			answersJSON.add(getAnswerJSON(answers.get(i)));
+		}
+		sectionDetails.put("answers", answersJSON);
 
 		// Handle comments (a list of Comment objects)
-		// TODO: add comments conversion when Comment class is ready
+		JSONArray commentsJSON = new JSONArray();
+		List<Comment> comments = section.getComments();
+		for (int i = 0; i < comments.size(); i++) {
+			commentsJSON.add(getCommentJSON(comments.get(i)));
+		}
+		sectionDetails.put("comments", commentsJSON);
 
 		return sectionDetails;
+	}
+
+	/**
+	 * Helper method to convert an Answer object to JSON
+	 */
+	private static JSONObject getAnswerJSON(Answer answer) {
+		JSONObject obj = new JSONObject();
+		obj.put("codeSnippet", answer.getCodeSnippet());
+		obj.put("explanation", answer.getExplanation());
+		obj.put("upvoteCount", answer.getUpvoteCount());
+		obj.put("downvoteCount", answer.getDownvoteCount());
+		obj.put("authorId", answer.getAuthorId() != null ? answer.getAuthorId().toString() : null);
+		obj.put("createdAt", answer.getCreatedAt() != null ? answer.getCreatedAt().toString() : null);
+
+		JSONArray ansComments = new JSONArray();
+		List<Comment> comments = answer.getComments();
+		for (int i = 0; i < comments.size(); i++) {
+			ansComments.add(getCommentJSON(comments.get(i)));
+		}
+		obj.put("comments", ansComments);
+		return obj;
+	}
+
+	/**
+	 * Helper method to convert a Comment object to JSON
+	 */
+	private static JSONObject getCommentJSON(Comment comment) {
+		JSONObject obj = new JSONObject();
+		obj.put("text", comment.getText());
+		obj.put("authorId", comment.getAuthorId() != null ? comment.getAuthorId().toString() : null);
+		obj.put("timestamp", comment.getTimestamp() != null ? comment.getTimestamp().toString() : null);
+		obj.put("isEdited", comment.isEdited());
+		obj.put("upvoteCount", comment.getUpvoteCount());
+		obj.put("downvoteCount", comment.getDownvoteCount());
+
+		JSONArray repliesJSON = new JSONArray();
+		List<Comment> replies = comment.getReplies();
+		for (int i = 0; i < replies.size(); i++) {
+			repliesJSON.add(getCommentJSON(replies.get(i)));
+		}
+		obj.put("replies", repliesJSON);
+		return obj;
 	}
 
 	/**
