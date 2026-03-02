@@ -247,11 +247,12 @@ public class InterviewQuestion {
     }
 
     /**
-     * Util
+     * Utility
      */
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "InterviewQuestion{" +
                 "id=" + questionId +
                 ", title='" + title + '\'' +
