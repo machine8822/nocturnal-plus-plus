@@ -15,6 +15,7 @@ import org.json.simple.JSONObject;
  * - Call saveUsers() to write users to json/users.json
  * - Call saveQuestions() to write questions to json/questions.json
  */
+@SuppressWarnings("unchecked")
 public class DataWriter {
 
 	private static final String USER_FILE = "json/users.json";
@@ -27,7 +28,7 @@ public class DataWriter {
 	 * @return true if save worked, false if there was an error
 	 */
 	public static boolean saveUsers(ArrayList<User> users) {
-		// Create an empty JSON array (like an empty box to hold all users as JSON)
+		// reates an empty JSON array 
 		JSONArray jsonUsers = new JSONArray();
 
 		// For each user in the list, convert it to JSON and add it to the box
@@ -47,12 +48,11 @@ public class DataWriter {
 	 * @param user: the User object to convert
 	 * @return JSONObject with all the user's data
 	 */
-	public static JSONObject getUserJSON(User user) {
+	private static JSONObject getUserJSON(User user) {
 		// Create an empty JSONObject (like an empty form to fill in)
 		JSONObject userDetails = new JSONObject();
 
 		// Fill in each field from the user object
-		// Each put() is like: name → "John", email → "john@example.com", etc.
 		userDetails.put("userId", user.getUserId().toString());
 		userDetails.put("email", user.getEmail());
 		userDetails.put("passwordHash", user.getPasswordHash());
@@ -63,7 +63,7 @@ public class DataWriter {
 		userDetails.put("isAdmin", user.isAdmin());
 		userDetails.put("isContributor", user.isContributor());
 
-		// Handle the profile (a nested object inside the user)
+		// Handle the profile a nested object inside the user
 		JSONObject profile = new JSONObject();
 		profile.put("school", user.getProfile().getSchool());
 		profile.put("major", user.getProfile().getMajor());
@@ -77,7 +77,7 @@ public class DataWriter {
 	/**
 	 * Save all interview questions to json/questions.json
 	 * 
-	 * @param questions: ArrayList of InterviewQuestion objects we want to save
+	 * @param questions: arrayList of InterviewQuestion objects we want to save
 	 * @return true if save worked, false if there was an error
 	 */
 	public static boolean saveQuestions(ArrayList<InterviewQuestion> questions) {
@@ -101,7 +101,7 @@ public class DataWriter {
 	 * @param question: the InterviewQuestion to convert
 	 * @return JSONObject with all the question's data
 	 */
-	public static JSONObject getQuestionJSON(InterviewQuestion question) {
+	private static JSONObject getQuestionJSON(InterviewQuestion question) {
 		// Create an empty JSONObject to fill in with question data
 		JSONObject questionDetails = new JSONObject();
 
@@ -120,8 +120,8 @@ public class DataWriter {
 		questionDetails.put("lastUpdated", question.getLastUpdated().toString());
 		
 
-		// Handle sections (a list of section objects)
-		ArrayList<Section> sections = question.getSections();
+		// Handle sections as a nested array inside the question
+		List<Section> sections = question.getSections();
 		JSONArray sectionsJSON = new JSONArray();
 		for (int i = 0; i < sections.size(); i++) {
 			Section section = sections.get(i);
@@ -220,7 +220,7 @@ public class DataWriter {
             // Convert the JSON to a string and write it to the file
 			file.write(json.toString());
 			
-			// Make sure the data is actually written to disk (not stuck in memory)
+			// Make sure the data is actually written to disk and not stuck in mem
 			file.flush();
 			
 			// Success!
