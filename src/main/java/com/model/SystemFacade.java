@@ -61,6 +61,14 @@ public class SystemFacade {
         return new ArrayList<>(questions.getByDifficulty(diff));
     }
 
+    public boolean addUser(User user) {
+        return users.addUser(user);
+    }
+
+    public ArrayList<User> getUsers() {
+        return users.getUsers();
+    }
+
 
 
 }

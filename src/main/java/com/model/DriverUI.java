@@ -14,7 +14,7 @@ public class DriverUI {
 	}
 
 	public void scenario1() {
-		System.out.println();
+		System.out.println("Scenario 1: Login");
 
 		User loggedInUser = driver.login("grant.smith@example.com", "123grant");
 		if (loggedInUser == null) {
@@ -23,6 +23,16 @@ public class DriverUI {
 		}
 		System.out.println("Grant Smith is now logged in");
 
+	}
+
+	public void scenario2() {
+		System.out.println("Scenario 2: User Creation");
+
+		)
+
+
+
+		
 	}
 
 
