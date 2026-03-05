@@ -14,12 +14,12 @@ public class DriverUI {
 
 	public void run() {
 		scenario1();
-		//scenario2();
-		//scenario3();
-		//scenario4();
+		// scenario2();
+		// scenario3();
+		// scenario4();
 	}
 
-	//User Scenarios
+	// User Scenarios
 	public void scenario1() {
 		System.out.println("Scenario 1: Login");
 
@@ -43,25 +43,25 @@ public class DriverUI {
 
 		UUID user1Id = UUID.randomUUID();
 		User newUser = new User(
-			user1Id,
-            "john.doe@example.com",
-            "hashed-password-123",
-            "John",
-            "Doe",
-            LocalDateTime.parse("2024-01-15T10:30:00"),
-            LocalDateTime.parse("2026-02-20T14:45:00"),
-            true,
-            true,
-            new Profile("University of South Carolina", "Computer Science", 2026, 5, "https://example.com/resume.pdf"),
-            new ArrayList<>()
-		);
+				user1Id,
+				"john.doe@example.com",
+				"hashed-password-123",
+				"John",
+				"Doe",
+				LocalDateTime.parse("2024-01-15T10:30:00"),
+				LocalDateTime.parse("2026-02-20T14:45:00"),
+				true,
+				true,
+				new Profile("University of South Carolina", "Computer Science", 2026, 5,
+						"https://example.com/resume.pdf"),
+				new ArrayList<>());
 
 		if (driver.addUser(newUser)) {
 			System.out.println("User John Doe has been successfully created");
 
-			//DataWriter.saveUsers(driver.getInstance().getUsers());
-			//driver.saveAllData();
-			//driver.deleteUser(newUser.getUserId());
+			// DataWriter.saveUsers(driver.getInstance().getUsers());
+			// driver.saveAllData();
+			// driver.deleteUser(newUser.getUserId());
 		} else {
 			System.out.println("Sorry, we couldn't create the user.");
 		}
@@ -91,13 +91,12 @@ public class DriverUI {
 
 		// Create a new interview question
 		InterviewQuestion newQuestion = new InterviewQuestion(
-			"How far can fish fly?",
-			"Given the weight and size, how far will that fucker fly?",
-			Difficulty.MEDIUM,
-			Category.LINKED_LIST,
-			QuestionType.SHORT_ANSWER,
-			loggedInUser.getUserId()
-		);
+				"How far can fish fly?",
+				"Given the weight and size, how far will that fucker fly?",
+				Difficulty.MEDIUM,
+				Category.LINKED_LIST,
+				QuestionType.SHORT_ANSWER,
+				loggedInUser.getUserId());
 
 		if (driver.addQuestion(newQuestion)) {
 			System.out.println("Question created successfully: " + newQuestion.getTitle());
@@ -107,9 +106,6 @@ public class DriverUI {
 		} else {
 			System.out.println("Failed to create question.");
 		}
-
-
-
 
 	}
 
