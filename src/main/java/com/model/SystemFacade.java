@@ -32,6 +32,11 @@ public class SystemFacade {
         User user = users.authenticate(identifier, pass);
         if (user != null) {
             currentUser = user;
+            ArrayList<InterviewQuestion> allQuestions = new ArrayList<>(questions.getAll());
+            currentQuestion = allQuestions.isEmpty() ? null : allQuestions.get(0);
+        } else {
+            currentUser = null;
+            currentQuestion = null;
         }
         return user;
     }
@@ -51,6 +56,14 @@ public class SystemFacade {
 
     public void selectQuestion(UUID id) {
         currentQuestion = questions.getQuestion(id);
+    }
+
+    public User getCurrentUser() {
+        return currentUser;
+    }
+
+    public InterviewQuestion getCurrentQuestion() {
+        return currentQuestion;
     }
 
     public ArrayList<InterviewQuestion> getQuestionsByCategory(Category cat) {
