@@ -1,9 +1,8 @@
 package com.model;
 
-import java.util.Scanner;
-import java.util.UUID;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class DriverUI {
 	private SystemFacade driver;
@@ -33,7 +32,8 @@ public class DriverUI {
 		System.out.println("Grant Smith is now logged in");
 
 		if (failedLogin == null) {
-			System.out.println("Failed login attempt with " + failedLogin.getEmail());
+			System.out.println("Failed login attempt with asshat@example.com");
+
 		}
 
 	}
