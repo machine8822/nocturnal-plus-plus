@@ -1,76 +1,262 @@
 [
   {
     "questionId": "57fb4022-ff25-4d2a-ab30-027081caa6fb",
-    "title": "Binary search time complexity",
-    "difficulty": "EASY",
-    "type": "SHORT_ANSWER",
-    "category": "ARRAY",
-    "imageURL": "",
-    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
-    "totalAttempts": 0,
+    "comments": [],
     "totalSuccesses": 0,
-    "createdAt": "2026-02-21T13:30:00",
-    "lastUpdated": "2026-02-21T13:30:00",
+    "totalAttempts": 0,
+    "description": null,
+    "title": "Binary search time complexity",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
     "sections": [
       {
-        "title": "Description",
-        "content": "What is the time complexity of binary search on a sorted array and why?",
-        "type": "DESCRIPTION",
-        "answers": [],
         "comments": [
           {
+            "downvoteCount": 0,
+            "replies": [],
+            "isEdited": false,
             "text": "Be sure to explain how the search space is reduced on each step.",
             "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "timestamp": "2026-02-21T13:32:00",
-            "isEdited": false,
-            "upvoteCount": 0,
-            "downvoteCount": 0,
-            "replies": []
+            "timestamp": "2026-02-21T13:32",
+            "upvoteCount": 0
           }
-        ]
+        ],
+        "dataType": null,
+        "answers": [],
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "content": "What is the time complexity of binary search on a sorted array and why?"
       }
-    ]
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-02-21T13:30",
+    "lastUpdated": "2026-03-13T12:58:47.903103400",
+    "imageURL": "",
+    "category": "ARRAY"
   },
   {
     "questionId": "d6060e08-4d54-4eb1-9e65-961e5f4ebdc6",
-    "title": "Detecting duplicates in an array",
-    "difficulty": "MEDIUM",
-    "type": "SHORT_ANSWER",
-    "category": "ARRAY",
-    "imageURL": "",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "totalAttempts": 0,
+    "comments": [],
     "totalSuccesses": 0,
-    "createdAt": "2026-02-21T14:00:00",
-    "lastUpdated": "2026-02-21T14:00:00",
+    "totalAttempts": 0,
+    "description": null,
+    "title": "Detecting duplicates in an array",
+    "type": "SHORT_ANSWER",
+    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
     "sections": [
       {
-        "title": "Description",
-        "content": "Given an integer array, explain an efficient approach to determine whether the array contains any duplicate values. What is the time complexity of your solution?",
-        "type": "DESCRIPTION",
+        "comments": [
+          {
+            "downvoteCount": 0,
+            "replies": [],
+            "isEdited": false,
+            "text": "Consider discussing how the solution would change if additional space was not allowed.",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "timestamp": "2026-02-21T14:07",
+            "upvoteCount": 0
+          }
+        ],
+        "dataType": null,
         "answers": [
           {
             "codeSnippet": "",
-            "explanation": "A common approach is to use a HashSet. Insert elements and check if already exists. O(n) time and O(n) space.",
-            "upvoteCount": 0,
+            "createdAt": "2026-02-21T14:05",
             "downvoteCount": 0,
+            "comments": [],
+            "explanation": "A common approach is to use a HashSet. Insert elements and check if already exists. O(n) time and O(n) space.",
             "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
-            "createdAt": "2026-02-21T14:05:00",
-            "comments": []
+            "upvoteCount": 0
           }
         ],
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "content": "Given an integer array, explain an efficient approach to determine whether the array contains any duplicate values. What is the time complexity of your solution?"
+      }
+    ],
+    "difficulty": "MEDIUM",
+    "createdAt": "2026-02-21T14:00",
+    "lastUpdated": "2026-03-13T12:58:47.904103800",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "6248c769-6627-42a2-b573-6a285696f092",
+    "comments": [],
+    "totalSuccesses": 0,
+    "totalAttempts": 0,
+    "description": "This question is created by PersistenceFlowDemo.",
+    "title": "Demo persisted question 1773420086060",
+    "type": "SHORT_ANSWER",
+    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+    "sections": [
+      {
+        "comments": [],
+        "dataType": "STRING",
+        "answers": [
+          {
+            "codeSnippet": "int x = 1;",
+            "createdAt": "2026-03-13T12:41:26.061009500",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Demo answer body",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "upvoteCount": 0
+          }
+        ],
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "content": "This section is part of save demo."
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-03-13T12:41:26.060011100",
+    "lastUpdated": "2026-03-13T12:58:47.905102800",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "af03598f-d224-4891-a74e-d9bf059a3a24",
+    "comments": [],
+    "totalSuccesses": 0,
+    "totalAttempts": 0,
+    "description": "This question is created as demo.",
+    "title": "Demo persisted question 1773420239973",
+    "type": "SHORT_ANSWER",
+    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+    "sections": [
+      {
+        "comments": [],
+        "dataType": "STRING",
+        "answers": [
+          {
+            "codeSnippet": "int x = 1;",
+            "createdAt": "2026-03-13T12:43:59.973793700",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Demo answer body",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "upvoteCount": 0
+          }
+        ],
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "content": "This section is part of save demo."
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-03-13T12:43:59.973793700",
+    "lastUpdated": "2026-03-13T12:58:47.905102800",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "81db56dc-e9eb-4974-9e20-f525aaf2500f",
+    "comments": [],
+    "totalSuccesses": 0,
+    "totalAttempts": 0,
+    "description": "This question is created as demo.",
+    "title": "Demo persisted question 1773420338638",
+    "type": "SHORT_ANSWER",
+    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+    "sections": [
+      {
+        "comments": [],
+        "dataType": "STRING",
+        "answers": [
+          {
+            "codeSnippet": "int x = 1;",
+            "createdAt": "2026-03-13T12:45:38.638759800",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Demo answer body",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "upvoteCount": 0
+          }
+        ],
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "content": "This section is part of save demo."
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-03-13T12:45:38.638759800",
+    "lastUpdated": "2026-03-13T12:58:47.905102800",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "8adeddd2-6a24-4c33-a82f-46d3c7681e3b",
+    "comments": [
+      {
+        "downvoteCount": 0,
+        "replies": [],
+        "isEdited": false,
+        "text": "adding a question level comment from user",
+        "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+        "timestamp": "2026-03-13T12:58:43.926619300",
+        "upvoteCount": 0
+      }
+    ],
+    "totalSuccesses": 0,
+    "totalAttempts": 0,
+    "description": "This qustion is created as demo.",
+    "title": "Demo persisted question 1773421123926",
+    "type": "SHORT_ANSWER",
+    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+    "sections": [
+      {
         "comments": [
           {
-            "text": "Consider discussing how the solution would change if additional space was not allowed.",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "timestamp": "2026-02-21T14:07:00",
-            "isEdited": false,
-            "upvoteCount": 0,
             "downvoteCount": 0,
-            "replies": []
+            "replies": [],
+            "isEdited": false,
+            "text": "section note from user",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "timestamp": "2026-03-13T12:58:43.926619300",
+            "upvoteCount": 0
           }
-        ]
+        ],
+        "dataType": "STRING",
+        "answers": [
+          {
+            "codeSnippet": "int x = 1;",
+            "createdAt": "2026-03-13T12:58:43.926619300",
+            "downvoteCount": 0,
+            "comments": [
+              {
+                "downvoteCount": 0,
+                "replies": [
+                  {
+                    "downvoteCount": 0,
+                    "replies": [],
+                    "isEdited": false,
+                    "text": "quick reply from same user",
+                    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+                    "timestamp": "2026-03-13T12:58:43.926619300",
+                    "upvoteCount": 0
+                  }
+                ],
+                "isEdited": false,
+                "text": "answer comment from user",
+                "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+                "timestamp": "2026-03-13T12:58:43.926619300",
+                "upvoteCount": 0
+              }
+            ],
+            "explanation": "Demo answer body",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "upvoteCount": 0
+          }
+        ],
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "content": "This sction is part of save demo."
       }
-    ]
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-03-13T12:58:43.926619300",
+    "lastUpdated": "2026-03-13T12:58:47.906103700",
+    "imageURL": "",
+    "category": "ARRAY"
   }
 ]

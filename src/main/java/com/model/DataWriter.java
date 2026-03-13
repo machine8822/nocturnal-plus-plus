@@ -2,13 +2,11 @@ package com.model;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.Reader;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
 /**
  * DataWriter saves User and InterviewQuestion objects to JSON files.
@@ -227,15 +225,17 @@ public class DataWriter {
 	 */
 	private static boolean writeJSONToFile(Object json, String filePath) {
 		try (FileWriter file = new FileWriter(filePath)) {
-			
-            // Convert the JSON to a string and write it to the file
+
+			// Convert JSON to text and write it in readable, indented format.
+			String jsonText;
 			if (json instanceof JSONArray) {
-				file.write(((JSONArray) json).toJSONString());
+				jsonText = ((JSONArray) json).toJSONString();
 			} else if (json instanceof JSONObject) {
-				file.write(((JSONObject) json).toJSONString());
+				jsonText = ((JSONObject) json).toJSONString();
 			} else {
-				file.write(String.valueOf(json));
+				jsonText = String.valueOf(json);
 			}
+			file.write(prettyPrintJson(jsonText));
 			
 			// Make sure the data is actually written to disk and not stuck in mem
 			file.flush();
@@ -245,20 +245,90 @@ public class DataWriter {
 		} catch (IOException e) {
 			// If something went wrong, print the error for debugging
 			System.err.println("Error writing to file: " + filePath);
-			e.printStackTrace();
+			System.err.println("Write failed: " + e.getMessage());
 			return false;
 		}
 	}
 
-	private static JSONArray readJSONArrayFromFile(String filePath) {
-		try (Reader reader = new java.io.FileReader(filePath)) {
-			Object parsed = new JSONParser().parse(reader);
-			if (parsed instanceof JSONArray) {
-				return (JSONArray) parsed;
+	private static String prettyPrintJson(String rawJson) {
+		if (rawJson == null || rawJson.isBlank()) {
+			return "";
+		}
+
+		StringBuilder out = new StringBuilder();
+		int indentLevel = 0;
+		boolean inString = false;
+		boolean escaping = false;
+
+		for (int i = 0; i < rawJson.length(); i++) {
+			char c = rawJson.charAt(i);
+
+			if (inString) {
+				out.append(c);
+				if (escaping) {
+					escaping = false;
+				} else if (c == '\\') {
+					escaping = true;
+				} else if (c == '"') {
+					inString = false;
+				}
+				continue;
 			}
-			return new JSONArray();
-		} catch (Exception e) {
-			return new JSONArray();
+
+			switch (c) {
+				case '"':
+					inString = true;
+					out.append(c);
+					break;
+				case '{':
+				case '[':
+					int next = findNextNonWhitespaceIndex(rawJson, i + 1);
+					char closing = c == '{' ? '}' : ']';
+					if (next >= 0 && rawJson.charAt(next) == closing) {
+						out.append(c).append(closing);
+						i = next;
+					} else {
+						out.append(c).append('\n');
+						indentLevel++;
+						appendIndent(out, indentLevel);
+					}
+					break;
+				case '}':
+				case ']':
+					out.append('\n');
+					indentLevel = Math.max(0, indentLevel - 1);
+					appendIndent(out, indentLevel);
+					out.append(c);
+					break;
+				case ',':
+					out.append(c).append('\n');
+					appendIndent(out, indentLevel);
+					break;
+				case ':':
+					out.append(": ");
+					break;
+				default:
+					if (!Character.isWhitespace(c)) {
+						out.append(c);
+					}
+			}
+		}
+
+		return out.toString();
+	}
+
+	private static int findNextNonWhitespaceIndex(String text, int start) {
+		for (int i = start; i < text.length(); i++) {
+			if (!Character.isWhitespace(text.charAt(i))) {
+				return i;
+			}
+		}
+		return -1;
+	}
+
+	private static void appendIndent(StringBuilder out, int indentLevel) {
+		for (int i = 0; i < indentLevel; i++) {
+			out.append("  ");
 		}
 	}
 
