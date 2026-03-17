@@ -77,4 +77,8 @@ public class UserList {
         if (found == null) return null;
         return found.login(pass) ? found : null;
     }
+
+    public boolean isValidUser(String user, String pass) {
+        return authenticate(user, pass) != null;
+    }
 }
