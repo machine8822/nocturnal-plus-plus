@@ -22,6 +22,8 @@ public class InterviewQuestion {
     private LocalDateTime createdAt;
     private LocalDateTime lastUpdated;
 
+    private boolean approved;
+
     private List<Comment> comments;
     private List<Section> sections;
 
@@ -48,6 +50,7 @@ public class InterviewQuestion {
 
         this.createdAt = LocalDateTime.now();
         this.lastUpdated = LocalDateTime.now();
+        this.approved = false;
 
         this.comments = new ArrayList<>();
         this.sections = new ArrayList<>();
@@ -74,9 +77,22 @@ public class InterviewQuestion {
         this.totalAttempts = totalAttempts;
         this.totalSuccesses = totalSuccesses;
         this.imageURL = imageURL == null ? "" : imageURL;
+        this.approved = true;
 
         this.comments = new ArrayList<>();
         this.sections = new ArrayList<>();
+    }
+
+    public void approveSubmission()
+    {
+        this.approved = true;
+        touch();
+    }
+
+    public void disapproveSubmission()
+    {
+        this.approved = false;
+        touch();
     }
 
     /**
@@ -246,6 +262,11 @@ public class InterviewQuestion {
         return imageURL;
     }
 
+    public boolean isApproved()
+    {
+        return approved;
+    }
+
     /**
      * Utility
      */
@@ -264,6 +285,7 @@ public class InterviewQuestion {
                 ", difficulty=" + difficulty +
                 ", type=" + type +
                 ", category=" + category +
+                ", approved=" + approved +
                 ", attempts=" + totalAttempts +
                 ", successes=" + totalSuccesses +
                 '}';
