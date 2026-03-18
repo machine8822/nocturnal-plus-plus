@@ -22,7 +22,7 @@ public class User {
     private boolean isContributor;
 
     private Profile profile;
-    private final ArrayList<UUID> bookmarkedQuestionIds;
+    private final List<UUID> bookmarkedQuestionIds;
 
     public User(String email, String password, String firstName, String lastName) {
         this(UUID.randomUUID(), email, hashPassword(password), firstName, lastName,
@@ -44,7 +44,7 @@ public class User {
                 boolean isAdmin,
                 boolean isContributor,
                 Profile profile,
-                ArrayList<UUID> bookmarkedQuestionIds) {
+                List<UUID> bookmarkedQuestionIds) {
 
         this.userId = userId == null ? UUID.randomUUID() : userId;
         this.email = (email == null) ? "" : email.trim();
@@ -56,7 +56,9 @@ public class User {
         this.isAdmin = isAdmin;
         this.isContributor = isContributor;
         this.profile = profile == null ? new Profile() : profile;
-        this.bookmarkedQuestionIds = (bookmarkedQuestionIds == null) ? new ArrayList<>() : bookmarkedQuestionIds;
+        this.bookmarkedQuestionIds = (bookmarkedQuestionIds == null)
+            ? new ArrayList<>()
+            : new ArrayList<>(bookmarkedQuestionIds);
     }
 
     public UUID getUserId() {
