@@ -9,6 +9,12 @@ public class Section {
     private String body;
     private SectionType sectionType;
     private DataType dataType;
+    private String imageURL;
+    private List<String> constraints;
+    private List<String> examples;
+    private String expectedTimeComplexity;
+    private Integer maxLinesOfCode;
+    private Integer timeLimitSeconds;
     private List<Answer> answers;
     private List<Comment> comments;
 
@@ -18,6 +24,12 @@ public class Section {
         this.body = body;
         this.dataType = dataType;
         this.sectionType = sectionType;
+        this.imageURL = "";
+        this.constraints = new ArrayList<>();
+        this.examples = new ArrayList<>();
+        this.expectedTimeComplexity = "";
+        this.maxLinesOfCode = null;
+        this.timeLimitSeconds = null;
         this.answers = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
@@ -48,6 +60,98 @@ public class Section {
     public DataType getDataType()
     {
         return dataType;
+    }
+
+    public String getImageURL()
+    {
+        return imageURL;
+    }
+
+    public List<String> getConstraints()
+    {
+        return constraints;
+    }
+
+    public List<String> getExamples()
+    {
+        return examples;
+    }
+
+    public String getExpectedTimeComplexity()
+    {
+        return expectedTimeComplexity;
+    }
+
+    public Integer getMaxLinesOfCode()
+    {
+        return maxLinesOfCode;
+    }
+
+    public Integer getTimeLimitSeconds()
+    {
+        return timeLimitSeconds;
+    }
+
+    public void setImageURL(String imageURL)
+    {
+        this.imageURL = imageURL == null ? "" : imageURL;
+    }
+
+    public void setExpectedTimeComplexity(String expectedTimeComplexity)
+    {
+        this.expectedTimeComplexity = expectedTimeComplexity == null ? "" : expectedTimeComplexity;
+    }
+
+    public void setMaxLinesOfCode(Integer maxLinesOfCode)
+    {
+        this.maxLinesOfCode = maxLinesOfCode;
+    }
+
+    public void setTimeLimitSeconds(Integer timeLimitSeconds)
+    {
+        this.timeLimitSeconds = timeLimitSeconds;
+    }
+
+    public void setConstraints(List<String> constraints)
+    {
+        this.constraints.clear();
+        if (constraints == null) {
+            return;
+        }
+
+        for (String constraint : constraints) {
+            if (constraint != null && !constraint.isBlank()) {
+                this.constraints.add(constraint);
+            }
+        }
+    }
+
+    public void addConstraint(String constraint)
+    {
+        if (constraint != null && !constraint.isBlank()) {
+            constraints.add(constraint);
+        }
+    }
+
+    public void setExamples(List<String> examples)
+    {
+        this.examples.clear();
+        if (examples == null) {
+            return;
+        }
+
+        for (String example : examples) {
+            if (example != null && !example.isBlank()) {
+                this.examples.add(example);
+            }
+        }
+    }
+
+    public void addExample(String example)
+    {
+        if (example != null && !example.isBlank()) {
+            examples.add(example);
+        }
     }
 
     public List<Answer> getAnswers()

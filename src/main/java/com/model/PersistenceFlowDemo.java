@@ -67,12 +67,23 @@ public class PersistenceFlowDemo {
         Comment questionComment = new Comment("adding a question level comment from user", loggedIn.getUserId());
         demoQuestion.addComment(questionComment);
 
-        // add a section with an answer to have some nested data in the question    
+        // Add a meaty description section with image, constraints, and examples.
         Section section = new Section(
                 "Description",
-                "This sction is part of save demo.",
+            "Given an array of integers nums and a target value, return the indices of two numbers that add up to target.",
                 DataType.STRING,
                 SectionType.DESCRIPTION);
+        section.setImageURL("https://images.example.com/questions/two-sum-visual.png");
+        section.setExpectedTimeComplexity("O(n)");
+        section.setMaxLinesOfCode(20);
+        section.setTimeLimitSeconds(1);
+        section.addConstraint("2 <= nums.length <= 10^4");
+        section.addConstraint("-10^9 <= nums[i] <= 10^9");
+        section.addConstraint("-10^9 <= target <= 10^9");
+        section.addConstraint("Exactly one valid answer exists");
+        section.addExample("Input: nums = [2,7,11,15], target = 9 | Output: [0,1]");
+        section.addExample("Input: nums = [3,2,4], target = 6 | Output: [1,2]");
+        section.addExample("Input: nums = [3,3], target = 6 | Output: [0,1]");
 
         // section-level comment from the same user
         Comment sectionComment = new Comment("section note from user", loggedIn.getUserId());
@@ -85,6 +96,29 @@ public class PersistenceFlowDemo {
         answer.addComment(answerComment);
         section.addAnswer(answer);
         demoQuestion.addSection(section);
+
+        Section constraintsSection = new Section(
+            "Hard Constraints",
+            "Your implementation should avoid brute force and fit within practical interview limits.",
+            DataType.STRING,
+            SectionType.CONSTRAINT);
+        constraintsSection.setExpectedTimeComplexity("O(n)");
+        constraintsSection.setMaxLinesOfCode(25);
+        constraintsSection.setTimeLimitSeconds(2);
+        constraintsSection.addConstraint("Do not use nested loops over nums");
+        constraintsSection.addConstraint("Use at most O(n) extra space");
+        constraintsSection.addConstraint("Return indices, not values");
+        demoQuestion.addSection(constraintsSection);
+
+        Section exampleSection = new Section(
+            "Walkthrough Examples",
+            "These examples clarify edge behavior and indexing expectations.",
+            DataType.STRING,
+            SectionType.EXAMPLE);
+        exampleSection.addExample("nums = [1,5,3,7], target = 8 -> [0,3]");
+        exampleSection.addExample("nums = [-3,4,3,90], target = 0 -> [0,2]");
+        exampleSection.addExample("nums = [0,4,3,0], target = 0 -> [0,3]");
+        demoQuestion.addSection(exampleSection);
         
         
         boolean addQuestionResult = facade.addQuestion(demoQuestion);

@@ -21,16 +21,67 @@
             "upvoteCount": 0
           }
         ],
+        "examples": [
+          "nums=[1,3,5,7,9], target=7 -> index=3",
+          "nums=[2,4,6,8], target=5 -> index=-1",
+          "nums=[10], target=10 -> index=0"
+        ],
         "dataType": null,
+        "imageURL": "https:\/\/images.example.com\/questions\/binary-search-interval.png",
+        "expectedTimeComplexity": "O(log n)",
+        "timeLimitSeconds": 1,
         "answers": [],
+        "maxLinesOfCode": 18,
         "title": "Description",
         "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= nums.length <= 10^5",
+          "nums is sorted in ascending order",
+          "Use iterative or recursive binary search"
+        ],
         "content": "What is the time complexity of binary search on a sorted array and why?"
+      },
+      {
+        "comments": [],
+        "examples": [
+          "After one comparison, n becomes n\/2",
+          "After k comparisons, n becomes n\/(2^k)"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "O(log n)",
+        "timeLimitSeconds": 1,
+        "answers": [],
+        "maxLinesOfCode": 15,
+        "title": "Contraint Notes",
+        "type": "CONSTRAINT",
+        "constraints": [
+          "Explain why search space halves each step",
+          "Mention space complexity for iterative solution"
+        ],
+        "content": "Your explanation must include both intuition and math for O(log n)."
+      },
+      {
+        "comments": [],
+        "examples": [
+          "n = 32 -> 5 steps max",
+          "n = 1,024 -> 10 steps max"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "O(log n)",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "Worked Examples",
+        "type": "EXAMPLE",
+        "constraints": [],
+        "content": "Connect powers of two to the number of decisions made by binary search."
       }
     ],
     "difficulty": "EASY",
     "createdAt": "2026-02-21T13:30",
-    "lastUpdated": "2026-03-13T12:58:47.903103400",
+    "lastUpdated": "2026-03-18T20:58:21.424447",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -56,7 +107,15 @@
             "upvoteCount": 0
           }
         ],
+        "examples": [
+          "nums=[1,2,3,1] -> true",
+          "nums=[1,2,3,4] -> false",
+          "nums=[1,1,1,3,3,4,3,2,4,2] -> true"
+        ],
         "dataType": null,
+        "imageURL": "https:\/\/images.example.com\/questions\/contains-duplicate-hashset.png",
+        "expectedTimeComplexity": "O(n)",
+        "timeLimitSeconds": 2,
         "answers": [
           {
             "codeSnippet": "",
@@ -68,14 +127,40 @@
             "upvoteCount": 0
           }
         ],
+        "maxLinesOfCode": 25,
         "title": "Description",
         "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= nums.length <= 10^5",
+          "-10^9 <= nums[i] <= 10^9",
+          "Try to avoid O(n^2) brute-force"
+        ],
         "content": "Given an integer array, explain an efficient approach to determine whether the array contains any duplicate values. What is the time complexity of your solution?"
+      },
+      {
+        "comments": [],
+        "examples": [
+          "Sort then scan adjacent values: O(n log n), O(1) extra space",
+          "Nested loops baseline: O(n^2)"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "O(n)",
+        "timeLimitSeconds": 2,
+        "answers": [],
+        "maxLinesOfCode": 20,
+        "title": "Constraint Notes",
+        "type": "CONSTRAINT",
+        "constraints": [
+          "HashSet-based approach preferred",
+          "Discuss tradeoff when extra space is not allowed"
+        ],
+        "content": "Compare at least two approaches and justify why one is better for large input sizes."
       }
     ],
     "difficulty": "MEDIUM",
     "createdAt": "2026-02-21T14:00",
-    "lastUpdated": "2026-03-13T12:58:47.904103800",
+    "lastUpdated": "2026-03-18T20:58:21.425443400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -91,7 +176,11 @@
     "sections": [
       {
         "comments": [],
+        "examples": [],
         "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
         "answers": [
           {
             "codeSnippet": "int x = 1;",
@@ -103,14 +192,16 @@
             "upvoteCount": 0
           }
         ],
+        "maxLinesOfCode": null,
         "title": "Description",
         "type": "DESCRIPTION",
+        "constraints": [],
         "content": "This section is part of save demo."
       }
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:41:26.060011100",
-    "lastUpdated": "2026-03-13T12:58:47.905102800",
+    "lastUpdated": "2026-03-18T20:58:21.425443400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -126,7 +217,11 @@
     "sections": [
       {
         "comments": [],
+        "examples": [],
         "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
         "answers": [
           {
             "codeSnippet": "int x = 1;",
@@ -138,14 +233,16 @@
             "upvoteCount": 0
           }
         ],
+        "maxLinesOfCode": null,
         "title": "Description",
         "type": "DESCRIPTION",
+        "constraints": [],
         "content": "This section is part of save demo."
       }
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:43:59.973793700",
-    "lastUpdated": "2026-03-13T12:58:47.905102800",
+    "lastUpdated": "2026-03-18T20:58:21.425443400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -161,7 +258,11 @@
     "sections": [
       {
         "comments": [],
+        "examples": [],
         "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
         "answers": [
           {
             "codeSnippet": "int x = 1;",
@@ -173,14 +274,16 @@
             "upvoteCount": 0
           }
         ],
+        "maxLinesOfCode": null,
         "title": "Description",
         "type": "DESCRIPTION",
+        "constraints": [],
         "content": "This section is part of save demo."
       }
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:45:38.638759800",
-    "lastUpdated": "2026-03-13T12:58:47.905102800",
+    "lastUpdated": "2026-03-18T20:58:21.425443400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -216,7 +319,11 @@
             "upvoteCount": 0
           }
         ],
+        "examples": [],
         "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
         "answers": [
           {
             "codeSnippet": "int x = 1;",
@@ -248,14 +355,142 @@
             "upvoteCount": 0
           }
         ],
+        "maxLinesOfCode": null,
         "title": "Description",
         "type": "DESCRIPTION",
+        "constraints": [],
         "content": "This sction is part of save demo."
       }
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:58:43.926619300",
-    "lastUpdated": "2026-03-13T12:58:47.906103700",
+    "lastUpdated": "2026-03-18T20:58:21.425443400",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "3ec76541-ecb1-4dab-a892-b808075c2b56",
+    "comments": [
+      {
+        "downvoteCount": 0,
+        "replies": [],
+        "isEdited": false,
+        "text": "adding a question level comment from user",
+        "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+        "timestamp": "2026-03-18T20:58:21.770093300",
+        "upvoteCount": 0
+      }
+    ],
+    "totalSuccesses": 0,
+    "totalAttempts": 0,
+    "description": "This qustion is created as demo.",
+    "title": "Demo persisted question 1773881901770",
+    "type": "SHORT_ANSWER",
+    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+    "sections": [
+      {
+        "comments": [
+          {
+            "downvoteCount": 0,
+            "replies": [],
+            "isEdited": false,
+            "text": "section note from user",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "timestamp": "2026-03-18T20:58:21.770093300",
+            "upvoteCount": 0
+          }
+        ],
+        "examples": [
+          "Input: nums = [2,7,11,15], target = 9 | Output: [0,1]",
+          "Input: nums = [3,2,4], target = 6 | Output: [1,2]",
+          "Input: nums = [3,3], target = 6 | Output: [0,1]"
+        ],
+        "dataType": "STRING",
+        "imageURL": "https:\/\/images.example.com\/questions\/two-sum-visual.png",
+        "expectedTimeComplexity": "O(n)",
+        "timeLimitSeconds": 1,
+        "answers": [
+          {
+            "codeSnippet": "int x = 1;",
+            "createdAt": "2026-03-18T20:58:21.770093300",
+            "downvoteCount": 0,
+            "comments": [
+              {
+                "downvoteCount": 0,
+                "replies": [
+                  {
+                    "downvoteCount": 0,
+                    "replies": [],
+                    "isEdited": false,
+                    "text": "quick reply from same user",
+                    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+                    "timestamp": "2026-03-18T20:58:21.770093300",
+                    "upvoteCount": 0
+                  }
+                ],
+                "isEdited": false,
+                "text": "answer comment from user",
+                "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+                "timestamp": "2026-03-18T20:58:21.770093300",
+                "upvoteCount": 0
+              }
+            ],
+            "explanation": "Demo answer body",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "upvoteCount": 0
+          }
+        ],
+        "maxLinesOfCode": 20,
+        "title": "Description",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "2 <= nums.length <= 10^4",
+          "-10^9 <= nums[i] <= 10^9",
+          "-10^9 <= target <= 10^9",
+          "Exactly one valid answer exists"
+        ],
+        "content": "Given an array of integers nums and a target value, return the indices of two numbers that add up to target."
+      },
+      {
+        "comments": [],
+        "examples": [],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "O(n)",
+        "timeLimitSeconds": 2,
+        "answers": [],
+        "maxLinesOfCode": 25,
+        "title": "Hard Constraints",
+        "type": "CONSTRAINT",
+        "constraints": [
+          "Do not use nested loops over nums",
+          "Use at most O(n) extra space",
+          "Return indices, not values"
+        ],
+        "content": "Your implementation should avoid brute force and fit within practical interview limits."
+      },
+      {
+        "comments": [],
+        "examples": [
+          "nums = [1,5,3,7], target = 8 -> [0,3]",
+          "nums = [-3,4,3,90], target = 0 -> [0,2]",
+          "nums = [0,4,3,0], target = 0 -> [0,3]"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "Walkthrough Examples",
+        "type": "EXAMPLE",
+        "constraints": [],
+        "content": "These examples clarify edge behavior and indexing expectations."
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-03-18T20:58:21.770093300",
+    "lastUpdated": "2026-03-18T20:58:21.770093300",
     "imageURL": "",
     "category": "ARRAY"
   }

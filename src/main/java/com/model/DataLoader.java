@@ -126,6 +126,37 @@ public class DataLoader {
 
                     Section sec = new Section(stitle, scontent, dataType, sectionType);
 
+                    sec.setImageURL((String) sJSON.get("imageURL"));
+                    sec.setExpectedTimeComplexity((String) sJSON.get("expectedTimeComplexity"));
+
+                    if (sJSON.get("maxLinesOfCode") instanceof Long) {
+                        sec.setMaxLinesOfCode(((Long) sJSON.get("maxLinesOfCode")).intValue());
+                    }
+
+                    if (sJSON.get("timeLimitSeconds") instanceof Long) {
+                        sec.setTimeLimitSeconds(((Long) sJSON.get("timeLimitSeconds")).intValue());
+                    }
+
+                    JSONArray constraintsJSON = (JSONArray) sJSON.get("constraints");
+                    if (constraintsJSON != null) {
+                        for (int c = 0; c < constraintsJSON.size(); c++) {
+                            Object constraintValue = constraintsJSON.get(c);
+                            if (constraintValue instanceof String) {
+                                sec.addConstraint((String) constraintValue);
+                            }
+                        }
+                    }
+
+                    JSONArray examplesJSON = (JSONArray) sJSON.get("examples");
+                    if (examplesJSON != null) {
+                        for (int ex = 0; ex < examplesJSON.size(); ex++) {
+                            Object exampleValue = examplesJSON.get(ex);
+                            if (exampleValue instanceof String) {
+                                sec.addExample((String) exampleValue);
+                            }
+                        }
+                    }
+
                     // answers
                     JSONArray answersJSON = (JSONArray) sJSON.get("answers");
                     if (answersJSON != null) {

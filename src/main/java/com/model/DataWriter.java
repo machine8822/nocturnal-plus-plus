@@ -153,6 +153,24 @@ public class DataWriter {
 		sectionDetails.put("content", section.getBody());
 		sectionDetails.put("type", section.getSectionType().toString());
 		sectionDetails.put("dataType", section.getDataType() == null ? null : section.getDataType().toString());
+		sectionDetails.put("imageURL", section.getImageURL());
+		sectionDetails.put("expectedTimeComplexity", section.getExpectedTimeComplexity());
+		sectionDetails.put("maxLinesOfCode", section.getMaxLinesOfCode());
+		sectionDetails.put("timeLimitSeconds", section.getTimeLimitSeconds());
+
+		JSONArray constraintsJSON = new JSONArray();
+		List<String> constraints = section.getConstraints();
+		for (int i = 0; i < constraints.size(); i++) {
+			constraintsJSON.add(constraints.get(i));
+		}
+		sectionDetails.put("constraints", constraintsJSON);
+
+		JSONArray examplesJSON = new JSONArray();
+		List<String> examples = section.getExamples();
+		for (int i = 0; i < examples.size(); i++) {
+			examplesJSON.add(examples.get(i));
+		}
+		sectionDetails.put("examples", examplesJSON);
 
 		// Handle answers (a list of Answer objects)
 		JSONArray answersJSON = new JSONArray();
