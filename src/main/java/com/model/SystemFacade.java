@@ -90,35 +90,10 @@ public class SystemFacade {
     }
 
     public boolean addQuestion(InterviewQuestion question) {
+        if (currentUser == null || !currentUser.isContributor() || question == null) {
+            return false;
+        }
         return questions.addQuestion(question);
-    }
-
-    public boolean approveQuestionSubmission(UUID questionId) {
-        if (currentUser == null || !currentUser.isAdmin() || questionId == null) {
-            return false;
-        }
-
-        InterviewQuestion question = questions.getQuestion(questionId);
-        if (question == null) {
-            return false;
-        }
-
-        question.approveSubmission();
-        return true;
-    }
-
-    public boolean disapproveQuestionSubmission(UUID questionId) {
-        if (currentUser == null || !currentUser.isAdmin() || questionId == null) {
-            return false;
-        }
-
-        InterviewQuestion question = questions.getQuestion(questionId);
-        if (question == null) {
-            return false;
-        }
-
-        question.disapproveSubmission();
-        return true;
     }
 
 }
