@@ -37,15 +37,35 @@ public class Comment {
         this.replies = replies == null ? new ArrayList<>() : new ArrayList<>(replies);
     }
 
-    // ── Getters ──
+    // Getters
 
-    public UUID getCommentId()           { return commentId; }
-    public String getText()              { return text; }
-    public UUID getAuthorId()            { return authorId; }
-    public LocalDateTime getTimestamp()  { return timestamp; }
-    public boolean isEdited()            { return isEdited; }
-    public int getUpvoteCount()          { return upvoteCount; }
-    public int getDownvoteCount()        { return downvoteCount; }
+    public UUID getCommentId() {
+        return commentId;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public UUID getAuthorId() {
+        return authorId;
+    }
+
+    public LocalDateTime getTimestamp() {
+        return timestamp;
+    }
+
+    public boolean isEdited() {
+        return isEdited;
+    }
+
+    public int getUpvoteCount() {
+        return upvoteCount;
+    }
+
+    public int getDownvoteCount() {
+        return downvoteCount;
+    }
 
     public void edit(String newText) {
         this.text = newText == null ? "" : newText;
@@ -56,7 +76,7 @@ public class Comment {
     public void upvote() {
         upvoteCount++;
     }
-    
+
     public void downvote() {
         downvoteCount++;
     }
@@ -130,5 +150,4 @@ public class Comment {
     public void setReplies(List<Comment> replies) {
         this.replies = replies == null ? new ArrayList<>() : new ArrayList<>(replies);
     }
-
 }
