@@ -12,10 +12,10 @@ public class DriverUI {
 	}
 
 	public void run() {
-		scenario1();
+		scenario4();
 		// scenario2();
 		// scenario3();
-		// scenario4();
+		// scenario1();
 	}
 
 	public void scenario1() {
@@ -81,7 +81,7 @@ public class DriverUI {
 
 	public void scenario4() {
 		System.out.println("Scenario 4: Daily Task Flow (Hard-Coded Driver Stub)");
-		DailyTaskScenarioStub.runDailyTaskScenario();
+		DailyTaskScenario.runDailyTaskScenario();
 	}
 
 	public static void main(String[] args) {

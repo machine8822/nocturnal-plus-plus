@@ -34,17 +34,15 @@ public class DailyTaskScenario {
         System.out.println("Jimmy logs into the system.");
         System.out.println("Current streak: " + startingStreak + " days");
 
-        DailyTaskAssignment assignment = assignDailyTaskForUser(
-                jimmy,
-                startingStreak,
-                preferredTopicsByEmail,
-                skillLevelByEmail);
-
-        InterviewQuestion dailyChallenge = assignment.question;
+        String email = jimmy.getEmail() == null ? "" : jimmy.getEmail();
+        String skillLevel = skillLevelByEmail.getOrDefault(email, "Beginner");
+        String preference = preferredTopicsByEmail.getOrDefault(email, "Arrays + Strings");
+        InterviewQuestion dailyChallenge = buildDailyChallenge(jimmy, skillLevel, preference);
         System.out.println("\nDaily challenge selected for Jimmy (tailored by skill + preference):");
-        System.out.println("- Skill level: " + assignment.skillLevel);
-        System.out.println("- Preference: " + assignment.preference);
+        System.out.println("- Skill level: " + skillLevel);
+        System.out.println("- Preference: " + preference);
         System.out.println("- Question: " + dailyChallenge.getTitle());
+        printQuestionOverview(dailyChallenge);
 
         Section mainSection = dailyChallenge.getSection(0);
         if (mainSection == null) {
@@ -82,29 +80,12 @@ public class DailyTaskScenario {
         System.out.println("Matches found: " + bstResults.size());
         for (InterviewQuestion q : bstResults) {
             System.out.println("- " + q.getTitle());
+            System.out.println("  Glance: " + q.getDescription());
         }
 
-        int endingStreak = assignment.streakAfterCompletion;
+        int endingStreak = startingStreak + 1;
         System.out.println("\nDaily streak increased to: " + endingStreak);
         System.out.println("Jimmy logs out.");
-
-        // TODO finish soon: replace hard-coded maps with real user profile and recommendation data.
-    }
-
-    private static DailyTaskAssignment assignDailyTaskForUser(
-            User user,
-            int currentStreak,
-            Map<String, String> preferredTopicsByEmail,
-            Map<String, String> skillLevelByEmail) {
-
-        String email = user.getEmail() == null ? "" : user.getEmail();
-        String skillLevel = skillLevelByEmail.getOrDefault(email, "Beginner");
-        String preference = preferredTopicsByEmail.getOrDefault(email, "Arrays + Strings");
-
-        InterviewQuestion selected = buildDailyChallenge(user, skillLevel, preference);
-        int streakAfterCompletion = currentStreak + 1;
-
-        return new DailyTaskAssignment(selected, skillLevel, preference, streakAfterCompletion);
     }
 
     private static InterviewQuestion buildDailyChallenge(User jimmy, String skillLevel, String preference) {
@@ -179,7 +160,7 @@ public class DailyTaskScenario {
                 jimmy.getUserId());
 
         InterviewQuestion bstTwo = new InterviewQuestion(
-                "Binary Search Tree Deletion Deep Dive",
+                "Binary Tree Deletion Deep Dive",
                 "Delete a node from BST and preserve ordering.",
                 Difficulty.MEDIUM,
             Category.ARRAY,
@@ -212,6 +193,26 @@ public class DailyTaskScenario {
         }
 
         return results;
+    }
+
+    private static void printQuestionOverview(InterviewQuestion question) {
+        System.out.println("\nQuestion overview:");
+        System.out.println("Description: " + question.getDescription());
+
+        Section sec = question.getSection(0);
+        if (sec == null) {
+            return;
+        }
+
+        System.out.println("Constraints:");
+        for (String c : sec.getConstraints()) {
+            System.out.println("- " + c);
+        }
+
+        System.out.println("Examples:");
+        for (String ex : sec.getExamples()) {
+            System.out.println("- " + ex);
+        }
     }
 
     private static void writeQuestionToTextFile(InterviewQuestion question, List<Answer> answers, Path outputPath)
@@ -248,21 +249,4 @@ public class DailyTaskScenario {
         Files.writeString(outputPath, sb.toString(), StandardCharsets.UTF_8);
     }
 
-    private static class DailyTaskAssignment {
-        private final InterviewQuestion question;
-        private final String skillLevel;
-        private final String preference;
-        private final int streakAfterCompletion;
-
-        private DailyTaskAssignment(
-                InterviewQuestion question,
-                String skillLevel,
-                String preference,
-                int streakAfterCompletion) {
-            this.question = question;
-            this.skillLevel = skillLevel;
-            this.preference = preference;
-            this.streakAfterCompletion = streakAfterCompletion;
-        }
-    }
 }
