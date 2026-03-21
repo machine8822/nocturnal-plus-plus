@@ -34,5 +34,23 @@
     "isContributor": true,
     "email": "theodore.johnson@example.com",
     "passwordHash": "$2a$12$ED.krIEIAy97TmhHuIcMWuTMuyifEYlEbH7xNpfpEXxKHgP5MQGXO"
+  },
+  {
+    "firstName": "Sullivan",
+    "lastName": "Sparrow",
+    "createdAt": "2024-03-10T09:00",
+    "lastLogin": "2025-04-15T16:00",
+    "profile": {
+      "resumeURL": "https:\/\/example.com\/resume.pdf",
+      "major": "Computer Science",
+      "school": "University of South Carolina",
+      "totalUpvotes": 5,
+      "gradYear": 2026
+    },
+    "isAdmin": false,
+    "userId": "4cf11d76-2502-4d4e-9e93-d705d1925913",
+    "isContributor": false,
+    "email": "sparrow@example.com",
+    "passwordHash": "hashed-password-456"
   }
 ]

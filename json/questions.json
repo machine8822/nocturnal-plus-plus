@@ -81,7 +81,7 @@
     ],
     "difficulty": "EASY",
     "createdAt": "2026-02-21T13:30",
-    "lastUpdated": "2026-03-18T20:58:21.424447",
+    "lastUpdated": "2026-03-21T19:42:04.473754600",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -160,7 +160,7 @@
     ],
     "difficulty": "MEDIUM",
     "createdAt": "2026-02-21T14:00",
-    "lastUpdated": "2026-03-18T20:58:21.425443400",
+    "lastUpdated": "2026-03-21T19:42:04.477655",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -201,7 +201,7 @@
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:41:26.060011100",
-    "lastUpdated": "2026-03-18T20:58:21.425443400",
+    "lastUpdated": "2026-03-21T19:42:04.478884400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -242,7 +242,7 @@
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:43:59.973793700",
-    "lastUpdated": "2026-03-18T20:58:21.425443400",
+    "lastUpdated": "2026-03-21T19:42:04.478884400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -283,7 +283,7 @@
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:45:38.638759800",
-    "lastUpdated": "2026-03-18T20:58:21.425443400",
+    "lastUpdated": "2026-03-21T19:42:04.478884400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -364,7 +364,7 @@
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-13T12:58:43.926619300",
-    "lastUpdated": "2026-03-18T20:58:21.425443400",
+    "lastUpdated": "2026-03-21T19:42:04.478884400",
     "imageURL": "",
     "category": "ARRAY"
   },
@@ -490,7 +490,90 @@
     ],
     "difficulty": "EASY",
     "createdAt": "2026-03-18T20:58:21.770093300",
-    "lastUpdated": "2026-03-18T20:58:21.770093300",
+    "lastUpdated": "2026-03-21T19:42:04.480132500",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "78c8d56b-a330-41f0-8d3d-5360db8ce300",
+    "comments": [],
+    "totalSuccesses": 0,
+    "totalAttempts": 0,
+    "description": "Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers.",
+    "title": "Longest Subarray with given Sum",
+    "type": "CODING",
+    "authorId": "2ba512ff-b4ac-4c62-bc13-864776884688",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "Problem Description",
+        "type": "DESCRIPTION",
+        "constraints": [],
+        "content": "Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers."
+      },
+      {
+        "comments": [],
+        "examples": [
+          "Input: nums = [1, -1, 5, -2, 3], k = 3",
+          "Output: 4",
+          "Explanation: The subarray [1, -1, 5, -2] sums to 3 and has length 4."
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "Example 1",
+        "type": "EXAMPLE",
+        "constraints": [],
+        "content": "Example walkthrough for the first input."
+      },
+      {
+        "comments": [],
+        "examples": [
+          "Input: nums = [-2, -1, 2, 1], k = 3",
+          "Output: 2"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "Example 2",
+        "type": "EXAMPLE",
+        "constraints": [],
+        "content": "Example walkthrough for the second input."
+      },
+      {
+        "comments": [],
+        "examples": [
+          "What is the time compleity of your algorithm?",
+          "Can you you find a way to make you algoritm faster?"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "Follow-up Questions",
+        "type": "EXAMPLE",
+        "constraints": [],
+        "content": "Addional follow-up questions."
+      }
+    ],
+    "difficulty": "MEDIUM",
+    "createdAt": "2026-03-21T19:42:05.211598500",
+    "lastUpdated": "2026-03-21T19:42:05.211598500",
     "imageURL": "",
     "category": "ARRAY"
   }
