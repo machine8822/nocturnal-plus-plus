@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Comment {
+    private UUID commentId;
     private String text;
     private UUID authorId;
     private LocalDateTime timestamp;
@@ -15,26 +16,39 @@ public class Comment {
     private List<Comment> replies;
 
     public Comment(String text, UUID authorId) {
-        this.text = text;
+        this(UUID.randomUUID(), text, authorId, LocalDateTime.now(), false, 0, 0, new ArrayList<>());
+    }
+
+    public Comment(UUID commentId,
+                   String text,
+                   UUID authorId,
+                   LocalDateTime timestamp,
+                   boolean isEdited,
+                   int upvoteCount,
+                   int downvoteCount,
+                   List<Comment> replies) {
+        this.commentId = commentId == null ? UUID.randomUUID() : commentId;
+        this.text = text == null ? "" : text;
         this.authorId = authorId;
-        this.timestamp = LocalDateTime.now();
-        this.isEdited = false;
-        this.upvoteCount = 0;
-        this.downvoteCount = 0;
-        this.replies = new ArrayList<>();
+        this.timestamp = timestamp == null ? LocalDateTime.now() : timestamp;
+        this.isEdited = isEdited;
+        this.upvoteCount = Math.max(0, upvoteCount);
+        this.downvoteCount = Math.max(0, downvoteCount);
+        this.replies = replies == null ? new ArrayList<>() : new ArrayList<>(replies);
     }
 
     // ── Getters ──
 
+    public UUID getCommentId()           { return commentId; }
     public String getText()              { return text; }
     public UUID getAuthorId()            { return authorId; }
-    public LocalDateTime getTimestamp()   { return timestamp; }
+    public LocalDateTime getTimestamp()  { return timestamp; }
     public boolean isEdited()            { return isEdited; }
     public int getUpvoteCount()          { return upvoteCount; }
     public int getDownvoteCount()        { return downvoteCount; }
 
     public void edit(String newText) {
-        this.text = newText;
+        this.text = newText == null ? "" : newText;
         this.isEdited = true;
         this.timestamp = LocalDateTime.now();
     }
@@ -52,11 +66,44 @@ public class Comment {
     }
 
     public void addReply(Comment reply) {
-        replies.add(reply);
+        if (reply != null) {
+            replies.add(reply);
+        }
+    }
+
+    public boolean deleteReply(UUID commentId, UUID actingUserId, boolean isAdmin) {
+        if (commentId == null || actingUserId == null) {
+            return false;
+        }
+
+        for (int i = 0; i < replies.size(); i++) {
+            Comment reply = replies.get(i);
+            if (reply.getCommentId().equals(commentId)) {
+                if (canBeDeletedBy(reply.getAuthorId(), actingUserId, isAdmin)) {
+                    replies.remove(i);
+                    return true;
+                }
+                return false;
+            }
+
+            if (reply.deleteReply(commentId, actingUserId, isAdmin)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public List<Comment> getReplies() {
         return replies;
+    }
+
+    private boolean canBeDeletedBy(UUID contentAuthorId, UUID actingUserId, boolean isAdmin) {
+        if (isAdmin) {
+            return true;
+        }
+
+        return contentAuthorId != null && contentAuthorId.equals(actingUserId);
     }
 
 }

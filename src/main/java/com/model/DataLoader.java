@@ -3,6 +3,7 @@ package com.model;
 import java.io.FileReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.json.simple.JSONArray;
@@ -17,6 +18,7 @@ import org.json.simple.parser.JSONParser;
 public class DataLoader {
 
     private static final String USER_FILE = "json/users.json";
+    private static final String QUESTION_FILE = "json/questions.json";
 
     /**
      * Read all users from the JSON file and return them in a list.
@@ -26,21 +28,27 @@ public class DataLoader {
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
 
-        try {
-            FileReader reader = new FileReader(USER_FILE);
+        try (FileReader reader = new FileReader(USER_FILE)) {
             JSONArray peopleJSON = (JSONArray) new JSONParser().parse(reader);
 
-            for (int i = 0; i < peopleJSON.size(); i++) {
-                JSONObject personJSON = (JSONObject) peopleJSON.get(i);
-                UUID id = UUID.fromString((String) personJSON.get("userId"));
-                String email = (String) personJSON.get("email");
-                String passwordHash = (String) personJSON.get("passwordHash");
-                String firstName = (String) personJSON.get("firstName");
-                String lastName = (String) personJSON.get("lastName");
-                // additional fields can be read here if you so desire...
+            for (Object person : peopleJSON) {
+                if (!(person instanceof JSONObject personJSON)) {
+                    continue;
+                }
 
-                // The User constructor must match whateve User class uses.
-                users.add(new User(id, email, passwordHash, firstName, lastName));
+                UUID id = parseUUID(personJSON.get("userId"), UUID.randomUUID());
+                String email = asString(personJSON.get("email"));
+                String passwordHash = asString(personJSON.get("passwordHash"));
+                String firstName = asString(personJSON.get("firstName"));
+                String lastName = asString(personJSON.get("lastName"));
+                LocalDateTime createdAt = parseLocalDateTime(personJSON.get("createdAt"), LocalDateTime.now());
+                LocalDateTime lastLogin = parseLocalDateTime(personJSON.get("lastLogin"), null);
+                boolean isAdmin = asBoolean(personJSON.get("isAdmin"));
+                boolean isContributor = asBoolean(personJSON.get("isContributor"));
+                Profile profile = loadProfile((JSONObject) personJSON.get("profile"));
+
+                users.add(new User(id, email, passwordHash, firstName, lastName, createdAt,
+                        lastLogin, isAdmin, isContributor, profile, new ArrayList<>()));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -61,51 +69,44 @@ public class DataLoader {
     public static ArrayList<InterviewQuestion> loadQuestions() {
         ArrayList<InterviewQuestion> questions = new ArrayList<>();
 
-        try {
-            FileReader reader = new FileReader("json/questions.json");
+        try (FileReader reader = new FileReader(QUESTION_FILE)) {
             JSONArray questionsJSON = (JSONArray) new JSONParser().parse(reader);
 
-            for (int i = 0; i < questionsJSON.size(); i++) {
-                JSONObject qJSON = (JSONObject) questionsJSON.get(i);
-                UUID qId = UUID.fromString((String) qJSON.get("questionId"));
-                String title = (String) qJSON.get("title");
-                String description = (String) qJSON.get("description");
-                Difficulty difficulty = Difficulty.valueOf((String) qJSON.get("difficulty"));
-                QuestionType type = QuestionType.valueOf((String) qJSON.get("type"));
-                Category category = Category.valueOf((String) qJSON.get("category"));
-                String imageURL = (String) qJSON.get("imageURL");
-                UUID authorId = UUID.fromString((String) qJSON.get("authorId"));
-                long totalAttempts = (Long) qJSON.get("totalAttempts");
-                long totalSuccesses = (Long) qJSON.get("totalSuccesses");
-                LocalDateTime createdAt = LocalDateTime.parse((String) qJSON.get("createdAt"));
-                LocalDateTime lastUpdated = LocalDateTime.parse((String) qJSON.get("lastUpdated"));
-
-                // create question object (constructor signature may differ)
-                InterviewQuestion q = new InterviewQuestion(
-                    qId,
-                    title,
-                    description,
-                    difficulty,
-                    category,
-                    type,
-                    authorId,
-                    createdAt,
-                    lastUpdated,
-                    (int) totalAttempts,
-                    (int) totalSuccesses,
-                    imageURL);
-
-                // load sections
-                JSONArray secArray = (JSONArray) qJSON.get("sections");
-                for (int j = 0; secArray != null && j < secArray.size(); j++) {
-                    JSONObject sJSON = (JSONObject) secArray.get(j);
-                    String stitle = (String) sJSON.get("title");
-                    String scontent = (String) sJSON.get("content");
-                    String stype = (String) sJSON.get("type");
-
-                    q.addSection(new Section(stitle, scontent, stype));
+            for (Object question : questionsJSON) {
+                if (!(question instanceof JSONObject qJSON)) {
+                    continue;
                 }
-                questions.add(q);
+
+                UUID qId = parseUUID(qJSON.get("questionId"), UUID.randomUUID());
+                String title = asString(qJSON.get("title"));
+                String description = asString(qJSON.get("description"));
+                Difficulty difficulty = parseEnum(Difficulty.class, qJSON.get("difficulty"), Difficulty.EASY);
+                QuestionType type = parseEnum(QuestionType.class, qJSON.get("type"), QuestionType.SHORT_ANSWER);
+                Category category = parseEnum(Category.class, qJSON.get("category"), Category.ARRAY);
+                String imageURL = asString(qJSON.get("imageURL"));
+                UUID authorId = parseUUID(qJSON.get("authorId"), null);
+                int totalAttempts = asInt(qJSON.get("totalAttempts"));
+                int totalSuccesses = asInt(qJSON.get("totalSuccesses"));
+                LocalDateTime createdAt = parseLocalDateTime(qJSON.get("createdAt"), LocalDateTime.now());
+                LocalDateTime lastUpdated = parseLocalDateTime(qJSON.get("lastUpdated"), createdAt);
+                List<Comment> comments = loadComments((JSONArray) qJSON.get("comments"));
+                List<Section> sections = loadSections((JSONArray) qJSON.get("sections"));
+
+                questions.add(new InterviewQuestion(
+                        qId,
+                        title,
+                        description,
+                        difficulty,
+                        category,
+                        type,
+                        authorId,
+                        createdAt,
+                        lastUpdated,
+                        totalAttempts,
+                        totalSuccesses,
+                        imageURL,
+                        comments,
+                        sections));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -122,5 +123,174 @@ public class DataLoader {
         for (User u : users) {
             System.out.println(u);
         }
+    }
+
+    private static Profile loadProfile(JSONObject profileJSON) {
+        if (profileJSON == null) {
+            return new Profile();
+        }
+
+        return new Profile(
+                asString(profileJSON.get("school")),
+                asString(profileJSON.get("major")),
+                asInt(profileJSON.get("gradYear")),
+                asInt(profileJSON.get("totalUpvotes")),
+                asString(profileJSON.get("resumeURL")));
+    }
+
+    private static List<Section> loadSections(JSONArray sectionArray) {
+        List<Section> sections = new ArrayList<>();
+        if (sectionArray == null) {
+            return sections;
+        }
+
+        for (Object sectionValue : sectionArray) {
+            if (!(sectionValue instanceof JSONObject sectionJSON)) {
+                continue;
+            }
+
+            SectionType sectionType = parseEnum(SectionType.class, sectionJSON.get("type"), SectionType.DESCRIPTION);
+            DataType dataType = parseEnum(DataType.class, sectionJSON.get("dataType"), null);
+            Section section = new Section(
+                    asString(sectionJSON.get("title")),
+                    asString(sectionJSON.get("content")),
+                    dataType,
+                    sectionType);
+
+            JSONArray answersJSON = (JSONArray) sectionJSON.get("answers");
+            if (answersJSON != null) {
+                for (Object answerValue : answersJSON) {
+                    if (answerValue instanceof JSONObject answerJSON) {
+                        section.addAnswer(loadAnswer(answerJSON));
+                    }
+                }
+            }
+
+            for (Comment comment : loadComments((JSONArray) sectionJSON.get("comments"))) {
+                section.addComment(comment);
+            }
+
+            sections.add(section);
+        }
+
+        return sections;
+    }
+
+    private static Answer loadAnswer(JSONObject answerJSON) {
+        return new Answer(
+                parseUUID(answerJSON.get("answerId"), UUID.randomUUID()),
+                asString(answerJSON.get("codeSnippet")),
+                asString(answerJSON.get("explanation")),
+                asInt(answerJSON.get("upvoteCount")),
+                asInt(answerJSON.get("downvoteCount")),
+                parseUUID(answerJSON.get("authorId"), null),
+                parseLocalDateTime(answerJSON.get("createdAt"), LocalDateTime.now()),
+                loadComments((JSONArray) answerJSON.get("comments")));
+    }
+
+    private static List<Comment> loadComments(JSONArray commentsJSON) {
+        List<Comment> comments = new ArrayList<>();
+        if (commentsJSON == null) {
+            return comments;
+        }
+
+        for (Object commentValue : commentsJSON) {
+            if (commentValue instanceof JSONObject commentJSON) {
+                comments.add(loadComment(commentJSON));
+            }
+        }
+
+        return comments;
+    }
+
+    private static Comment loadComment(JSONObject commentJSON) {
+        return new Comment(
+                parseUUID(commentJSON.get("commentId"), UUID.randomUUID()),
+                asString(commentJSON.get("text")),
+                parseUUID(commentJSON.get("authorId"), null),
+                parseLocalDateTime(commentJSON.get("timestamp"), LocalDateTime.now()),
+                asBoolean(commentJSON.get("isEdited")),
+                asInt(commentJSON.get("upvoteCount")),
+                asInt(commentJSON.get("downvoteCount")),
+                loadComments((JSONArray) commentJSON.get("replies")));
+    }
+
+    private static String asString(Object value) {
+        return asString(value, "");
+    }
+
+    private static String asString(Object value, String defaultValue) {
+        if (value instanceof String stringValue) {
+            return stringValue;
+        }
+        return defaultValue;
+    }
+
+    private static int asInt(Object value) {
+        if (value instanceof Number numberValue) {
+            return numberValue.intValue();
+        }
+
+        if (value instanceof String stringValue) {
+            try {
+                return Integer.parseInt(stringValue);
+            } catch (NumberFormatException e) {
+                return 0;
+            }
+        }
+
+        return 0;
+    }
+
+    private static boolean asBoolean(Object value) {
+        if (value instanceof Boolean booleanValue) {
+            return booleanValue;
+        }
+
+        if (value instanceof String stringValue) {
+            return Boolean.parseBoolean(stringValue);
+        }
+
+        return false;
+    }
+
+    private static UUID parseUUID(Object value, UUID defaultValue) {
+        if (value instanceof UUID uuidValue) {
+            return uuidValue;
+        }
+
+        if (value instanceof String stringValue && !stringValue.isBlank()) {
+            try {
+                return UUID.fromString(stringValue);
+            } catch (IllegalArgumentException e) {
+                return defaultValue;
+            }
+        }
+
+        return defaultValue;
+    }
+
+    private static LocalDateTime parseLocalDateTime(Object value, LocalDateTime defaultValue) {
+        if (value instanceof String stringValue && !stringValue.isBlank()) {
+            try {
+                return LocalDateTime.parse(stringValue);
+            } catch (Exception e) {
+                return defaultValue;
+            }
+        }
+
+        return defaultValue;
+    }
+
+    private static <E extends Enum<E>> E parseEnum(Class<E> enumType, Object value, E defaultValue) {
+        if (value instanceof String enumName && !enumName.isBlank()) {
+            try {
+                return Enum.valueOf(enumType, enumName);
+            } catch (IllegalArgumentException e) {
+                return defaultValue;
+            }
+        }
+
+        return defaultValue;
     }
 }

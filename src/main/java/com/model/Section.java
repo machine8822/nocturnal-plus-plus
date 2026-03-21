@@ -2,6 +2,7 @@ package com.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class Section {
 
@@ -14,10 +15,10 @@ public class Section {
 
     public Section(String title, String body, DataType dataType, SectionType sectionType)
     {
-        this.title = title;
-        this.body = body;
+        this.title = title == null ? "" : title;
+        this.body = body == null ? "" : body;
         this.dataType = dataType;
-        this.sectionType = sectionType;
+        this.sectionType = sectionType == null ? SectionType.DESCRIPTION : sectionType;
         this.answers = new ArrayList<>();
         this.comments = new ArrayList<>();
     }
@@ -68,11 +69,64 @@ public class Section {
         return comments;
     }
 
-    public void addComment(Comment comment)
-    {
-        if (comment != null)
-        {
+    public void addComment(Comment comment) {
+        if (comment != null) {
             comments.add(comment);
         }
+    }
+
+    public boolean deleteComment(UUID commentId, UUID actingUserId, boolean isAdmin) {
+        if (commentId == null || actingUserId == null) {
+            return false;
+        }
+
+        for (int i = 0; i < comments.size(); i++) {
+            Comment comment = comments.get(i);
+            if (comment.getCommentId().equals(commentId)) {
+                if (canBeDeletedBy(comment.getAuthorId(), actingUserId, isAdmin)) {
+                    comments.remove(i);
+                    return true;
+                }
+                return false;
+            }
+
+            if (comment.deleteReply(commentId, actingUserId, isAdmin)) {
+                return true;
+            }
+        }
+
+        for (Answer answer : answers) {
+            if (answer.deleteComment(commentId, actingUserId, isAdmin)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean deleteAnswer(UUID answerId, UUID actingUserId, boolean isAdmin) {
+        if (answerId == null || actingUserId == null) {
+            return false;
+        }
+
+        for (int i = 0; i < answers.size(); i++) {
+            Answer answer = answers.get(i);
+            if (answer.getAnswerId().equals(answerId)) {
+                if (canBeDeletedBy(answer.getAuthorId(), actingUserId, isAdmin)) {
+                    answers.remove(i);
+                    return true;
+                }
+                return false;
+            }
+        }
+        return false;
+    }
+
+    private boolean canBeDeletedBy(UUID contentAuthorId, UUID actingUserId, boolean isAdmin) {
+        if (isAdmin) {
+            return true;
+        }
+
+        return contentAuthorId != null && contentAuthorId.equals(actingUserId);
     }
 }

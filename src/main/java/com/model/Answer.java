@@ -9,7 +9,7 @@ public class Answer {
 
     // Fields / Attributes
     
-
+    private UUID answerId;
     // Optional code included with this answer.
     private String codeSnippet;
     // Main written explanation.
@@ -31,17 +31,32 @@ public class Answer {
      * Create a new answer with default vote counts and current timestamp.
      */
     public Answer(String codeSnippet, String explanation, UUID authorId) {
+        this(UUID.randomUUID(), codeSnippet, explanation, 0, 0, authorId, LocalDateTime.now(), new ArrayList<>());
+    }
+
+    public Answer(UUID answerId,
+                  String codeSnippet,
+                  String explanation,
+                  int upvoteCount,
+                  int downvoteCount,
+                  UUID authorId,
+                  LocalDateTime createdAt,
+                  List<Comment> comments) {
+        this.answerId = answerId == null ? UUID.randomUUID() : answerId;
         this.codeSnippet = codeSnippet == null ? "" : codeSnippet;
         this.explanation = explanation == null ? "" : explanation;
         this.authorId = authorId;
-        this.upvoteCount = 0;
-        this.downvoteCount = 0;
-        this.createdAt = LocalDateTime.now();
-        this.comments = new ArrayList<>();
+        this.upvoteCount = Math.max(0, upvoteCount);
+        this.downvoteCount = Math.max(0, downvoteCount);
+        this.createdAt = createdAt == null ? LocalDateTime.now() : createdAt;
+        this.comments = comments == null ? new ArrayList<>() : new ArrayList<>(comments);
     }
 
     // Getters
 
+    public UUID getAnswerId() {
+        return answerId;
+    }   
     /**
      * Return the code snippet text for this answer.
      */
@@ -127,7 +142,7 @@ public class Answer {
      * Replace comments list (null becomes empty list).
      */
     public void setComments(List<Comment> comments) {
-        this.comments = comments == null ? new ArrayList<>() : comments;
+        this.comments = comments == null ? new ArrayList<>() : new ArrayList<>(comments);
     }
 
     // Behavior / Actions
@@ -177,10 +192,29 @@ public class Answer {
     }
 
     /**
-     * Remove a comment and return whether it was removed.
+     * Remove a comment by ID and return whether it was removed.
      */
-    public boolean removeComment(Comment comment) {
-        return comments.remove(comment);
+    public boolean deleteComment(UUID commentId, UUID actingUserId, boolean isAdmin) {
+        if (commentId == null || actingUserId == null) {
+            return false;
+        }
+
+        for (int i = 0; i < comments.size(); i++) {
+            Comment comment = comments.get(i);
+            if (comment.getCommentId().equals(commentId)) {
+                if (canBeDeletedBy(comment.getAuthorId(), actingUserId, isAdmin)) {
+                    comments.remove(i);
+                    return true;
+                }
+                return false;
+            }
+
+            if (comment.deleteReply(commentId, actingUserId, isAdmin)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -188,5 +222,13 @@ public class Answer {
      */
     public int getCommentCount() {
         return comments.size();
+    }
+
+    private boolean canBeDeletedBy(UUID contentAuthorId, UUID actingUserId, boolean isAdmin) {
+        if (isAdmin) {
+            return true;
+        }
+
+        return contentAuthorId != null && contentAuthorId.equals(actingUserId);
     }
 }
