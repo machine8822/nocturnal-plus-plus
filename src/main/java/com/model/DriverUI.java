@@ -79,6 +79,11 @@ public class DriverUI {
 
 	}
 
+	public void scenario4() {
+		System.out.println("Scenario 4: Daily Task Flow (Hard-Coded Driver Stub)");
+		DailyTaskScenarioStub.runDailyTaskScenario();
+	}
+
 	public static void main(String[] args) {
 		DriverUI appInterface = new DriverUI();
 		appInterface.run();
