@@ -90,6 +90,10 @@ public class QuestionList {
         return new ArrayList<>(questions);
     }
 
+    public InterviewQuestion getFirstQuestion() {
+        return questions.isEmpty() ? null : questions.get(0);
+    }
+
     /**
      * Returns all questions matching the specified category.
      *

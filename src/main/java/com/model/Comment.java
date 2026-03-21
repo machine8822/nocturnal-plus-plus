@@ -106,4 +106,29 @@ public class Comment {
         return contentAuthorId != null && contentAuthorId.equals(actingUserId);
     }
 
+    // Used by DataLoader when restoring from JSON
+    public void setTimestamp(LocalDateTime timestamp) {
+        this.timestamp = timestamp;
+    }
+
+    // Used by DataLoader when restoring from JSON
+    public void setEdited(boolean edited) {
+        this.isEdited = edited;
+    }
+
+    // Used by DataLoader when restoring from JSON
+    public void setUpvoteCount(int upvoteCount) {
+        this.upvoteCount = Math.max(0, upvoteCount);
+    }
+
+    // Used by DataLoader when restoring from JSON
+    public void setDownvoteCount(int downvoteCount) {
+        this.downvoteCount = Math.max(0, downvoteCount);
+    }
+
+    // Used by DataLoader when restoring from JSON
+    public void setReplies(List<Comment> replies) {
+        this.replies = replies == null ? new ArrayList<>() : new ArrayList<>(replies);
+    }
+
 }

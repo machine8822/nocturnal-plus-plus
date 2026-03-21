@@ -12,8 +12,8 @@ import org.json.simple.parser.JSONParser;
 
 /**
  *
- * Only the user-reading method is implemented; it reads the hard‑coded
- * users.json file and builds User objects. 
+ * Only the user-reading method is implemented; it reads the hard-coded
+ * users.json file and builds User objects.
  */
 public class DataLoader {
 
@@ -60,7 +60,7 @@ public class DataLoader {
     /**
      * Read interview questions (including their sections) from JSON.
      *
-     * The structure matches what DataWriter writes.  We simply walk the array
+     * The structure matches what DataWriter writes. We simply walk the array
      * and extract the same fields; sections are treated as nested arrays.
      *
      * This method is deliberately as basic as the users loader adapts the
@@ -123,6 +123,11 @@ public class DataLoader {
         for (User u : users) {
             System.out.println(u);
         }
+
+        ArrayList<InterviewQuestion> questions = DataLoader.loadQuestions();
+        for (InterviewQuestion q : questions) {
+            System.out.println(q);
+        }
     }
 
     private static Profile loadProfile(JSONObject profileJSON) {
@@ -156,6 +161,22 @@ public class DataLoader {
                     asString(sectionJSON.get("content")),
                     dataType,
                     sectionType);
+
+            section.setImageURL(asString(sectionJSON.get("imageURL")));
+            section.setExpectedTimeComplexity(asString(sectionJSON.get("expectedTimeComplexity")));
+
+            Integer maxLinesOfCode = asNullableInt(sectionJSON.get("maxLinesOfCode"));
+            if (maxLinesOfCode != null) {
+                section.setMaxLinesOfCode(maxLinesOfCode);
+            }
+
+            Integer timeLimitSeconds = asNullableInt(sectionJSON.get("timeLimitSeconds"));
+            if (timeLimitSeconds != null) {
+                section.setTimeLimitSeconds(timeLimitSeconds);
+            }
+
+            section.setConstraints(loadStringList((JSONArray) sectionJSON.get("constraints")));
+            section.setExamples(loadStringList((JSONArray) sectionJSON.get("examples")));
 
             JSONArray answersJSON = (JSONArray) sectionJSON.get("answers");
             if (answersJSON != null) {
@@ -215,6 +236,21 @@ public class DataLoader {
                 loadComments((JSONArray) commentJSON.get("replies")));
     }
 
+    private static List<String> loadStringList(JSONArray values) {
+        List<String> items = new ArrayList<>();
+        if (values == null) {
+            return items;
+        }
+
+        for (Object value : values) {
+            if (value instanceof String stringValue && !stringValue.isBlank()) {
+                items.add(stringValue);
+            }
+        }
+
+        return items;
+    }
+
     private static String asString(Object value) {
         return asString(value, "");
     }
@@ -240,6 +276,14 @@ public class DataLoader {
         }
 
         return 0;
+    }
+
+    private static Integer asNullableInt(Object value) {
+        if (value == null) {
+            return null;
+        }
+
+        return asInt(value);
     }
 
     private static boolean asBoolean(Object value) {

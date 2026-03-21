@@ -310,19 +310,90 @@ public class InterviewQuestion {
     }
 
     /**
-     * Utility
+     * To string to display the question in a readable format.
+     * @return String representation of the question, including sections and comments.
      */
 
     @Override
     public String toString()
     {
-        return "InterviewQuestion{" +
-                "id=" + questionId +
-                ", title='" + title + '\'' +
-                ", difficulty=" + difficulty +
-                ", category=" + category +
-                ", attempts=" + totalAttempts +
-                ", successes=" + totalSuccesses +
-                '}';
+        StringBuilder sb = new StringBuilder();
+        
+        // Question header
+        sb.append("=== Interview Question ===\n");
+        sb.append("ID: ").append(questionId).append("\n");
+        sb.append("Title: ").append(title).append("\n");
+        
+        String displayDescription = (description == null || description.isBlank())
+            ? "(no description)"
+            : description;
+        sb.append("Description: ").append(displayDescription).append("\n");
+        
+        sb.append("Difficulty: ").append(difficulty).append("\n");
+        sb.append("Type: ").append(type).append("\n");
+        sb.append("Category: ").append(category).append("\n");
+        sb.append("Author ID: ").append(authorId).append("\n");
+        sb.append("Image URL: ").append(imageURL.isEmpty() ? "(none)" : imageURL).append("\n");
+        sb.append("Total Attempts: ").append(totalAttempts).append("\n");
+        sb.append("Total Successes: ").append(totalSuccesses).append("\n");
+        sb.append("Success Rate: ").append(String.format("%.2f%%", getSuccessRate() * 100)).append("\n");
+        sb.append("Created At: ").append(createdAt).append("\n");
+        sb.append("Last Updated: ").append(lastUpdated).append("\n");
+        
+        // Sections
+        if (!sections.isEmpty()) {
+            sb.append("\n--- Sections (").append(sections.size()).append(") ---\n");
+            for (int i = 0; i < sections.size(); i++) {
+                Section section = sections.get(i);
+                sb.append("\n  Section ").append(i + 1).append(":\n");
+                sb.append("    Title: ").append(section.getTitle()).append("\n");
+                sb.append("    Body: ").append(section.getBody()).append("\n");
+                sb.append("    Type: ").append(section.getSectionType()).append("\n");
+                sb.append("    Data Type: ").append(section.getDataType()).append("\n");
+                sb.append("    Image URL: ").append(section.getImageURL().isEmpty() ? "(none)" : section.getImageURL()).append("\n");
+                
+                List<String> constraints = section.getConstraints();
+                if (!constraints.isEmpty()) {
+                    sb.append("    Constraints: ").append(constraints).append("\n");
+                }
+                
+                List<String> examples = section.getExamples();
+                if (!examples.isEmpty()) {
+                    sb.append("    Examples: ").append(examples).append("\n");
+                }
+                
+                String timeComplexity = section.getExpectedTimeComplexity();
+                if (timeComplexity != null && !timeComplexity.isEmpty()) {
+                    sb.append("    Expected Time Complexity: ").append(timeComplexity).append("\n");
+                }
+                
+                Integer maxLines = section.getMaxLinesOfCode();
+                if (maxLines != null) {
+                    sb.append("    Max Lines of Code: ").append(maxLines).append("\n");
+                }
+                
+                Integer timeLimit = section.getTimeLimitSeconds();
+                if (timeLimit != null) {
+                    sb.append("    Time Limit (seconds): ").append(timeLimit).append("\n");
+                }
+                
+                List<Answer> answers = section.getAnswers();
+                if (!answers.isEmpty()) {
+                    sb.append("    Number of Answers: ").append(answers.size()).append("\n");
+                }
+                
+                List<Comment> sectionComments = section.getComments();
+                if (!sectionComments.isEmpty()) {
+                    sb.append("    Number of Comments: ").append(sectionComments.size()).append("\n");
+                }
+            }
+        }
+        
+        // Comments
+        if (!comments.isEmpty()) {
+            sb.append("\n--- Comments (").append(comments.size()).append(") ---\n");
+        }
+        
+        return sb.toString();
     }
 }

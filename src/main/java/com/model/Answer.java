@@ -145,6 +145,16 @@ public class Answer {
         this.comments = comments == null ? new ArrayList<>() : new ArrayList<>(comments);
     }
 
+    // Used by DataLoader when restoring from JSON
+    public void setUpvoteCount(int upvoteCount) {
+        this.upvoteCount = Math.max(0, upvoteCount);
+    }
+
+    // Used by DataLoader when restoring from JSON
+    public void setDownvoteCount(int downvoteCount) {
+        this.downvoteCount = Math.max(0, downvoteCount);
+    }
+
     // Behavior / Actions
 
     /**
