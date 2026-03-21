@@ -61,6 +61,15 @@ public class InterviewQuestion {
     Category category, QuestionType type, UUID authorId, LocalDateTime createdAt,
     LocalDateTime lastUpdated, int totalAttempts,int totalSuccesses, String imageURL)
     {
+        this(questionId, title, description, difficulty, category, type, authorId, createdAt,
+                lastUpdated, totalAttempts, totalSuccesses, imageURL, new ArrayList<>(), new ArrayList<>());
+    }
+
+    public InterviewQuestion(UUID questionId, String title, String description, Difficulty difficulty,
+    Category category, QuestionType type, UUID authorId, LocalDateTime createdAt,
+    LocalDateTime lastUpdated, int totalAttempts,int totalSuccesses, String imageURL,
+    List<Comment> comments, List<Section> sections)
+    {
 
         this.questionId = questionId;
         this.title = title;
@@ -75,8 +84,8 @@ public class InterviewQuestion {
         this.totalSuccesses = totalSuccesses;
         this.imageURL = imageURL == null ? "" : imageURL;
 
-        this.comments = new ArrayList<>();
-        this.sections = new ArrayList<>();
+        this.comments = comments == null ? new ArrayList<>() : new ArrayList<>(comments);
+        this.sections = sections == null ? new ArrayList<>() : new ArrayList<>(sections);
     }
 
     /**
@@ -123,6 +132,52 @@ public class InterviewQuestion {
     public List<Comment> getComments() 
     {
         return comments;
+    }
+
+    public boolean deleteComment(UUID commentId, UUID actingUserId, boolean isAdmin) {
+        if (commentId == null || actingUserId == null) {
+            return false;
+        }
+
+        for (int i = 0; i < comments.size(); i++) {
+            Comment comment = comments.get(i);
+            if (comment.getCommentId().equals(commentId)) {
+                if (canBeDeletedBy(comment.getAuthorId(), actingUserId, isAdmin)) {
+                    comments.remove(i);
+                    touch();
+                    return true;
+                }
+                return false;
+            }
+
+            if (comment.deleteReply(commentId, actingUserId, isAdmin)) {
+                touch();
+                return true;
+            }
+        }
+
+        for (Section section : sections) {
+            if (section.deleteComment(commentId, actingUserId, isAdmin)) {
+                touch();
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean deleteAnswer(UUID answerId, UUID actingUserId, boolean isAdmin) {
+        if (answerId == null || actingUserId == null) {
+            return false;
+        }
+
+        for (Section section : sections) {
+            if (section.deleteAnswer(answerId, actingUserId, isAdmin)) {
+                touch();
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -179,6 +234,14 @@ public class InterviewQuestion {
     private void touch() 
     {
         this.lastUpdated = LocalDateTime.now();
+    }
+
+    private boolean canBeDeletedBy(UUID contentAuthorId, UUID actingUserId, boolean isAdmin) {
+        if (isAdmin) {
+            return true;
+        }
+
+        return contentAuthorId != null && contentAuthorId.equals(actingUserId);
     }
 
     /**
