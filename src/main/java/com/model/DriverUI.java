@@ -26,7 +26,7 @@ public class DriverUI {
 		User duplicateUser = new User(
 				newUserId,
 				"sparrow@example.com",
-				"hashed-password-456",
+				User.hashPassword("hashed-password-456"),
 				"Sally",
 				"Sparrow",
 				LocalDateTime.parse("2024-03-10T09:00:00"),
@@ -39,7 +39,7 @@ public class DriverUI {
 
 		if (driver.addUser(duplicateUser)) {
 			System.out.println("User Sally Sparrow has been successfully created");
-			DataWriter.saveUsers(driver.getInstance().getUsers());
+			DataWriter.saveUsers(driver.getUsers());
 			driver.saveAllData();
 		} else {
 			System.out.println("Sorry, we couldn't create the user. Email already exists.");
@@ -67,7 +67,7 @@ public class DriverUI {
 
 		if (driver.addUser(successfulUser)) {
 			System.out.println("User Sally Sparrow has been successfully created");
-			DataWriter.saveUsers(driver.getInstance().getUsers());
+			DataWriter.saveUsers(driver.getUsers());
 			driver.saveAllData();
 
 		} else {
@@ -139,20 +139,41 @@ public class DriverUI {
 		//Follow-up section
 		Section followUpSection = new Section(
 			"Follow-up Questions",
-			"Addional follow-up questions.",
+			"Additional follow-up questions.",
 			DataType.STRING,
-			SectionType.EXAMPLE
+			SectionType.EXPLANATION
 			);
 
-		followUpSection.addExample("What is the time compleity of your algorithm?");
-		followUpSection.addExample("Can you you find a way to make you algoritm faster?");
+		followUpSection.addExample("What is the time complexity of your algorithm?");
+		followUpSection.addExample("Can you find a way to make your algorithm faster?");
 
-		//May need to add answer sections for each solution
-		
+		Section solutionsSection = new Section(
+			"Solutions",
+			"Two solution approaches with filenames and explanations.",
+			DataType.FILE,
+			SectionType.EXPLANATION
+			);
+
+		Answer bruteForceSolution = new Answer(
+			"LongestSubarrayBruteForce.java",
+			"Checks every start index and extends subarrays while tracking running sum. Time O(n^2), space O(1).",
+			loggedInUser.getUserId()
+			);
+
+		Answer prefixSumSolution = new Answer(
+			"LongestSubarrayPrefixSum.java",
+			"Uses prefix sums and a map of earliest indices to find longest valid window. Time O(n), space O(n).",
+			loggedInUser.getUserId()
+			);
+
+		solutionsSection.addAnswer(bruteForceSolution);
+		solutionsSection.addAnswer(prefixSumSolution);
+
 		question.addSection(desciptionSection);
 		question.addSection(example1Section);
 		question.addSection(example2Section);
 		question.addSection(followUpSection);
+		question.addSection(solutionsSection);
 
 		boolean isAdded = driver.addQuestion(question);
 

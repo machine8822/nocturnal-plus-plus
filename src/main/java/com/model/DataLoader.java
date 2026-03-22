@@ -346,8 +346,12 @@ public class DataLoader {
 
     private static <E extends Enum<E>> E parseEnum(Class<E> enumType, Object value, E defaultValue) {
         if (value instanceof String enumName && !enumName.isBlank()) {
+            String normalizedName = enumName;
+            if (enumType == QuestionType.class && "MULTIPUL_CHOICE".equals(enumName)) {
+                normalizedName = "MULTIPLE_CHOICE";
+            }
             try {
-                return Enum.valueOf(enumType, enumName);
+                return Enum.valueOf(enumType, normalizedName);
             } catch (IllegalArgumentException e) {
                 return defaultValue;
             }
