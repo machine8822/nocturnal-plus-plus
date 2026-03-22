@@ -4,7 +4,7 @@
     "comments": [],
     "totalSuccesses": 0,
     "totalAttempts": 0,
-    "description": null,
+    "description": "",
     "title": "Binary search time complexity",
     "type": "SHORT_ANSWER",
     "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
@@ -14,6 +14,7 @@
           {
             "downvoteCount": 0,
             "replies": [],
+            "commentId": "f5ee3a33-54a5-4511-aa38-a93d864072c8",
             "isEdited": false,
             "text": "Be sure to explain how the search space is reduced on each step.",
             "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -90,7 +91,7 @@
     "comments": [],
     "totalSuccesses": 0,
     "totalAttempts": 0,
-    "description": null,
+    "description": "",
     "title": "Detecting duplicates in an array",
     "type": "SHORT_ANSWER",
     "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -100,6 +101,7 @@
           {
             "downvoteCount": 0,
             "replies": [],
+            "commentId": "64c18bd8-6cb1-4704-a43d-c5c2cd397d43",
             "isEdited": false,
             "text": "Consider discussing how the solution would change if additional space was not allowed.",
             "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -118,6 +120,7 @@
         "timeLimitSeconds": 2,
         "answers": [
           {
+            "answerId": "a8e37271-e0af-4e48-8b4a-0c046deae56c",
             "codeSnippet": "",
             "createdAt": "2026-02-21T14:05",
             "downvoteCount": 0,
@@ -183,6 +186,7 @@
         "timeLimitSeconds": null,
         "answers": [
           {
+            "answerId": "23426373-5ec6-43f9-bb24-48c56eac7b77",
             "codeSnippet": "int x = 1;",
             "createdAt": "2026-03-13T12:41:26.061009500",
             "downvoteCount": 0,
@@ -224,6 +228,7 @@
         "timeLimitSeconds": null,
         "answers": [
           {
+            "answerId": "91780ea6-bc03-4f4c-a4dc-783529026e18",
             "codeSnippet": "int x = 1;",
             "createdAt": "2026-03-13T12:43:59.973793700",
             "downvoteCount": 0,
@@ -265,6 +270,7 @@
         "timeLimitSeconds": null,
         "answers": [
           {
+            "answerId": "6360bff9-d8d1-4bdc-989a-523c426c0b05",
             "codeSnippet": "int x = 1;",
             "createdAt": "2026-03-13T12:45:38.638759800",
             "downvoteCount": 0,
@@ -293,6 +299,7 @@
       {
         "downvoteCount": 0,
         "replies": [],
+        "commentId": "cf0db26d-5bb5-4371-938b-45859bf9e960",
         "isEdited": false,
         "text": "adding a question level comment from user",
         "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -312,6 +319,7 @@
           {
             "downvoteCount": 0,
             "replies": [],
+            "commentId": "9883492d-8e61-4721-ae4f-8961a48ff736",
             "isEdited": false,
             "text": "section note from user",
             "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -326,6 +334,7 @@
         "timeLimitSeconds": null,
         "answers": [
           {
+            "answerId": "1c00b14b-cc27-44d5-b781-9cdafe79590f",
             "codeSnippet": "int x = 1;",
             "createdAt": "2026-03-13T12:58:43.926619300",
             "downvoteCount": 0,
@@ -336,6 +345,7 @@
                   {
                     "downvoteCount": 0,
                     "replies": [],
+                    "commentId": "16b81156-bea8-4860-a703-eb6ae06c9a64",
                     "isEdited": false,
                     "text": "quick reply from same user",
                     "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -343,6 +353,7 @@
                     "upvoteCount": 0
                   }
                 ],
+                "commentId": "d74a64e9-8b85-485d-a78d-a319f18cb3f3",
                 "isEdited": false,
                 "text": "answer comment from user",
                 "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -374,6 +385,7 @@
       {
         "downvoteCount": 0,
         "replies": [],
+        "commentId": "b6ae9778-5be3-4493-93d3-6f6ed75a786f",
         "isEdited": false,
         "text": "adding a question level comment from user",
         "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -393,6 +405,7 @@
           {
             "downvoteCount": 0,
             "replies": [],
+            "commentId": "276dbc61-aa7f-4324-8a8e-14f304e1ab95",
             "isEdited": false,
             "text": "section note from user",
             "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -411,6 +424,7 @@
         "timeLimitSeconds": 1,
         "answers": [
           {
+            "answerId": "61f83324-2f2a-41b2-98c9-f7bba6316e44",
             "codeSnippet": "int x = 1;",
             "createdAt": "2026-03-18T20:58:21.770093300",
             "downvoteCount": 0,
@@ -421,6 +435,7 @@
                   {
                     "downvoteCount": 0,
                     "replies": [],
+                    "commentId": "bd843401-bffd-46c3-9cf4-31a32f10581c",
                     "isEdited": false,
                     "text": "quick reply from same user",
                     "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -428,6 +443,7 @@
                     "upvoteCount": 0
                   }
                 ],
+                "commentId": "b79107e7-6b83-4ff4-8258-97b583007281",
                 "isEdited": false,
                 "text": "answer comment from user",
                 "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
@@ -491,89 +507,6 @@
     "difficulty": "EASY",
     "createdAt": "2026-03-18T20:58:21.770093300",
     "lastUpdated": "2026-03-21T19:42:04.480132500",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "78c8d56b-a330-41f0-8d3d-5360db8ce300",
-    "comments": [],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers.",
-    "title": "Longest Subarray with given Sum",
-    "type": "CODING",
-    "authorId": "2ba512ff-b4ac-4c62-bc13-864776884688",
-    "sections": [
-      {
-        "comments": [],
-        "examples": [],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [],
-        "maxLinesOfCode": null,
-        "title": "Problem Description",
-        "type": "DESCRIPTION",
-        "constraints": [],
-        "content": "Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers."
-      },
-      {
-        "comments": [],
-        "examples": [
-          "Input: nums = [1, -1, 5, -2, 3], k = 3",
-          "Output: 4",
-          "Explanation: The subarray [1, -1, 5, -2] sums to 3 and has length 4."
-        ],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [],
-        "maxLinesOfCode": null,
-        "title": "Example 1",
-        "type": "EXAMPLE",
-        "constraints": [],
-        "content": "Example walkthrough for the first input."
-      },
-      {
-        "comments": [],
-        "examples": [
-          "Input: nums = [-2, -1, 2, 1], k = 3",
-          "Output: 2"
-        ],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [],
-        "maxLinesOfCode": null,
-        "title": "Example 2",
-        "type": "EXAMPLE",
-        "constraints": [],
-        "content": "Example walkthrough for the second input."
-      },
-      {
-        "comments": [],
-        "examples": [
-          "What is the time compleity of your algorithm?",
-          "Can you you find a way to make you algoritm faster?"
-        ],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [],
-        "maxLinesOfCode": null,
-        "title": "Follow-up Questions",
-        "type": "EXAMPLE",
-        "constraints": [],
-        "content": "Addional follow-up questions."
-      }
-    ],
-    "difficulty": "MEDIUM",
-    "createdAt": "2026-03-21T19:42:05.211598500",
-    "lastUpdated": "2026-03-21T19:42:05.211598500",
     "imageURL": "",
     "category": "ARRAY"
   }

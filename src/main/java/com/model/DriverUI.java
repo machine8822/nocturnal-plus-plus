@@ -12,17 +12,10 @@ public class DriverUI {
 	}
 
 	public void run() {
-<<<<<<< HEAD
-		scenario4();
-		// scenario2();
-		// scenario3();
-		// scenario1();
-=======
 		scenario1();
 		scenario2();
 		scenario3();
-		// scenario4();
->>>>>>> main
+		scenario4();
 	}
 
 	public void scenario1() {
@@ -104,58 +97,53 @@ public class DriverUI {
 
 		loggedInUser.setContributor(true);
 		InterviewQuestion question = new InterviewQuestion(
-			"Longest Subarray with given Sum",
-			"Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers.",
-			Difficulty.MEDIUM,
-			Category.ARRAY,
-			QuestionType.CODING,
-			loggedInUser.getUserId()
-		);
+				"Longest Subarray with given Sum",
+				"Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers.",
+				Difficulty.MEDIUM,
+				Category.ARRAY,
+				QuestionType.CODING,
+				loggedInUser.getUserId());
 
-		//Description section
+		// Description section
 		Section desciptionSection = new Section(
-			"Problem Description",
-			"Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers.",
-			DataType.STRING,
-			SectionType.DESCRIPTION
-			);
+				"Problem Description",
+				"Given an integer array nums and an integer sum k, return the length of the longest contiguous subarray whose total equals k.\nNote: the array can contain negative numbers.",
+				DataType.STRING,
+				SectionType.DESCRIPTION);
 
-		//Example 1 section
+		// Example 1 section
 		Section example1Section = new Section(
-			"Example 1",
-			"Example walkthrough for the first input.",
-			DataType.STRING,
-			SectionType.EXAMPLE
-			);
+				"Example 1",
+				"Example walkthrough for the first input.",
+				DataType.STRING,
+				SectionType.EXAMPLE);
 
 		example1Section.addExample("Input: nums = [1, -1, 5, -2, 3], k = 3");
 		example1Section.addExample("Output: 4");
 		example1Section.addExample("Explanation: The subarray [1, -1, 5, -2] sums to 3 and has length 4.");
 
-		//Example 2 section
+		// Example 2 section
 		Section example2Section = new Section(
-			"Example 2",
-			"Example walkthrough for the second input.",
-			DataType.STRING,
-			SectionType.EXAMPLE
-			);
+				"Example 2",
+				"Example walkthrough for the second input.",
+				DataType.STRING,
+				SectionType.EXAMPLE);
 
 		example2Section.addExample("Input: nums = [-2, -1, 2, 1], k = 3");
 		example2Section.addExample("Output: 2");
 
-		//Follow-up section
+		// Follow-up section
 		Section followUpSection = new Section(
-			"Follow-up Questions",
-			"Addional follow-up questions.",
-			DataType.STRING,
-			SectionType.EXAMPLE
-			);
+				"Follow-up Questions",
+				"Addional follow-up questions.",
+				DataType.STRING,
+				SectionType.EXAMPLE);
 
 		followUpSection.addExample("What is the time compleity of your algorithm?");
 		followUpSection.addExample("Can you you find a way to make you algoritm faster?");
 
-		//May need to add answer sections for each solution
-		
+		// May need to add answer sections for each solution
+
 		question.addSection(desciptionSection);
 		question.addSection(example1Section);
 		question.addSection(example2Section);
@@ -173,14 +161,10 @@ public class DriverUI {
 
 	}
 
-<<<<<<< HEAD
 	public void scenario4() {
 		System.out.println("Scenario 4: Daily Task Flow (Hard-Coded Driver Stub)");
 		DailyTaskScenario.runDailyTaskScenario();
 	}
-=======
-		
->>>>>>> main
 
 	public static void main(String[] args) {
 		DriverUI appInterface = new DriverUI();
