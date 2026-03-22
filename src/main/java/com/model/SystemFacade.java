@@ -52,9 +52,7 @@ public class SystemFacade {
     }
 
     public boolean saveAllData() {
-        boolean usersSaved = DataWriter.saveUsers(users.getUsers());
-        boolean questionsSaved = DataWriter.saveQuestions(new ArrayList<>(questions.getAll()));
-        return usersSaved && questionsSaved;
+        return DataWriter.saveAllData(users.getUsers(), questions.getAll());
     }
 
     public void selectQuestion(UUID id) {

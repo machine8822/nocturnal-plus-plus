@@ -1,6 +1,8 @@
 package com.model;
 
 import java.io.FileReader;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +21,22 @@ public class DataLoader {
 
     private static final String USER_FILE = "json/users.json";
     private static final String QUESTION_FILE = "json/questions.json";
+
+    public static boolean userDataFileExists() {
+        return Files.exists(Path.of(USER_FILE));
+    }
+
+    public static boolean questionDataFileExists() {
+        return Files.exists(Path.of(QUESTION_FILE));
+    }
+
+    public static int countUsersInStorage() {
+        return loadUsers().size();
+    }
+
+    public static int countQuestionsInStorage() {
+        return loadQuestions().size();
+    }
 
     /**
      * Read all users from the JSON file and return them in a list.

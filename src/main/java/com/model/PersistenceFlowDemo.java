@@ -134,6 +134,11 @@ public class PersistenceFlowDemo {
         // load flow: show counts from loaded data, then check valid/invalid login.
         System.out.println("loading app startup > data load > login checks");
 
+        System.out.println("users file exists: " + DataLoader.userDataFileExists());
+        System.out.println("questions file exists: " + DataLoader.questionDataFileExists());
+        System.out.println("stored users count: " + DataLoader.countUsersInStorage());
+        System.out.println("stored questions count: " + DataLoader.countQuestionsInStorage());
+
         //
         SystemFacade facade = SystemFacade.getInstance();
         int userCount = facade.getUsers().size();

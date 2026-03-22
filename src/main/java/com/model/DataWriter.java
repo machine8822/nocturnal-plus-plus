@@ -23,11 +23,29 @@ public class DataWriter {
 
 	/**
 	 * Save all users to json/users.json
+	 * List overload for convenience.
+	 *
+	 * @param users list of users to save
+	 * @return true if save worked, false otherwise
+	 */
+	public static boolean saveUsers(List<User> users) {
+		if (users == null) {
+			return saveUsers(new ArrayList<>());
+		}
+		return saveUsers(new ArrayList<>(users));
+	}
+
+	/**
+	 * Save all users to json/users.json
 	 * 
 	 * @param users: ArrayList of User objects we want to save
 	 * @return true if save worked, false if there was an error
 	 */
 	public static boolean saveUsers(ArrayList<User> users) {
+		if (users == null) {
+			users = new ArrayList<>();
+		}
+
 		JSONArray jsonUsers = new JSONArray();
 
 		// For each user in the list, convert it to JSON and add it to the box
@@ -76,11 +94,42 @@ public class DataWriter {
 
 	/**
 	 * Save all interview questions to json/questions.json
+	 * List overload for convenience.
+	 *
+	 * @param questions list of questions to save
+	 * @return true if save worked, false otherwise
+	 */
+	public static boolean saveQuestions(List<InterviewQuestion> questions) {
+		if (questions == null) {
+			return saveQuestions(new ArrayList<>());
+		}
+		return saveQuestions(new ArrayList<>(questions));
+	}
+
+	/**
+	 * Save both users and questions in one call.
+	 *
+	 * @param users users to persist
+	 * @param questions questions to persist
+	 * @return true when both saves succeed
+	 */
+	public static boolean saveAllData(List<User> users, List<InterviewQuestion> questions) {
+		boolean usersSaved = saveUsers(users);
+		boolean questionsSaved = saveQuestions(questions);
+		return usersSaved && questionsSaved;
+	}
+
+	/**
+	 * Save all interview questions to json/questions.json
 	 * 
 	 * @param questions: arrayList of InterviewQuestion objects we want to save
 	 * @return true if save worked, false if there was an error
 	 */
 	public static boolean saveQuestions(ArrayList<InterviewQuestion> questions) {
+		if (questions == null) {
+			questions = new ArrayList<>();
+		}
+
 		JSONArray jsonQuestions = new JSONArray();
 
 		// For each question in the list, convert it to JSON and add it to the array
