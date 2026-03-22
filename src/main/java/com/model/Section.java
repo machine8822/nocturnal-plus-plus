@@ -160,6 +160,16 @@ public class Section {
         return answers;
     }
 
+    public int getAnswerCount()
+    {
+        return answers.size();
+    }
+
+    public boolean hasAnswers()
+    {
+        return !answers.isEmpty();
+    }
+
     public void addAnswer(Answer answer)
     {
         if (answer != null)
@@ -171,6 +181,16 @@ public class Section {
     public List<Comment> getComments()
     {
         return comments;
+    }
+
+    public int getCommentCount()
+    {
+        return comments.size();
+    }
+
+    public boolean hasComments()
+    {
+        return !comments.isEmpty();
     }
 
     public void addComment(Comment comment) {

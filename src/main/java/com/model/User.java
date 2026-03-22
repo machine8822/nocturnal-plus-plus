@@ -161,6 +161,22 @@ public class User {
         return Collections.unmodifiableList(bookmarkedQuestionIds);
     }
 
+    public int getBookmarkCount() {
+        return bookmarkedQuestionIds.size();
+    }
+
+    public boolean hasBookmarked(UUID questionId) {
+        if (questionId == null) return false;
+        return bookmarkedQuestionIds.contains(questionId);
+    }
+
+    public String getFullName() {
+        String first = firstName == null ? "" : firstName.trim();
+        String last = lastName == null ? "" : lastName.trim();
+        String fullName = (first + " " + last).trim();
+        return fullName.isEmpty() ? email : fullName;
+    }
+
     private boolean isValidPassword(String password) {
         if (password == null) return false;
         if (password.length() < 8 || password.length() > 24) return false;

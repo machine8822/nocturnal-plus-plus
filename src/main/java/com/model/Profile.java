@@ -61,4 +61,15 @@ public class Profile {
     public void setResumeURL(String resumeURL) {
         this.resumeURL = resumeURL == null ? "" : resumeURL;
     }
+
+    public boolean hasResumeURL() {
+        return resumeURL != null && !resumeURL.isBlank();
+    }
+
+    public String getAcademicSummary() {
+        String schoolText = school == null || school.isBlank() ? "Unknown School" : school;
+        String majorText = major == null || major.isBlank() ? "Undeclared" : major;
+        String gradYearText = gradYear <= 0 ? "N/A" : String.valueOf(gradYear);
+        return schoolText + " · " + majorText + " · " + gradYearText;
+    }
 }

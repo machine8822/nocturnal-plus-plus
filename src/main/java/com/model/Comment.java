@@ -118,6 +118,18 @@ public class Comment {
         return replies;
     }
 
+    public int getReplyCount() {
+        return replies.size();
+    }
+
+    public boolean hasReplies() {
+        return !replies.isEmpty();
+    }
+
+    public boolean isNetPositive() {
+        return getVoteScore() > 0;
+    }
+
     private boolean canBeDeletedBy(UUID contentAuthorId, UUID actingUserId, boolean isAdmin) {
         if (isAdmin) {
             return true;

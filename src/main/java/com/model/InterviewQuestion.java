@@ -106,6 +106,16 @@ public class InterviewQuestion {
         return sections;
     }
 
+    public int getSectionCount()
+    {
+        return sections.size();
+    }
+
+    public boolean hasContent()
+    {
+        return !sections.isEmpty() || !comments.isEmpty();
+    }
+
     public Section getSection(int index) 
     {
         if (index < 0 || index >= sections.size())
@@ -132,6 +142,11 @@ public class InterviewQuestion {
     public List<Comment> getComments() 
     {
         return comments;
+    }
+
+    public int getCommentCount()
+    {
+        return comments.size();
     }
 
     public boolean deleteComment(UUID commentId, UUID actingUserId, boolean isAdmin) {
