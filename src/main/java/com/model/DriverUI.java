@@ -12,10 +12,17 @@ public class DriverUI {
 	}
 
 	public void run() {
+<<<<<<< HEAD
+		scenario4();
+		// scenario2();
+		// scenario3();
+		// scenario1();
+=======
 		scenario1();
 		scenario2();
 		scenario3();
 		// scenario4();
+>>>>>>> main
 	}
 
 	public void scenario1() {
@@ -166,7 +173,14 @@ public class DriverUI {
 
 	}
 
+<<<<<<< HEAD
+	public void scenario4() {
+		System.out.println("Scenario 4: Daily Task Flow (Hard-Coded Driver Stub)");
+		DailyTaskScenario.runDailyTaskScenario();
+	}
+=======
 		
+>>>>>>> main
 
 	public static void main(String[] args) {
 		DriverUI appInterface = new DriverUI();
