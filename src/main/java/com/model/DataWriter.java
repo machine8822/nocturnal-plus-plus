@@ -112,7 +112,7 @@ public class DataWriter {
 		questionDetails.put("type", question.getType().toString());
 		questionDetails.put("category", question.getCategory().toString());
 		questionDetails.put("imageURL", question.getImageURL());
-		questionDetails.put("authorId", question.getAuthorId().toString());
+		questionDetails.put("authorId", question.getAuthorId() != null ? question.getAuthorId().toString() : null);
 		questionDetails.put("totalAttempts", question.getTotalAttempts());
 		questionDetails.put("totalSuccesses", question.getTotalSuccesses());
 		questionDetails.put("createdAt", question.getCreatedAt().toString());
@@ -125,7 +125,6 @@ public class DataWriter {
 			qComments.add(getCommentJSON(questionComments.get(i)));
 		}
 		questionDetails.put("comments", qComments);
-		
 
 		// Handle sections as a nested array inside the question
 		List<Section> sections = question.getSections();
@@ -151,8 +150,8 @@ public class DataWriter {
 
 		sectionDetails.put("title", section.getTitle());
 		sectionDetails.put("content", section.getBody());
-		sectionDetails.put("type", section.getSectionType().toString());
-		sectionDetails.put("dataType", section.getDataType() == null ? null : section.getDataType().toString());
+		sectionDetails.put("type", section.getSectionType() != null ? section.getSectionType().toString() : null);
+		sectionDetails.put("dataType", section.getDataType() != null ? section.getDataType().toString() : null);
 		sectionDetails.put("imageURL", section.getImageURL());
 		sectionDetails.put("expectedTimeComplexity", section.getExpectedTimeComplexity());
 		sectionDetails.put("maxLinesOfCode", section.getMaxLinesOfCode());
@@ -197,6 +196,7 @@ public class DataWriter {
 	
 	private static JSONObject getAnswerJSON(Answer answer) {
 		JSONObject obj = new JSONObject();
+		obj.put("answerId", answer.getAnswerId().toString());
 		obj.put("codeSnippet", answer.getCodeSnippet());
 		obj.put("explanation", answer.getExplanation());
 		obj.put("upvoteCount", answer.getUpvoteCount());
@@ -218,6 +218,7 @@ public class DataWriter {
 	 */
 	private static JSONObject getCommentJSON(Comment comment) {
 		JSONObject obj = new JSONObject();
+		obj.put("commentId", comment.getCommentId().toString());
 		obj.put("text", comment.getText());
 		obj.put("authorId", comment.getAuthorId() != null ? comment.getAuthorId().toString() : null);
 		obj.put("timestamp", comment.getTimestamp() != null ? comment.getTimestamp().toString() : null);
