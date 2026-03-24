@@ -327,4 +327,117 @@ public class NocturnalTest {
         c.edit("Updated text");
         assertTrue(c.getTimestamp().isAfter(before));
     }
+
+    // Tests for Bug #69
+
+    @Test
+    public void login_nonBcryptHash_alwaysReturnsFalse() {
+        User user = new User(java.util.UUID.randomUUID(), "sparrow@test.com",
+                "hashed-password-456", "Sullivan", "Sparrow");
+        assertFalse("Bug #69: non-BCrypt hash means login always returns false",
+                user.login("hashed-password-456"));
+    }
+
+    @Test
+    public void login_nonBcryptHash_neverUpdatesLastLogin() {
+        User user = new User(java.util.UUID.randomUUID(), "sparrow@test.com",
+                "hashed-password-456", "Sullivan", "Sparrow");
+        user.login("hashed-password-456");
+        assertNull("Bug #69: lastLogin should remain null since login always fails",
+                user.getLastLogin());
+    }
+
+    @Test
+    public void login_bcryptHash_succeeds() {
+        User user = new User("valid@test.com", "Password1!", "Valid", "User");
+        assertTrue(user.login("Password1!"));
+    }
+
+    // Tests for Bug #70
+
+    @Test
+    public void changePassword_invalidNewPassword_stillUpdatesLastLogin() {
+        User user = new User("cp@test.com", "Password1!", "First", "Last");
+        assertNull(user.getLastLogin());
+        boolean changed = user.changePassword("Password1!", "weak");
+        assertFalse("changePassword should return false for invalid new password", changed);
+        assertNotNull("Bug #70: lastLogin was updated even though changePassword failed",
+                user.getLastLogin());
+    }
+
+    @Test
+    public void changePassword_validNewPassword_updatesHash() {
+        User user = new User("cp@test.com", "Password1!", "First", "Last");
+        assertTrue(user.changePassword("Password1!", "NewSecure2@"));
+        assertTrue(user.login("NewSecure2@"));
+        assertFalse(user.login("Password1!"));
+    }
+
+    @Test
+    public void changePassword_wrongOldPassword_returnsFalse() {
+        User user = new User("cp@test.com", "Password1!", "First", "Last");
+        assertFalse(user.changePassword("WrongOld1!", "NewSecure2@"));
+    }
+
+    @Test
+    public void changePassword_nullOldPassword_returnsFalse() {
+        User user = new User("cp@test.com", "Password1!", "First", "Last");
+        assertFalse(user.changePassword(null, "NewSecure2@"));
+    }
+
+    @Test
+    public void changePassword_nullNewPassword_returnsFalse() {
+        User user = new User("cp@test.com", "Password1!", "First", "Last");
+        assertFalse(user.changePassword("Password1!", null));
+    }
+
+    // Tests for Bug #71
+
+    @Test(expected = NullPointerException.class)
+    public void section_stringConstructor_nullSectionType_throwsNPE() {
+        new Section("title", "body", (String) null);
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void section_stringConstructor_invalidSectionType_throwsIAE() {
+        new Section("title", "body", "NOT_A_REAL_TYPE");
+    }
+
+    @Test
+    public void section_stringConstructor_validSectionType_works() {
+        Section s = new Section("title", "body", "PROBLEM");
+        assertEquals(SectionType.PROBLEM, s.getSectionType());
+    }
+
+    // Tests for Bug #72
+
+    @Test
+    public void section_setMaxLinesOfCode_negativeValue_isStored() {
+        Section s = new Section("t", "b", DataType.STRING, SectionType.PROBLEM);
+        s.setMaxLinesOfCode(-5);
+        assertEquals("Bug #72: negative maxLinesOfCode should be rejected",
+                Integer.valueOf(-5), s.getMaxLinesOfCode());
+    }
+
+    @Test
+    public void section_setTimeLimitSeconds_negativeValue_isStored() {
+        Section s = new Section("t", "b", DataType.STRING, SectionType.PROBLEM);
+        s.setTimeLimitSeconds(-10);
+        assertEquals("Bug #72: negative timeLimitSeconds should be rejected",
+                Integer.valueOf(-10), s.getTimeLimitSeconds());
+    }
+
+    @Test
+    public void section_setMaxLinesOfCode_positiveValue_works() {
+        Section s = new Section("t", "b", DataType.STRING, SectionType.PROBLEM);
+        s.setMaxLinesOfCode(20);
+        assertEquals(Integer.valueOf(20), s.getMaxLinesOfCode());
+    }
+
+    @Test
+    public void section_setTimeLimitSeconds_positiveValue_works() {
+        Section s = new Section("t", "b", DataType.STRING, SectionType.PROBLEM);
+        s.setTimeLimitSeconds(30);
+        assertEquals(Integer.valueOf(30), s.getTimeLimitSeconds());
+    }
 }
