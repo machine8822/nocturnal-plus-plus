@@ -2,6 +2,6 @@ package com.model;
 
 public enum QuestionType {
 CODING,
-MULTIPUL_CHOICE,
+MULTIPLE_CHOICE,
 SHORT_ANSWER
 }
