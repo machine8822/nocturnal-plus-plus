@@ -3,16 +3,10 @@ package com.model;
 import java.lang.reflect.Field;
 
 import org.junit.After;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-/* Tests for Bug #63 */
 public class NocturnalTest {
 
     @Before
@@ -35,6 +29,8 @@ public class NocturnalTest {
         resetSingletons();
     }
 
+    // Tests for Bug #63
+
     @Test
     public void userList_freshInstance_doesNotContainPreviouslyAddedUser() throws Exception {
         UserList first = UserList.getInstance();
@@ -45,8 +41,7 @@ public class NocturnalTest {
         f.set(null, null);
 
         UserList second = UserList.getInstance();
-        assertNull("Bug #63: user from previous instance should not carry over",
-                second.getUserByEmail("carry@test.com"));
+        assertNull(second.getUserByEmail("carry@test.com"));
     }
 
     @Test
@@ -62,8 +57,7 @@ public class NocturnalTest {
         f.set(null, null);
 
         QuestionList second = QuestionList.getInstance();
-        assertNull("Bug #63: question from previous instance should not carry over",
-                second.getQuestion(q.getQuestionId()));
+        assertNull(second.getQuestion(q.getQuestionId()));
     }
 
     @Test
@@ -77,14 +71,14 @@ public class NocturnalTest {
     public void userList_getInstance_returnsSameReference() {
         UserList a = UserList.getInstance();
         UserList b = UserList.getInstance();
-        assertSame("getInstance should return the same singleton object", a, b);
+        assertSame(a, b);
     }
 
     @Test
     public void questionList_getInstance_returnsSameReference() {
         QuestionList a = QuestionList.getInstance();
         QuestionList b = QuestionList.getInstance();
-        assertSame("getInstance should return the same singleton object", a, b);
+        assertSame(a, b);
     }
 
     // Tests for Bug #64
@@ -183,5 +177,154 @@ public class NocturnalTest {
         Thread.sleep(10);
         q.updateContent("New Title", "New Desc");
         assertTrue(q.getLastUpdated().isAfter(before));
+    }
+
+    // Tests for Bug #66
+
+    @Test
+    public void systemFacade_login_withValidEmail_returnsUser() {
+        UserList.getInstance().addUser(new User("email@test.com", "Password1!", "First", "Last"));
+        User result = SystemFacade.getInstance().login("email@test.com", "Password1!");
+        assertNotNull(result);
+    }
+
+    @Test
+    public void systemFacade_login_withWrongPassword_returnsNull() {
+        UserList.getInstance().addUser(new User("email@test.com", "Password1!", "First", "Last"));
+        User result = SystemFacade.getInstance().login("email@test.com", "WrongPass1!");
+        assertNull(result);
+    }
+
+    @Test
+    public void systemFacade_login_withValidUsername_returnsNull() {
+        UserList.getInstance().addUser(new User("email@test.com", "Password1!", "First", "Last"));
+        User result = SystemFacade.getInstance().login("First", "Password1!");
+        assertNull(result);
+    }
+
+    @Test
+    public void systemFacade_login_withNullIdentifier_returnsNull() {
+        User result = SystemFacade.getInstance().login(null, "Password1!");
+        assertNull(result);
+    }
+
+    @Test
+    public void systemFacade_login_setsCurrentUser_onSuccess() {
+        UserList.getInstance().addUser(new User("email@test.com", "Password1!", "First", "Last"));
+        SystemFacade.getInstance().login("email@test.com", "Password1!");
+        assertNotNull(SystemFacade.getInstance().getCurrentUser());
+    }
+
+    @Test
+    public void systemFacade_login_clearsCurrentUser_onFailure() {
+        SystemFacade.getInstance().login("nobody@test.com", "Password1!");
+        assertNull(SystemFacade.getInstance().getCurrentUser());
+    }
+
+    // Tests for Bug #67
+
+    @Test
+    public void addQuestion_withNoCurrentUser_returnsFalse() {
+        InterviewQuestion q = new InterviewQuestion(
+                "Title", "desc", Difficulty.EASY,
+                Category.ARRAY, QuestionType.CODING, null);
+        assertFalse(SystemFacade.getInstance().addQuestion(q));
+    }
+
+    @Test
+    public void addQuestion_withNonContributorUser_returnsFalse() {
+        User user = new User("a@test.com", "Password1!", "First", "Last");
+        user.setContributor(false);
+        UserList.getInstance().addUser(user);
+        SystemFacade.getInstance().login("a@test.com", "Password1!");
+        InterviewQuestion q = new InterviewQuestion(
+                "Title", "desc", Difficulty.EASY,
+                Category.ARRAY, QuestionType.CODING, null);
+        assertFalse(SystemFacade.getInstance().addQuestion(q));
+    }
+
+    @Test
+    public void addQuestion_withContributorUser_returnsTrue() {
+        User user = new User("a@test.com", "Password1!", "First", "Last");
+        user.setContributor(true);
+        UserList.getInstance().addUser(user);
+        SystemFacade.getInstance().login("a@test.com", "Password1!");
+        InterviewQuestion q = new InterviewQuestion(
+                "Title", "desc", Difficulty.EASY,
+                Category.ARRAY, QuestionType.CODING, null);
+        assertTrue(SystemFacade.getInstance().addQuestion(q));
+    }
+
+    @Test
+    public void addQuestion_withNullQuestion_returnsFalse() {
+        User user = new User("a@test.com", "Password1!", "First", "Last");
+        user.setContributor(true);
+        UserList.getInstance().addUser(user);
+        SystemFacade.getInstance().login("a@test.com", "Password1!");
+        assertFalse(SystemFacade.getInstance().addQuestion(null));
+    }
+
+    @Test
+    public void addQuestion_nullUserAndNullQuestion_returnsFalse() {
+        assertFalse("Bug #67: cannot distinguish null user from null question, both return false",
+                SystemFacade.getInstance().addQuestion(null));
+    }
+
+    @Test
+    public void addQuestion_nonContributorAndNullQuestion_returnsFalse() {
+        User user = new User("a@test.com", "Password1!", "First", "Last");
+        user.setContributor(false);
+        UserList.getInstance().addUser(user);
+        SystemFacade.getInstance().login("a@test.com", "Password1!");
+        assertFalse("Bug #67: cannot distinguish non-contributor from null question, both return false",
+                SystemFacade.getInstance().addQuestion(null));
+    }
+
+    // Tests for Bug #68
+
+    @Test
+    public void comment_edit_withValidText_updatesText() {
+        Comment c = new Comment("Original text", java.util.UUID.randomUUID());
+        c.edit("Updated text");
+        assertEquals("Updated text", c.getText());
+    }
+
+    @Test
+    public void comment_edit_withValidText_setsIsEdited() {
+        Comment c = new Comment("Original text", java.util.UUID.randomUUID());
+        c.edit("Updated text");
+        assertTrue(c.isEdited());
+    }
+
+    @Test
+    public void comment_edit_withNullText_storesEmptyString() {
+        Comment c = new Comment("Original text", java.util.UUID.randomUUID());
+        c.edit(null);
+        assertEquals("", c.getText());
+    }
+
+    @Test
+    public void comment_edit_withBlankText_storesBlankText() {
+        Comment c = new Comment("Original text", java.util.UUID.randomUUID());
+        c.edit("   ");
+        assertEquals("Bug #68: blank whitespace should not be accepted as valid edit text",
+                "   ", c.getText());
+    }
+
+    @Test
+    public void comment_edit_withBlankText_setsIsEdited() {
+        Comment c = new Comment("Original text", java.util.UUID.randomUUID());
+        c.edit("   ");
+        assertTrue("Bug #68: isEdited is set to true even for blank text",
+                c.isEdited());
+    }
+
+    @Test
+    public void comment_edit_updatesTimestamp() throws InterruptedException {
+        Comment c = new Comment("Original text", java.util.UUID.randomUUID());
+        java.time.LocalDateTime before = c.getTimestamp();
+        Thread.sleep(10);
+        c.edit("Updated text");
+        assertTrue(c.getTimestamp().isAfter(before));
     }
 }
