@@ -440,4 +440,64 @@ public class NocturnalTest {
         s.setTimeLimitSeconds(30);
         assertEquals(Integer.valueOf(30), s.getTimeLimitSeconds());
     }
+
+    // Tests for Bug #73
+
+    @Test
+    public void profile_constructor_negativeGradYear_clampsToZero() {
+        Profile p = new Profile("School", "CS", -5);
+        assertEquals("Constructor should clamp negative gradYear to 0", 0, p.getGradYear());
+    }
+
+    @Test
+    public void profile_updateProfile_negativeGradYear_doesNotChange() {
+        Profile p = new Profile("School", "CS", 2026);
+        p.updateProfile(null, null, -1);
+        assertEquals("Bug #73: updateProfile ignores negative gradYear instead of clamping to 0",
+                2026, p.getGradYear());
+    }
+
+    @Test
+    public void profile_updateProfile_zeroGradYear_setsToZero() {
+        Profile p = new Profile("School", "CS", 2026);
+        p.updateProfile(null, null, 0);
+        assertEquals(0, p.getGradYear());
+    }
+
+    // Tests for Bug #74
+
+    @Test
+    public void updateContent_nullTitleAndNullDescription_stillUpdatesTimestamp() throws InterruptedException {
+        InterviewQuestion q = new InterviewQuestion(
+                "Title", "Desc", Difficulty.EASY,
+                Category.ARRAY, QuestionType.CODING, null);
+        java.time.LocalDateTime before = q.getLastUpdated();
+        Thread.sleep(10);
+        q.updateContent(null, null);
+        assertTrue("Bug #74: lastUpdated changed even though nothing was actually updated",
+                q.getLastUpdated().isAfter(before));
+    }
+
+    @Test
+    public void updateContent_blankTitleAndBlankDescription_stillUpdatesTimestamp() throws InterruptedException {
+        InterviewQuestion q = new InterviewQuestion(
+                "Title", "Desc", Difficulty.EASY,
+                Category.ARRAY, QuestionType.CODING, null);
+        java.time.LocalDateTime before = q.getLastUpdated();
+        Thread.sleep(10);
+        q.updateContent("   ", "   ");
+        assertTrue("Bug #74: lastUpdated changed even though both inputs were blank",
+                q.getLastUpdated().isAfter(before));
+    }
+
+    @Test
+    public void updateContent_validInputs_correctlyUpdatesTimestamp() throws InterruptedException {
+        InterviewQuestion q = new InterviewQuestion(
+                "Title", "Desc", Difficulty.EASY,
+                Category.ARRAY, QuestionType.CODING, null);
+        java.time.LocalDateTime before = q.getLastUpdated();
+        Thread.sleep(10);
+        q.updateContent("New Title", "New Desc");
+        assertTrue(q.getLastUpdated().isAfter(before));
+    }
 }
