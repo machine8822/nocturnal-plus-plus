@@ -2,6 +2,7 @@ package com.model;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,48 +11,30 @@ import org.json.simple.JSONObject;
 
 /**
  * DataWriter saves User and InterviewQuestion objects to JSON files.
- * 
- * This class is simple and straightforward:
- * - Call saveUsers() to write users to json/users.json
- * - Call saveQuestions() to write questions to json/questions.json
+ * Extends DataConstants so it can detect JUnit and switch file paths.
  */
 @SuppressWarnings("unchecked")
-public class DataWriter {
-
-	private static final String USER_FILE = "json/users.json";
-	private static final String QUESTION_FILE = "json/questions.json";
+public class DataWriter extends DataConstants {
 
 	/**
 	 * Save all users to json/users.json
-	 * 
-	 * @param users: ArrayList of User objects we want to save
-	 * @return true if save worked, false if there was an error
 	 */
 	public static boolean saveUsers(ArrayList<User> users) {
 		JSONArray jsonUsers = new JSONArray();
 
-		// For each user in the list, convert it to JSON and add it to the box
 		for (int i = 0; i < users.size(); i++) {
 			User user = users.get(i);
 			JSONObject userJSON = getUserJSON(user);
 			jsonUsers.add(userJSON);
 		}
 
-		// Now write the entire box of JSON users to the file
-		return writeJSONToFile(jsonUsers, USER_FILE);
+		String path = getFileWritingPath(USER_FILE, USER_FILE_JUNIT);
+		return writeJSONToFile(jsonUsers, path);
 	}
 
-	/**
-	 * Convert a single User object into a JSON object
-	 * 
-	 * @param user: the User object to convert
-	 * @return JSONObject with all the user's data
-	 */
 	private static JSONObject getUserJSON(User user) {
-		// Create an empty JSONObject (like an empty form to fill in)
 		JSONObject userDetails = new JSONObject();
 
-		// Fill in each field from the user object
 		userDetails.put("userId", user.getUserId().toString());
 		userDetails.put("email", user.getEmail());
 		userDetails.put("passwordHash", user.getPasswordHash());
@@ -62,7 +45,6 @@ public class DataWriter {
 		userDetails.put("isAdmin", user.isAdmin());
 		userDetails.put("isContributor", user.isContributor());
 
-		// Handle the profile a nested object inside the user
 		JSONObject profile = new JSONObject();
 		profile.put("school", user.getProfile().getSchool());
 		profile.put("major", user.getProfile().getMajor());
@@ -76,35 +58,23 @@ public class DataWriter {
 
 	/**
 	 * Save all interview questions to json/questions.json
-	 * 
-	 * @param questions: arrayList of InterviewQuestion objects we want to save
-	 * @return true if save worked, false if there was an error
 	 */
 	public static boolean saveQuestions(ArrayList<InterviewQuestion> questions) {
 		JSONArray jsonQuestions = new JSONArray();
 
-		// For each question in the list, convert it to JSON and add it to the array
 		for (int i = 0; i < questions.size(); i++) {
 			InterviewQuestion question = questions.get(i);
 			JSONObject questionJSON = getQuestionJSON(question);
 			jsonQuestions.add(questionJSON);
 		}
 
-		// Write the entire array of JSON questions to the file
-		return writeJSONToFile(jsonQuestions, QUESTION_FILE);
+		String path = getFileWritingPath(QUESTION_FILE, QUESTION_FILE_JUNIT);
+		return writeJSONToFile(jsonQuestions, path);
 	}
 
-	/**
-	 * Convert a single InterviewQuestion object into a JSON object
-	 * 
-	 * @param question: the InterviewQuestion to convert
-	 * @return JSONObject with all the question's data
-	 */
 	private static JSONObject getQuestionJSON(InterviewQuestion question) {
-		// Create an empty JSONObject to fill in with question data
 		JSONObject questionDetails = new JSONObject();
 
-		// Fill in the basic question fields
 		questionDetails.put("questionId", question.getQuestionId().toString());
 		questionDetails.put("title", question.getTitle());
 		questionDetails.put("description", question.getDescription());
@@ -118,7 +88,6 @@ public class DataWriter {
 		questionDetails.put("createdAt", question.getCreatedAt().toString());
 		questionDetails.put("lastUpdated", question.getLastUpdated().toString());
 
-		// Question-level comments
 		JSONArray qComments = new JSONArray();
 		List<Comment> questionComments = question.getComments();
 		for (int i = 0; i < questionComments.size(); i++) {
@@ -126,7 +95,6 @@ public class DataWriter {
 		}
 		questionDetails.put("comments", qComments);
 
-		// Handle sections as a nested array inside the question
 		List<Section> sections = question.getSections();
 		JSONArray sectionsJSON = new JSONArray();
 		for (int i = 0; i < sections.size(); i++) {
@@ -139,12 +107,6 @@ public class DataWriter {
 		return questionDetails;
 	}
 
-	/**
-	 * Helper method to convert a Section object to JSON
-	 * 
-	 * @param section: the Section object to convert
-	 * @return JSONObject with all the section's data
-	 */
 	private static JSONObject getSectionJSON(Section section) {
 		JSONObject sectionDetails = new JSONObject();
 
@@ -171,7 +133,6 @@ public class DataWriter {
 		}
 		sectionDetails.put("examples", examplesJSON);
 
-		// Handle answers (a list of Answer objects)
 		JSONArray answersJSON = new JSONArray();
 		List<Answer> answers = section.getAnswers();
 		for (int i = 0; i < answers.size(); i++) {
@@ -179,7 +140,6 @@ public class DataWriter {
 		}
 		sectionDetails.put("answers", answersJSON);
 
-		// Handle comments (a list of Comment objects)
 		JSONArray commentsJSON = new JSONArray();
 		List<Comment> comments = section.getComments();
 		for (int i = 0; i < comments.size(); i++) {
@@ -190,10 +150,6 @@ public class DataWriter {
 		return sectionDetails;
 	}
 
-	/**
-	 * Helper method to convert an Answer object to JSON
-	 */
-	
 	private static JSONObject getAnswerJSON(Answer answer) {
 		JSONObject obj = new JSONObject();
 		obj.put("answerId", answer.getAnswerId().toString());
@@ -213,9 +169,6 @@ public class DataWriter {
 		return obj;
 	}
 
-	/**
-	 * Helper method to convert a Comment object to JSON
-	 */
 	private static JSONObject getCommentJSON(Comment comment) {
 		JSONObject obj = new JSONObject();
 		obj.put("commentId", comment.getCommentId().toString());
@@ -236,16 +189,28 @@ public class DataWriter {
 	}
 
 	/**
-	 * Generic helper method to write ANY JSON (array or object) to a file
-	 * 
-	 * @param json: the JSONArray or JSONObject to write
-	 * @param filePath: the path where to save it (e.g., "json/users.json")
-	 * @return true if successful, false if something went wrong
+	 * Returns the correct file path depending on whether running under JUnit.
+	 *
+	 * Normal run:  returns the regular file path (e.g. "json/users.json")
+	 * JUnit test:  returns the path to the resource in src/test/resources
 	 */
+	private static String getFileWritingPath(String pathName, String junitPathName) {
+		try {
+			if (isJUnitTest()) {
+				URI url = DataWriter.class.getResource(junitPathName).toURI();
+				return url.getPath();
+			} else {
+				return pathName;
+			}
+		} catch (Exception e) {
+			System.out.println("Difficulty getting resource path");
+			return pathName;
+		}
+	}
+
 	private static boolean writeJSONToFile(Object json, String filePath) {
 		try (FileWriter file = new FileWriter(filePath)) {
 
-			// Convert JSON to text and write it in readable, indented format.
 			String jsonText;
 			if (json instanceof JSONArray) {
 				jsonText = ((JSONArray) json).toJSONString();
@@ -255,14 +220,11 @@ public class DataWriter {
 				jsonText = String.valueOf(json);
 			}
 			file.write(prettyPrintJson(jsonText));
-			
-			// Make sure the data is actually written to disk and not stuck in mem
+
 			file.flush();
-			
-			// Success!
+
 			return true;
 		} catch (IOException e) {
-			// If something went wrong, print the error for debugging
 			System.err.println("Error writing to file: " + filePath);
 			System.err.println("Write failed: " + e.getMessage());
 			return false;
@@ -351,16 +313,6 @@ public class DataWriter {
 		}
 	}
 
-	/**
-	 * Main method for testing
-	 * 
-	 * Uncomment and modify to test saving users or questions
-	 */
 	public static void main(String[] args) {
-		// Example: Create some test users and save them
-		// ArrayList<User> testUsers = new ArrayList<>();
-		// testUsers.add(new User(...));
-		// boolean success = DataWriter.saveUsers(testUsers);
-		// System.out.println("Users saved: " + success);
 	}
 }

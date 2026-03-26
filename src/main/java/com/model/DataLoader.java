@@ -1,6 +1,9 @@
 package com.model;
 
+import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,14 +14,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 /**
- *
- * Only the user-reading method is implemented; it reads the hard-coded
- * users.json file and builds User objects.
+ * Loads Users and InterviewQuestions from JSON files.
+ * Extends DataConstants so it can detect JUnit and switch file paths.
  */
-public class DataLoader {
-
-    private static final String USER_FILE = "json/users.json";
-    private static final String QUESTION_FILE = "json/questions.json";
+public class DataLoader extends DataConstants {
 
     /**
      * Read all users from the JSON file and return them in a list.
@@ -28,7 +27,10 @@ public class DataLoader {
     public static ArrayList<User> loadUsers() {
         ArrayList<User> users = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(USER_FILE)) {
+        try {
+            BufferedReader reader = getReaderFromFile(USER_FILE, USER_FILE_JUNIT);
+            if (reader == null) return users;
+
             JSONArray peopleJSON = (JSONArray) new JSONParser().parse(reader);
 
             for (Object person : peopleJSON) {
@@ -50,6 +52,7 @@ public class DataLoader {
                 users.add(new User(id, email, passwordHash, firstName, lastName, createdAt,
                         lastLogin, isAdmin, isContributor, profile, new ArrayList<>()));
             }
+            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -59,17 +62,14 @@ public class DataLoader {
 
     /**
      * Read interview questions (including their sections) from JSON.
-     *
-     * The structure matches what DataWriter writes. We simply walk the array
-     * and extract the same fields; sections are treated as nested arrays.
-     *
-     * This method is deliberately as basic as the users loader adapts the
-     * constructor calls to match your actual InterviewQuestion/Section classes.
      */
     public static ArrayList<InterviewQuestion> loadQuestions() {
         ArrayList<InterviewQuestion> questions = new ArrayList<>();
 
-        try (FileReader reader = new FileReader(QUESTION_FILE)) {
+        try {
+            BufferedReader reader = getReaderFromFile(QUESTION_FILE, QUESTION_FILE_JUNIT);
+            if (reader == null) return questions;
+
             JSONArray questionsJSON = (JSONArray) new JSONParser().parse(reader);
 
             for (Object question : questionsJSON) {
@@ -108,11 +108,35 @@ public class DataLoader {
                         comments,
                         sections));
             }
+            reader.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return questions;
+    }
+
+    /**
+     * Returns a BufferedReader that reads from the correct file depending
+     * on whether the code is running under JUnit or not.
+     *
+     * Normal run:  reads from the file system (e.g. "json/users.json")
+     * JUnit test:  reads from classpath resources (e.g. "/json/users.json" in src/test/resources)
+     */
+    private static BufferedReader getReaderFromFile(String fileName, String junitFileName) {
+        try {
+            if (isJUnitTest()) {
+                InputStream inputStream = DataLoader.class.getResourceAsStream(junitFileName);
+                InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+                return new BufferedReader(inputStreamReader);
+            } else {
+                FileReader reader = new FileReader(fileName);
+                return new BufferedReader(reader);
+            }
+        } catch (Exception e) {
+            System.out.println("Can't load: " + fileName);
+            return null;
+        }
     }
 
     /**
