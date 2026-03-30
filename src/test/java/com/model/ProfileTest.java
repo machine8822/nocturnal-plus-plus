@@ -5,7 +5,7 @@ import org.junit.Test;
 
 public class ProfileTest {
 
-    // Bug #73 — Profile gradYear handling is inconsistent
+    // Bug #73 — Profile gradYear handling can be inconsistent
 
     @Test
     public void profile_constructor_negativeGradYear_clampsToZero() {
