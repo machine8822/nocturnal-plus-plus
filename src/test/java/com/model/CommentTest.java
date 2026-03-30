@@ -136,4 +136,18 @@ public class CommentTest {
 
     
 
+
+    // Bug #68 — edit() allows setting text to blank
+
+    @Test
+    public void comment_edit_withBlankText_storesBlankText() {
+        comment.edit("   ");
+        assertEquals("   ", comment.getText());
+    }
+
+    @Test
+    public void comment_edit_withBlankText_setsIsEdited() {
+        comment.edit("   ");
+        assertTrue(comment.isEdited());
+    }
 }
