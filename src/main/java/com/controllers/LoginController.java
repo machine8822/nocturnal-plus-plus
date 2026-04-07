@@ -4,10 +4,10 @@ import java.io.IOException;
 import javafx.fxml.FXML;
 import com.nocturnal.App;
 
-public class SecondaryController {
+public class LoginController {
 
     @FXML
-    private void switchToPrimary() throws IOException {
-        App.setRoot("primary");
+    private void back() throws IOException {
+        App.setRoot("home");
     }
 }
