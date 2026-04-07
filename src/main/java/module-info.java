@@ -5,7 +5,7 @@ module com.nocturnal {
     requires jbcrypt;
     requires junit;
 
-    opens com.nocturnal to javafx.fxml;
+    opens com.controllers to javafx.fxml;
 
     exports com.nocturnal;
     exports com.model;

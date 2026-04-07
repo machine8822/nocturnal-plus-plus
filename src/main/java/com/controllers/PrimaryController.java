@@ -1,7 +1,8 @@
-package com.nocturnal;
+package com.controllers;
 
 import java.io.IOException;
 import javafx.fxml.FXML;
+import com.nocturnal.App;
 
 public class PrimaryController {
 
