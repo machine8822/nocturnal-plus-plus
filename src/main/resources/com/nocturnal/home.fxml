@@ -10,7 +10,7 @@
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/25"
    xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.HomeController">
    <children>
-      <Label text="Primary View" />
+      <Label styleClass="title" text="Primary View" />
       <ButtonBar prefHeight="40.0" prefWidth="200.0">
          <buttons>
             <Button mnemonicParsing="false" text="Button" />
