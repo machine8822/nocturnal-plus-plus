@@ -1,8 +1,10 @@
 package com.controllers;
 
 import java.io.IOException;
-import javafx.fxml.FXML;
+
 import com.nocturnal.App;
+
+import javafx.fxml.FXML;
 
 public class LoginController {
 
@@ -10,4 +12,10 @@ public class LoginController {
     private void back() throws IOException {
         App.setRoot("home");
     }
+
+    @FXML
+    private void goToDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
+
 }
