@@ -1,0 +1,150 @@
+NOCTURNAL++ PRESENTATION SCRIPT (10-12 MINUTES)
+================================================
+
+[Darius S1 — 1:15]
+"Hey everyone. This is Darius with Nocturnal++. Today we're walking through our code presentation. This is an interview-practice platform that manages users, interview questions, and community discussion. The key thing we want to demonstrate is how data persists across the entire user journey—from account creation through question authoring to daily challenges.
+
+Our architecture uses a clean separation of concerns: the DriverUI runs demo scenarios, SystemFacade acts as a central controller, UserList and QuestionList manage data in memory, and our persistence layer—DataWriter and DataLoader—handles all JSON serialization. 
+
+The beauty of this design is that the UI layer never directly touches files or databases. Everything goes through the facade. That means we can swap out persistence implementations later without breaking the UI code.
+
+[REEKo S4 — USER —]
+This Reeko 
+"Now let's talk about data persistence. This is the core of today's demo.
+
+Before we ran the scenarios, let me show you what was already in our JSON files.
+
+In json/users.json, we had three existing users: Grant Smith, Theodore Johnson, and Sullivan Sparrow. Notice that Sally Sparrow isn't in here yet because we haven't run scenario 2 yet.
+
+In json/questions.json, we can see the questions we already had: 'Binary search time complexity,' 'Detecting duplicates in an array,' plus some demo-persisted questions from previous runs, and Sally's 'Longest Subarray with given Sum.' Most importantly, Jimmy Bauer was not an author of any questions yet, and his streak wasn't incremented.
+
+So our starting state: pre-populated users and questions, but none of the demo data from today's run.
+
+[At this point, show the JSON files on screen]
+
+---
+
+[Will s2 — 1:45]
+"Scenario 1: Duplicate Account Creation.
+
+Sally Sparrow tries to create an account. But here's the thing—her brother Sullivan already has an account with the email sparrow@example.com. So when Sally attempts to create an account with the same email, the system rejects her.
+
+What happens behind the scenes? UserList maintains the users via email address. When we try to add Sally's duplicate entry, the HashMap's containsKey check fails, and addUser returns false. The UI then prints 'Sorry, we couldn't create the user. Email already exists.'
+
+The takeaway here is that the rejection isn't about family relationships—it's purely email-based duplicate detection. That's what makes the validation rule deterministic and testable. No fuzzy logic, no name matching. Just does this email already exist in our JSON? Yes? Reject.
+
+This demonstrates the first layer of data integrity: preventing duplicate records at insertion time."
+
+---
+
+[Daruis S1 — 2:00]
+"Scenario 2: Successful Account Creation and Login.
+
+Sally realizes the issue, so she changes her email to sally@example.com. This time when she tries to create the account, the email is unique, so the system accepts it.
+
+Here's the critical part: her password gets hashed using BCrypt before it's stored in memory and persisted to JSON. BCrypt gives us a salted hash, so even if someone accessed our JSON file, they can't just read passwords in plaintext. Each password has a unique salt, so even identical passwords produce different hashes.
+
+When Sally logs in with her credentials, SystemFacade calls login on UserList, which uses BCrypt.checkpw() to verify her password against the stored hash. If it checks out, her user object is loaded, and she's authenticated. She also gets a currentUser session object so the facade knows who's acting right now.
+
+Notice also that each user has a lastLogin timestamp. When Sally logs in, that gets updated. This is useful for tracking activity and user engagement over time.
+
+So scenario 2 shows us account creation with proper password security and successful authentication."
+
+---
+
+[Jaden S3 — 2:30]
+"Scenario 3: Sally Creates an Interview Question with Two Solutions.
+
+Sally logs back in and gets promoted to contributor status. Now she can author questions.
+
+She creates a new InterviewQuestion about 'Longest Subarray with Given Sum'—a classic array algorithm problem. The question has medium difficulty, it's in the ARRAY category, and it's a CODING type question.
+
+Then she structures it with multiple sections: a problem description, two worked examples, follow-up thinking questions, and a solutions section. This nested structure is key to our data model.
+
+Each section can have constraints, examples, and answers with code snippets and explanations. For the two solutions, Sally stores filenames in the codeSnippet field rather than raw code:
+
+When we eventually build the GUI, users can click on a filename to view the actual Java code. For now, we're demonstrating that the structured data flows through correctly.
+
+Sally saves her question, which triggers DataWriter.saveAllData() and persists everything to the JSON. This is the first moment where new data hits disk."
+
+---
+
+[Will S2 — 2:50]
+"Scenario 4: Jimmy Bauer's Daily Task Flow.
+
+Jimmy logs into the system. He has an 8-day streak going—he's been doing the daily challenge consistently.
+
+The system tailors a daily challenge specifically for him based on his skill level—'Intermediate'—and his preferences—'Trees + Visualization.' So he gets a Binary Search Tree question. This personalization is key: Jimmy isn't getting a random question; the system knows his profile and adapts.
+
+When he clicks on the question, he sees the full problem statement with constraints, multiple examples, and two well-explained solutions. Jimmy reads both approaches carefully.
+
+As he's reviewing the second solution, something confuses him. He posts a comment directly on that solution: 'I am confused on solution 2. Why does this always stay O(log n)?' His name—Jimmy Bauer—today's date, and his question all show up in the comment thread. That comment is now part of the persistent record, stored as a nested Comment object inside the Answer object inside the Section.
+
+Jimmy then exports this question to a formatted text file so he can review it offline with friends. The file includes the title, difficulty, category, problem description, constraints, examples, and both solutions—all nicely formatted. This is useful for collaborative studying.
+
+Next, Jimmy searches the question database for 'Binary Search Tree.' He finds two matching questions and glances through both of them. The search is simple but effective—it filters by title substring matching.
+
+Because he completed the daily challenge, his streak increments from 8 to 9 days. That's stored on his User object.
+
+He logs out—which triggers a final save of his progress to JSON. All his activity today: the comment he wrote, the search he performed, the streak increment—all of it is persisted."
+
+---
+
+
+[REEKo S4 — USER —]
+
+"Now that we've executed the account and question scenarios and saved data, let's check the files again.
+
+First, in json/users.json, Sally Sparrow now appears with email sally@example.com and user metadata. That confirms scenario 2 persisted correctly.
+
+Next, in json/questions.json, Sally's 'Longest Subarray with given Sum' question is present with full structure: title, description, difficulty, category, type, author ID, and nested sections.
+
+Inside that question, we can see the two solution entries in the Solutions section, each stored as an Answer object where codeSnippet holds the filename and explanation holds the algorithm summary.
+
+We can also see nested comment data persisted in the JSON structure. The important point is the shape is preserved exactly as Question → Sections → Answers → Comments.
+
+This proves end-to-end persistence: DriverUI runs scenarios, SystemFacade coordinates operations, UserList and QuestionList hold in-memory objects, and DataWriter.saveAllData writes everything to JSON. On restart, DataLoader reconstructs the same object graph from disk.
+
+Under the hood, DataWriter recursively serializes users, questions, sections, answers, and comments into JSON objects and arrays, then writes formatted output for readability.
+
+When the app starts again, DataLoader parses those files and rebuilds the same nested Java objects in memory.
+
+That is the core value of this layer: continuity across sessions. What users create in one run is still available in the next run." 
+
+---
+
+[Jonah/Jaden — 1:30]
+"Let's wrap this up by talking about what we've demonstrated:
+
+We showed account creation with duplicate detection and password security. We showed successful login with BCrypt verification. We showed question authoring with a rich nested structure—sections, examples, solutions. We showed user interaction in the form of comments. And we showed data persistence across all of it.
+
+The architecture keeps each layer focused: UI orchestration in DriverUI, business logic coordination in SystemFacade, in-memory repositories in UserList and QuestionList, and serialization in DataWriter/DataLoader. That separation makes the code testable, maintainable, and scalable.
+
+If we needed to swap JSON for a database later, we'd only modify DataWriter and DataLoader. The rest of the codebase wouldn't care.
+
+One last note: the data model uses UUIDs for all IDs, LocalDateTime for all timestamps, and enums for controlled values like Difficulty and Category. That keeps data consistency high and bugs low.
+
+Thanks for watching Nocturnal++."
+
+---
+
+TOTAL RUNTIME: 11:40–12:15
+(Adjust speaker pace and file display timing as needed)
+
+KEY TALKING POINTS FOR SCREEN SHARING:
+- Before demo: Show json/users.json with 3 users (Grant, Theodore, Sullivan), no Sally yet
+- Before demo: Show json/questions.json with existing questions, no "Longest Subarray" or Jimmy comments yet
+- Run demo (scenarios 1-4)
+- After demo: Show json/users.json with Sally now present
+- After demo: Show json/questions.json with Sally's question structure and Jimmy's comment nested inside
+- Highlight the BCrypt hash in Sally's password field
+- Highlight the nested structure in the questions.json (Question → Sections → Answers → Comments)
+
+TECHNICAL DETAILS IF Asked During Q&A:
+- UserList uses HashMap<String, User> keyed by normalized email for O(1) lookup
+- SystemFacade is a singleton (getInstance() returns single instance)
+- DataWriter uses json-simple library for serialization
+- BCrypt salt rounds: default 10 (configurable)
+- Filenames stored, actual Java files not in JSON
+- Comments support nested replies with recursive delete logic
+- Success rate calculated as totalSuccesses / totalAttempts
