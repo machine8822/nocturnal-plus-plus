@@ -23,6 +23,8 @@ public class LoginController {
         String email = emailInput.getText();
         String password = passwordInput.getText();
 
+        // Grant Smith Password: password
+
         User loggedInUser = driver.login(email, password);
         if (loggedInUser != null) {
             System.out.println(

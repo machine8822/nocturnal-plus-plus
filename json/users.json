@@ -3,7 +3,7 @@
     "firstName": "Grant",
     "lastName": "Smith",
     "createdAt": "2024-01-15T10:30",
-    "lastLogin": "2026-03-18T20:58:21.856618100",
+    "lastLogin": "2026-04-14T14:18:03.878716300",
     "profile": {
       "resumeURL": "",
       "major": "Computer Science",
@@ -15,7 +15,7 @@
     "userId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
     "isContributor": true,
     "email": "grant.smith@example.com",
-    "passwordHash": "$2a$10$qMewBcMRiIrP01oTPKu.D.t/VHYiVJozm8xiJrQIAhYDCTGs0uVxy"
+    "passwordHash": "$2a$10$qMewBcMRiIrP01oTPKu.D.t\/VHYiVJozm8xiJrQIAhYDCTGs0uVxy"
   },
   {
     "firstName": "Theodore",

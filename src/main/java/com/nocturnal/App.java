@@ -2,11 +2,16 @@ package com.nocturnal;
 
 import java.io.IOException;
 
+import com.model.SystemFacade;
+
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+import javafx.event.EventHandler;
 
 /**
  * JavaFX App
@@ -20,6 +25,14 @@ public class App extends Application {
         scene = new Scene(loadFXML("login"), 640, 480);
         stage.setScene(scene);
         stage.show();
+        stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+            @Override
+            public void handle(WindowEvent t) {
+                SystemFacade.getInstance().logout();
+                Platform.exit();
+                System.exit(0);
+            }
+        });
     }
 
     public static void setRoot(String fxml) throws IOException {
