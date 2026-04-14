@@ -12,7 +12,4 @@ public class CreateUserController {
         App.setRoot("dashboard");
     }
 
-
-
-
 }

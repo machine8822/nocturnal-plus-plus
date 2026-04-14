@@ -4,9 +4,13 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateUserController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+   minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateUserController">
    <children>
-      <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Creating User" textAlignment="CENTER" wrappingWidth="90.13671875" />
-      <Button fx:id="createUserButton" mnemonicParsing="false" onAction="#createUser" text="Create User" />
+      <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Creating User"
+         textAlignment="CENTER" wrappingWidth="90.13671875" />
+      <Button fx:id="createUserButton" mnemonicParsing="false" onAction="#createUser"
+         text="Create User" />
    </children>
 </VBox>
