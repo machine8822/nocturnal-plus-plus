@@ -3,6 +3,7 @@ package com.controllers;
 import java.io.IOException;
 
 import com.nocturnal.App;
+import com.model.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -17,24 +18,19 @@ public class LoginController {
 
     @FXML
     private void login() throws IOException {
+        SystemFacade driver = SystemFacade.getInstance();
+
         String email = emailInput.getText();
         String password = passwordInput.getText();
 
-        if (email.equals("testing") && password.equals("password")) {
-            System.out.println("Email: " + email);
-            System.out.println("Password: " + password);
-
-            System.out.println("Login successful");
-
+        User loggedInUser = driver.login(email, password);
+        if (loggedInUser != null) {
+            System.out.println(
+                    "Login successful for user: " + loggedInUser.getFirstName() + " " + loggedInUser.getLastName());
             App.setRoot("dashboard");
         } else {
-            System.out.println("Email: " + email);
-            System.out.println("Password: " + password);
-
-            System.out.println("Invalid credentials");
+            System.out.println("Invalid credentials for email: " + email);
         }
-
-
 
     }
 
@@ -42,7 +38,5 @@ public class LoginController {
     private void goToCreateUser() throws IOException {
         App.setRoot("createUser");
     }
-
-
 
 }
