@@ -4,12 +4,19 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
     <children>
         <Label text="Login Page" />
-        <Button fx:id="login" onAction="#goToDashboard" text="Login" />
+      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+      <TextField fx:id="emailInput" promptText="Email address" />
+      <PasswordField fx:id="passwordInput" promptText="Password" />
+        <Button fx:id="login" onAction="#login" text="Login" />
+      <Button fx:id="createUserButton" mnemonicParsing="false" onAction="#goToCreateUser" text="Create User" />
     </children>
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

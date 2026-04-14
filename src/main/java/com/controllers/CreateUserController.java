@@ -8,7 +8,11 @@ import javafx.fxml.FXML;
 
 public class CreateUserController {
     @FXML
-    private void goToDashboard() throws IOException {
+    private void createUser() throws IOException {
         App.setRoot("dashboard");
     }
+
+
+
+
 }
