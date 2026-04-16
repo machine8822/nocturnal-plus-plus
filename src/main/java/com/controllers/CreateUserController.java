@@ -12,4 +12,9 @@ public class CreateUserController {
         App.setRoot("dashboard");
     }
 
+    @FXML
+    private void goToLogin() throws IOException {
+        App.setRoot("login");
+    }
+
 }
