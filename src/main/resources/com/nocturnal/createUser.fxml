@@ -1,16 +1,79 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
-   minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateUserController">
+<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateUserController">
    <children>
-      <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Creating User"
-         textAlignment="CENTER" wrappingWidth="90.13671875" />
-      <Button fx:id="createUserButton" mnemonicParsing="false" onAction="#createUser"
-         text="Create User" />
+      <Text fx:id="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Creating User" textAlignment="CENTER" wrappingWidth="90.13671875" />
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="firstName" maxWidth="200.0" promptText="First Name" GridPane.halignment="CENTER" />
+            <TextField fx:id="lastName" maxWidth="200.0" promptText="Last Name" GridPane.columnIndex="1" GridPane.halignment="CENTER" />
+         </children>
+      </GridPane>
+      <TextField fx:id="emailAdd" maxWidth="500.0" promptText="Email Address">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </TextField>
+      <PasswordField fx:id="password" maxWidth="500.0" promptText="Password">
+         <VBox.margin>
+            <Insets top="5.0" />
+         </VBox.margin>
+      </PasswordField>
+      <Line endX="400.0929260253906" endY="-0.24273212254047394" startX="-100.0">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Line>
+      <TextField fx:id="school" maxWidth="500.0" promptText="School" />
+      <GridPane>
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <TextField fx:id="major" maxWidth="200.0" promptText="Major" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+            <TextField fx:id="gradYear" maxWidth="200.0" promptText="Grad. Year" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.rowIndex="1" />
+         </children>
+      </GridPane>
+      <Button fx:id="createUserButton" mnemonicParsing="false" onAction="#createUser" text="Create User">
+         <VBox.margin>
+            <Insets top="10.0" />
+         </VBox.margin>
+      </Button>
+      <GridPane>
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="366.4000244140625" minWidth="10.0" prefWidth="303.2" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="297.59999999999997" minWidth="10.0" prefWidth="297.59999999999997" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account:" wrappingWidth="150.42108917236328" GridPane.halignment="RIGHT" />
+            <Button fx:id="goToLogin" mnemonicParsing="false" text="Sign In" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
    </children>
 </VBox>
