@@ -72,7 +72,7 @@
         </rowConstraints>
          <children>
             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Already have an account:" wrappingWidth="150.42108917236328" GridPane.halignment="RIGHT" />
-            <Button fx:id="goToLogin" mnemonicParsing="false" text="Sign In" GridPane.columnIndex="1" />
+            <Button fx:id="goToLogin" mnemonicParsing="false" onAction="#goToLogin" text="Log In" GridPane.columnIndex="1" />
          </children>
       </GridPane>
    </children>

@@ -18,6 +18,24 @@
     "passwordHash": "$2a$10$qMewBcMRiIrP01oTPKu.D.t\/VHYiVJozm8xiJrQIAhYDCTGs0uVxy"
   },
   {
+    "firstName": "William",
+    "lastName": "King",
+    "createdAt": "2026-04-19T18:48:08.170884",
+    "lastLogin": "2026-04-19T18:51:17.378677900",
+    "profile": {
+      "resumeURL": "",
+      "major": "test",
+      "school": "test",
+      "totalUpvotes": 5,
+      "gradYear": 2026
+    },
+    "isAdmin": false,
+    "userId": "92d91572-21f9-4860-888e-937b110c29c3",
+    "isContributor": false,
+    "email": "willy@example.com",
+    "passwordHash": "$2a$12$H\/CMsLN\/65pqwxMtFnBkZu.opCkbYzZflPgajFOG5spfW6izTQXZ6"
+  },
+  {
     "firstName": "Theodore",
     "lastName": "Johnson",
     "createdAt": "2024-01-26T10:30",

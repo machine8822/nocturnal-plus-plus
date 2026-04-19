@@ -1,9 +1,14 @@
 package com.controllers;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.UUID;
 
+import com.model.Profile;
+import com.model.SystemFacade;
+import com.model.User;
 import com.nocturnal.App;
-import com.model.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -36,6 +41,21 @@ public class CreateUserController {
         String schoolString = school.getText();
         String majorString = major.getText();
         int gradYe = Integer.parseInt(gradYear.getText());
+        
+
+        User newUser = new User(
+                UUID.randomUUID(),
+                emailAddress,
+                User.hashPassword(pass),
+                firstNameString,
+                lastNameString,
+                LocalDateTime.now(),
+                null,
+                false,
+                false,
+                new Profile(schoolString, majorString, gradYe, 5, null),
+                new ArrayList<>()
+        );
 
         // If any is blank/wrong needs to notify user
         if (firstNameString.isEmpty() || lastNameString.isEmpty() || emailAddress.isEmpty() || pass.isEmpty()
@@ -43,13 +63,17 @@ public class CreateUserController {
             System.out.println("All fields must be filled out.");
             return;
         }
-        // Need to implement using "getUserByEmail" to check if email is already taken
-        if (driver.getUsers().isEmailTaken(emailAddress)) {
-            System.out.println("Email is already taken. Please choose a different email.");
+        
+        if (driver.addUser(newUser)) {
+            System.out.println("User: " + firstNameString + " " + lastNameString + " has been successfully created");
+            driver.saveAllData();
+            App.setRoot("login");
+            return;
+        } else {
+            System.out.println("Sorry, we couldn't create the user. Email already exists.");
             return;
         }
 
-        // If successful, needs to update user.json and send user back to login
 
     }
 
