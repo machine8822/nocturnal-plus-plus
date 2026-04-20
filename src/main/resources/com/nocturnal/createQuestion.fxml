@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="TOP_CENTER" prefHeight="520.0" prefWidth="680.0" spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateQuestionController">
+   <children>
+      <Label styleClass="title" text="Create Question" />
+      <GridPane hgap="10.0" vgap="10.0">
+         <children>
+            <TextField fx:id="titleInput" promptText="Question Title" GridPane.columnSpan="2" />
+            <TextArea fx:id="descriptionInput" prefRowCount="4" promptText="Question Description" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+            <ChoiceBox fx:id="difficultyInput" prefWidth="220.0" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="categoryInput" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ChoiceBox fx:id="typeInput" prefWidth="220.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+            <TextArea fx:id="constraintsInput" prefRowCount="3" promptText="Constraints (one per line)" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="4" />
+            <TextArea fx:id="examplesInput" prefRowCount="3" promptText="Examples (one per line)" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="5" />
+            <TextField fx:id="expectedComplexityInput" promptText="Expected Time Complexity (e.g. O(log n))" GridPane.columnSpan="2" GridPane.rowIndex="6" />
+            <TextField fx:id="maxLinesInput" promptText="Max Lines of Code (optional)" GridPane.rowIndex="7" />
+            <TextField fx:id="timeLimitInput" promptText="Time Limit Seconds (optional)" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+         </children>
+      </GridPane>
+      <Label fx:id="statusLabel" wrapText="true" />
+      <GridPane hgap="10.0">
+         <children>
+            <Button onAction="#goToDashboard" text="Back" />
+            <Button onAction="#createQuestion" styleClass="primary-button" text="Create Question" GridPane.columnIndex="1" />
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
+   <stylesheets>
+      <URL value="@styles.css" />
+   </stylesheets>
+</VBox>

@@ -3,8 +3,42 @@
     -fx-font-size: 32px;
 }
 
+.root {
+    -fx-background-color: linear-gradient(to bottom, #f9fbff, #eef4ff);
+}
 
+.label {
+    -fx-font-size: 13px;
+}
 
+.text-field,
+.password-field,
+.text-area,
+.choice-box {
+    -fx-background-color: #ffffff;
+    -fx-background-radius: 8px;
+    -fx-border-color: #d7dfef;
+    -fx-border-radius: 8px;
+    -fx-padding: 8px;
+}
 
+.button {
+    -fx-background-color: #e8eefb;
+    -fx-text-fill: #1f2a44;
+    -fx-background-radius: 8px;
+    -fx-font-weight: 600;
+    -fx-cursor: hand;
+}
 
+.button:hover {
+    -fx-background-color: #dce6fb;
+}
 
+.primary-button {
+    -fx-background-color: #549df9;
+    -fx-text-fill: #ffffff;
+}
+
+.primary-button:hover {
+    -fx-background-color: #3a8ef6;
+}
