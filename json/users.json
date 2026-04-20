@@ -18,6 +18,24 @@
     "passwordHash": "$2a$10$qMewBcMRiIrP01oTPKu.D.t\/VHYiVJozm8xiJrQIAhYDCTGs0uVxy"
   },
   {
+    "firstName": "tyrek",
+    "lastName": "long",
+    "createdAt": "2026-04-20T15:02:57.714471600",
+    "lastLogin": "2026-04-20T15:03:07.319241",
+    "profile": {
+      "resumeURL": "",
+      "major": "iit",
+      "school": "usc",
+      "totalUpvotes": 5,
+      "gradYear": 2028
+    },
+    "isAdmin": false,
+    "userId": "be0b2f64-baaf-4049-a39a-c11e725cd525",
+    "isContributor": false,
+    "email": "tyrek@email.com",
+    "passwordHash": "$2a$12$96EgPEByyL4xHKR4KLf5Tef7GWi72P5GdtElweH4Puq44zh3cTtXG"
+  },
+  {
     "firstName": "William",
     "lastName": "King",
     "createdAt": "2026-04-19T18:48:08.170884",

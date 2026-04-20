@@ -1,7 +1,7 @@
 package com.model;
 
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.Test;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
 import java.util.UUID;
 
@@ -19,16 +19,16 @@ public class InterviewQuestionTest {
     }
 
     @Test
-    void testGetSuccessRate_NoAttempts(){
+    public void testGetSuccessRate_NoAttempts(){
         InterviewQuestion q = createQuestion();
 
         double rate = q.getSuccessRate();
 
-        assertEquals(0.0, rate);
+        assertEquals(0.0, rate, 0.0001);
     }
 
     @Test
-    void testGetSuccessRate_AllCorrect() {
+    public void testGetSuccessRate_AllCorrect() {
         InterviewQuestion q = createQuestion();
 
         q.recordAttempt(true);
@@ -37,11 +37,11 @@ public class InterviewQuestionTest {
 
         double rate = q.getSuccessRate();
 
-        assertEquals(1.0, rate);
+        assertEquals(1.0, rate, 0.0001);
     }
 
     @Test
-    void testGetSuccessRate_AllIncorrect() {
+    public void testGetSuccessRate_AllIncorrect() {
         InterviewQuestion q = createQuestion();
 
         q.recordAttempt(false);
@@ -50,11 +50,11 @@ public class InterviewQuestionTest {
 
         double rate = q.getSuccessRate();
 
-        assertEquals(0.0, rate);
+        assertEquals(0.0, rate, 0.0001);
     }
 
     @Test
-    void testGetSuccessRate_Mixed() {
+    public void testGetSuccessRate_Mixed() {
         InterviewQuestion q = createQuestion();
 
         q.recordAttempt(true);
@@ -64,13 +64,13 @@ public class InterviewQuestionTest {
 
         double rate = q.getSuccessRate();
 
-        assertEquals(0.5, rate);
+        assertEquals(0.5, rate, 0.0001);
     }
 
     // ----------- Record Attempt -----------
 
     @Test
-    void testRecordAttempt_IncrementsCounts() {
+    public void testRecordAttempt_IncrementsCounts() {
         InterviewQuestion q = createQuestion();
 
         q.recordAttempt(true);
@@ -83,14 +83,14 @@ public class InterviewQuestionTest {
     // ----------- Sections -----------
 
     @Test
-    void testGetSection_OutOfBounds() {
+    public void testGetSection_OutOfBounds() {
         InterviewQuestion q = createQuestion();
 
         assertNull(q.getSection(0)); // no sections added yet
     }
 
     @Test
-    void testAddSection_NullIgnored() {
+    public void testAddSection_NullIgnored() {
         InterviewQuestion q = createQuestion();
 
         q.addSection(null);
@@ -101,7 +101,7 @@ public class InterviewQuestionTest {
     // ----------- Comments -----------
 
     @Test
-    void testAddComment_NullIgnored() {
+    public void testAddComment_NullIgnored() {
         InterviewQuestion q = createQuestion();
 
         q.addComment(null);
@@ -112,7 +112,7 @@ public class InterviewQuestionTest {
     // ----------- Update Content -----------
 
     @Test
-    void testUpdateContent_BlankIgnored() {
+    public void testUpdateContent_BlankIgnored() {
         InterviewQuestion q = createQuestion();
 
         q.updateContent("", "");
@@ -122,7 +122,7 @@ public class InterviewQuestionTest {
     }
 
     @Test
-    void testUpdateContent_ValidUpdate() {
+    public void testUpdateContent_ValidUpdate() {
         InterviewQuestion q = createQuestion();
 
         q.updateContent("New Title", "New Description");
@@ -134,7 +134,7 @@ public class InterviewQuestionTest {
     // ----------- Image URL -----------
 
     @Test
-    void testSetImageURL_NullDefaultsToEmpty() {
+    public void testSetImageURL_NullDefaultsToEmpty() {
         InterviewQuestion q = createQuestion();
 
         q.setImageURL(null);
@@ -145,7 +145,7 @@ public class InterviewQuestionTest {
     // ----------- Delete Comment (basic safety) -----------
 
     @Test
-    void testDeleteComment_InvalidInputs() {
+    public void testDeleteComment_InvalidInputs() {
         InterviewQuestion q = createQuestion();
 
         boolean result = q.deleteComment(null, null, false);
@@ -154,7 +154,7 @@ public class InterviewQuestionTest {
     }
 
     @Test
-    void testDeleteAnswer_InvalidInputs() {
+    public void testDeleteAnswer_InvalidInputs() {
         InterviewQuestion q = createQuestion();
 
         boolean result = q.deleteAnswer(null, null, false);

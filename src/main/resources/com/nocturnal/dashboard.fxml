@@ -2,20 +2,162 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Priority?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.text.Text?>
 
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DashboardController">
-    <children>
-          <Text styleClass="title" strokeType="OUTSIDE" strokeWidth="0.0" text="Dashboard" />
-          <Button fx:id="goToCreateQuestion" mnemonicParsing="false" onAction="#goToCreateQuestion" styleClass="primary-button" text="Create Question" />
-        <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" text="Logout" />
-    </children>
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-    </padding>
+<BorderPane prefHeight="640.0" prefWidth="1080.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.DashboardController">
+    <left>
+        <VBox prefWidth="210.0" spacing="14.0" styleClass="dashboard-sidebar">
+            <children>
+                <Label styleClass="sidebar-brand" text="Nocturnal++" />
+                <VBox spacing="2.0" styleClass="sidebar-user-card">
+                    <children>
+                        <Label fx:id="sidebarUserName" styleClass="sidebar-user-name" text="User" />
+                        <Label fx:id="sidebarUserMeta" styleClass="sidebar-user-meta" text="Member" />
+                    </children>
+                </VBox>
+                <Separator styleClass="dashboard-separator" />
+                <VBox spacing="6.0">
+                    <children>
+                        <Label styleClass="sidebar-link active" text="Home" />
+                        <Label styleClass="sidebar-link" text="Question Library" />
+                        <Label styleClass="sidebar-link" text="Bookmarks" />
+                        <Label styleClass="sidebar-link" text="Profile" />
+                        <Label styleClass="sidebar-link" text="Settings" />
+                    </children>
+                </VBox>
+                <Separator styleClass="dashboard-separator" />
+                <Button fx:id="goToCreateQuestion" mnemonicParsing="false" onAction="#goToCreateQuestion" styleClass="accent-button" text="+ Create Question" />
+                <Button fx:id="logout" mnemonicParsing="false" onAction="#logout" styleClass="ghost-button" text="Sign Out" />
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="14.0" right="14.0" top="18.0" />
+            </padding>
+        </VBox>
+    </left>
+    <center>
+        <VBox spacing="14.0" styleClass="dashboard-main">
+            <children>
+                <HBox alignment="CENTER_LEFT" styleClass="top-nav">
+                    <children>
+                        <Label fx:id="welcomeLabel" styleClass="page-title" text="Welcome" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label styleClass="muted-text" text="Dashboard" />
+                    </children>
+                </HBox>
+
+                <HBox spacing="12.0">
+                    <children>
+                        <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
+                            <children>
+                                <Label styleClass="card-label" text="Member Since" />
+                                <Label fx:id="memberSinceValue" styleClass="card-value" text="-" />
+                            </children>
+                            <padding>
+                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                            </padding>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
+                            <children>
+                                <Label styleClass="card-label" text="Solved" />
+                                <Label fx:id="solvedValue" styleClass="card-value" text="0/0" />
+                            </children>
+                            <padding>
+                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                            </padding>
+                        </VBox>
+                        <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
+                            <children>
+                                <Label styleClass="card-label" text="Rank" />
+                                <Label fx:id="rankValue" styleClass="card-value" text="-" />
+                            </children>
+                            <padding>
+                                <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                            </padding>
+                        </VBox>
+                    </children>
+                </HBox>
+
+                <HBox alignment="CENTER_LEFT" styleClass="continue-strip">
+                    <children>
+                        <Label fx:id="continueQuestionLabel" styleClass="strip-text" text="Continue: No question yet" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="continueDifficultyChip" styleClass="strip-chip" text="-" />
+                        <Label fx:id="continueCategoryLabel" styleClass="muted-text" text="-" />
+                        <Label styleClass="strip-arrow" text="→" />
+                    </children>
+                    <padding>
+                        <Insets bottom="9.0" left="12.0" right="12.0" top="9.0" />
+                    </padding>
+                </HBox>
+
+                <VBox spacing="4.0" styleClass="panel-card" VBox.vgrow="ALWAYS">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <children>
+                                <Label styleClass="panel-title" text="Recent Questions" />
+                                <Region HBox.hgrow="ALWAYS" />
+                                <Label styleClass="muted-link" text="See All" />
+                            </children>
+                        </HBox>
+                        <HBox styleClass="table-header">
+                            <children>
+                                <Label styleClass="table-cell large" text="Title" />
+                                <Label styleClass="table-cell" text="Difficulty" />
+                                <Label styleClass="table-cell" text="Category" />
+                                <Label styleClass="table-cell" text="Success" />
+                            </children>
+                        </HBox>
+                        <VBox fx:id="recentQuestionsRows" spacing="0.0" />
+                    </children>
+                    <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                    </padding>
+                </VBox>
+
+                <VBox spacing="8.0" styleClass="panel-card">
+                    <children>
+                        <Label styleClass="panel-title" text="Progress" />
+                        <HBox spacing="8.0">
+                            <children>
+                                <Label styleClass="progress-label" text="Easy" />
+                                <ProgressBar fx:id="easyProgress" prefWidth="320.0" progress="0.0" styleClass="gold-progress" />
+                                <Label fx:id="easyProgressValue" styleClass="progress-value" text="0/0" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="8.0">
+                            <children>
+                                <Label styleClass="progress-label" text="Medium" />
+                                <ProgressBar fx:id="mediumProgress" prefWidth="320.0" progress="0.0" styleClass="gold-progress" />
+                                <Label fx:id="mediumProgressValue" styleClass="progress-value" text="0/0" />
+                            </children>
+                        </HBox>
+                        <HBox spacing="8.0">
+                            <children>
+                                <Label styleClass="progress-label" text="Hard" />
+                                <ProgressBar fx:id="hardProgress" prefWidth="320.0" progress="0.0" styleClass="gold-progress" />
+                                <Label fx:id="hardProgressValue" styleClass="progress-value" text="0/0" />
+                            </children>
+                        </HBox>
+                    </children>
+                    <padding>
+                        <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+                    </padding>
+                </VBox>
+            </children>
+            <padding>
+                <Insets bottom="16.0" left="18.0" right="18.0" top="16.0" />
+            </padding>
+        </VBox>
+    </center>
     <stylesheets>
         <URL value="@styles.css" />
     </stylesheets>
-</VBox>
+</BorderPane>
