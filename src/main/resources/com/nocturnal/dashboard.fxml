@@ -27,7 +27,7 @@
                 <VBox spacing="6.0">
                     <children>
                         <Label styleClass="sidebar-link active" text="Home" />
-                        <Label styleClass="sidebar-link" text="Question Library" />
+                        <Label styleClass="sidebar-link" text="Question Library" onMouseClicked="#goToLibrary" />
                         <Label styleClass="sidebar-link" text="Bookmarks" />
                         <Label styleClass="sidebar-link" text="Profile" />
                         <Label styleClass="sidebar-link" text="Settings" />

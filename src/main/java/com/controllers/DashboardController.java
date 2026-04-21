@@ -12,6 +12,7 @@ import com.model.User;
 import com.nocturnal.App;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
@@ -68,6 +69,9 @@ public class DashboardController {
     private Label hardProgressValue;
 
     @FXML
+    private Button goToCreateQuestion;
+
+    @FXML
     private void initialize() {
         SystemFacade facade = SystemFacade.getInstance();
         User currentUser = facade.getCurrentUser();
@@ -81,6 +85,7 @@ public class DashboardController {
         populateContinueStrip(facade, questions);
         populateRecentQuestions(questions);
         populateProgress(questions);
+        applyContributorVisibility(currentUser);
     }
 
     @FXML
@@ -89,8 +94,20 @@ public class DashboardController {
     }
 
     @FXML
+    private void goToLibrary() throws IOException {
+        App.setRoot("questionLibrary");
+    }
+
+    @FXML
     private void logout() throws IOException {
+        SystemFacade.getInstance().logout();
         App.setRoot("login");
+    }
+
+    private void applyContributorVisibility(User currentUser) {
+        boolean canCreate = currentUser != null && currentUser.isContributor();
+        goToCreateQuestion.setVisible(canCreate);
+        goToCreateQuestion.setManaged(canCreate);
     }
 
     private void populateUser(User currentUser) {
