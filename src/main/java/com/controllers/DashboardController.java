@@ -99,6 +99,21 @@ public class DashboardController {
     }
 
     @FXML
+    private void goToProfile() throws IOException {
+        App.setRoot("profile");
+    }
+
+    @FXML
+    private void goToBookmarks() throws IOException {
+        App.setRoot("bookmarks");
+    }
+
+    @FXML
+    private void goToSettings() throws IOException {
+        App.setRoot("settings");
+    }
+
+    @FXML
     private void logout() throws IOException {
         SystemFacade.getInstance().logout();
         App.setRoot("login");

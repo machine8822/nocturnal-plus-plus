@@ -28,9 +28,9 @@
                     <children>
                         <Label styleClass="sidebar-link active" text="Home" />
                         <Label styleClass="sidebar-link" text="Question Library" onMouseClicked="#goToLibrary" />
-                        <Label styleClass="sidebar-link" text="Bookmarks" />
-                        <Label styleClass="sidebar-link" text="Profile" />
-                        <Label styleClass="sidebar-link" text="Settings" />
+                        <Label styleClass="sidebar-link" text="Bookmarks" onMouseClicked="#goToBookmarks" />
+                        <Label styleClass="sidebar-link" text="Profile" onMouseClicked="#goToProfile" />
+                        <Label styleClass="sidebar-link" text="Settings" onMouseClicked="#goToSettings" />
                     </children>
                 </VBox>
                 <Separator styleClass="dashboard-separator" />
@@ -104,7 +104,7 @@
                             <children>
                                 <Label styleClass="panel-title" text="Recent Questions" />
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Label styleClass="muted-link" text="See All" />
+                                <Label styleClass="muted-link" text="See All" onMouseClicked="#goToLibrary" />
                             </children>
                         </HBox>
                         <HBox styleClass="table-header">
