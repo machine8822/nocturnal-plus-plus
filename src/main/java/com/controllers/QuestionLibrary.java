@@ -3,11 +3,9 @@ package com.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
-import java.util.List;
 
 import com.model.InterviewQuestion;
 import com.model.SystemFacade;
-import com.model.User;
 import com.nocturnal.App;
 
 import javafx.collections.FXCollections;
@@ -23,7 +21,6 @@ public class QuestionLibrary {
     @FXML
     private void initialize() {
         SystemFacade driver = SystemFacade.getInstance();
-        User currentUser = driver.getCurrentUser();
         ArrayList<InterviewQuestion> questions = driver.getAllQuestions();
 
         questions.sort(Comparator.comparing(InterviewQuestion::getLastUpdated,
@@ -70,6 +67,12 @@ public class QuestionLibrary {
     @FXML
     private void goToDashboard() throws IOException {
         App.setRoot("dashboard");
+    }
+
+    @FXML
+    private void logout() throws IOException {
+        SystemFacade.getInstance().logout();
+        App.setRoot("login");
     }
 
 }

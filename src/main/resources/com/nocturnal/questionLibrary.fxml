@@ -14,6 +14,8 @@
       <VBox fx:id="questionListContainer" spacing="6.0" VBox.vgrow="ALWAYS" />
       <Button fx:id="goToDashboard" mnemonicParsing="false" onAction="#goToDashboard"
          text="Back to Dashboard" />
+      <Button fx:id="logout" mnemonicParsing="false" onAction="#logout"
+         text="Sign Out" />
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
