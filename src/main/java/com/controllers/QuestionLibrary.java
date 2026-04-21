@@ -3,20 +3,22 @@ package com.controllers;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.List;
 
 import com.model.InterviewQuestion;
 import com.model.SystemFacade;
 import com.model.User;
 import com.nocturnal.App;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.HBox;
-import javafx.scene.control.Label;
+import javafx.scene.control.ListCell;
+import javafx.scene.control.ListView;
 
 public class QuestionLibrary {
     @FXML
-    private VBox questionListContainer;
+    private ListView<InterviewQuestion> questionList = new ListView<>();
 
     @FXML
     private void initialize() {
@@ -31,19 +33,38 @@ public class QuestionLibrary {
         populateQuestions(questions);
     }
 
+    // populate the listView
     private void populateQuestions(ArrayList<InterviewQuestion> questions) {
-        for (InterviewQuestion question : questions) {
-            HBox questionRow = createQuestionRow(question);
-            questionListContainer.getChildren().add(questionRow);
-        }
-    }
+        ObservableList<InterviewQuestion> observableQuestions = FXCollections.observableArrayList(questions);
+        questionList.setItems(observableQuestions);
 
-    private HBox createQuestionRow(InterviewQuestion question) {
-        HBox row = new HBox();
-        Label title = new Label(question.getTitle());
-        Label difficulty = new Label(question.getDifficulty().toString());
-        row.getChildren().addAll(title, difficulty);
-        return row;
+        // Set cells to display the title
+        questionList.setCellFactory(param -> new ListCell<InterviewQuestion>() {
+            @Override
+            protected void updateItem(InterviewQuestion item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty || item == null) {
+                    setText(null);
+                } else {
+                    setText(item.getTitle());
+                }
+            }
+        });
+
+        // Handle question selection
+        questionList.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            if (newSelection != null) {
+                // Set the selected question in the SystemFacade and navigate to the
+                // questionDetails
+                SystemFacade.getInstance().selectQuestion(newSelection.getQuestionId());
+                try {
+                    App.setRoot("questionDetails");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
     }
 
     @FXML

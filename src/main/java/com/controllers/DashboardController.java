@@ -17,7 +17,6 @@ import javafx.scene.control.ProgressBar;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-
 public class DashboardController {
     @FXML
     private Label sidebarUserName;
@@ -74,7 +73,7 @@ public class DashboardController {
         ArrayList<InterviewQuestion> questions = facade.getAllQuestions();
 
         questions.sort(Comparator.comparing(InterviewQuestion::getLastUpdated,
-            Comparator.nullsLast(Comparator.naturalOrder())).reversed());
+                Comparator.nullsLast(Comparator.naturalOrder())).reversed());
 
         populateUser(currentUser);
         populateSummary(currentUser, questions);
@@ -86,6 +85,11 @@ public class DashboardController {
     @FXML
     private void goToCreateQuestion() throws IOException {
         App.setRoot("createQuestion");
+    }
+
+    @FXML
+    private void goToQuestionLibrary() throws IOException {
+        App.setRoot("questionLibrary");
     }
 
     @FXML
@@ -188,8 +192,8 @@ public class DashboardController {
         category.getStyleClass().add("table-cell");
 
         Label success = new Label(question.getTotalAttempts() == 0
-            ? "--"
-            : String.format("%.0f%%", question.getSuccessRate() * 100.0));
+                ? "--"
+                : String.format("%.0f%%", question.getSuccessRate() * 100.0));
         success.getStyleClass().add("table-cell");
 
         row.getChildren().addAll(title, difficulty, category, success);

@@ -2,13 +2,12 @@
 
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Separator?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.Priority?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
@@ -55,7 +54,7 @@
 
                 <HBox spacing="12.0">
                     <children>
-                        <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label styleClass="card-label" text="Member Since" />
                                 <Label fx:id="memberSinceValue" styleClass="card-value" text="-" />
@@ -64,7 +63,7 @@
                                 <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                             </padding>
                         </VBox>
-                        <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label styleClass="card-label" text="Solved" />
                                 <Label fx:id="solvedValue" styleClass="card-value" text="0/0" />
@@ -73,7 +72,7 @@
                                 <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
                             </padding>
                         </VBox>
-                        <VBox HBox.hgrow="ALWAYS" styleClass="stat-card">
+                        <VBox styleClass="stat-card" HBox.hgrow="ALWAYS">
                             <children>
                                 <Label styleClass="card-label" text="Rank" />
                                 <Label fx:id="rankValue" styleClass="card-value" text="-" />
@@ -104,7 +103,7 @@
                             <children>
                                 <Label styleClass="panel-title" text="Recent Questions" />
                                 <Region HBox.hgrow="ALWAYS" />
-                                <Label styleClass="muted-link" text="See All" />
+                                <Label onMouseClicked="#goToQuestionLibrary" styleClass="muted-link" text="See All" />
                             </children>
                         </HBox>
                         <HBox styleClass="table-header">
