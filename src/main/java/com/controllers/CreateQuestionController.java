@@ -133,6 +133,12 @@ public class CreateQuestionController {
         App.setRoot("dashboard");
     }
 
+    @FXML
+    private void goBack() throws IOException {
+        // Back button navigates to dashboard
+        goToDashboard();
+    }
+
     private void clearForm() {
         titleInput.clear();
         descriptionInput.clear();

@@ -8,30 +8,37 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="TOP_CENTER" prefHeight="520.0" prefWidth="680.0" spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateQuestionController">
+<VBox alignment="TOP_CENTER" maxHeight="Infinity" maxWidth="Infinity" spacing="12.0" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.CreateQuestionController">
    <children>
-      <Label styleClass="title" text="Create Question" />
-      <GridPane hgap="10.0" vgap="10.0">
+      <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 10; -fx-border-color: #2b3256; -fx-border-width: 0 0 1 0;">
          <children>
-            <TextField fx:id="titleInput" promptText="Question Title" GridPane.columnSpan="2" />
-            <TextArea fx:id="descriptionInput" prefRowCount="4" promptText="Question Description" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" />
-            <ChoiceBox fx:id="difficultyInput" prefWidth="220.0" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="categoryInput" prefWidth="220.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <ChoiceBox fx:id="typeInput" prefWidth="220.0" GridPane.columnSpan="2" GridPane.rowIndex="3" />
-            <TextArea fx:id="constraintsInput" prefRowCount="3" promptText="Constraints (one per line)" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="4" />
-            <TextArea fx:id="examplesInput" prefRowCount="3" promptText="Examples (one per line)" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="5" />
-            <TextField fx:id="expectedComplexityInput" promptText="Expected Time Complexity (e.g. O(log n))" GridPane.columnSpan="2" GridPane.rowIndex="6" />
-            <TextField fx:id="maxLinesInput" promptText="Max Lines of Code (optional)" GridPane.rowIndex="7" />
-            <TextField fx:id="timeLimitInput" promptText="Time Limit Seconds (optional)" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Button styleClass="ghost-button" text="← Back" onAction="#goBack" minWidth="60" />
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+      <Label styleClass="title" text="Create Question" />
+      <GridPane hgap="10.0" vgap="10.0" VBox.vgrow="ALWAYS">
+         <children>
+            <TextField fx:id="titleInput" promptText="Question Title" GridPane.columnSpan="2" GridPane.hgrow="ALWAYS" />
+            <TextArea fx:id="descriptionInput" prefRowCount="4" promptText="Question Description" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="1" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+            <ChoiceBox fx:id="difficultyInput" minWidth="200.0" maxWidth="250.0" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS" />
+            <ChoiceBox fx:id="categoryInput" minWidth="200.0" maxWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.hgrow="ALWAYS" />
+            <ChoiceBox fx:id="typeInput" minWidth="200.0" maxWidth="Infinity" GridPane.columnSpan="2" GridPane.rowIndex="3" GridPane.hgrow="ALWAYS" />
+            <TextArea fx:id="constraintsInput" prefRowCount="3" promptText="Constraints (one per line)" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="4" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+            <TextArea fx:id="examplesInput" prefRowCount="3" promptText="Examples (one per line)" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="5" GridPane.hgrow="ALWAYS" GridPane.vgrow="ALWAYS" />
+            <TextField fx:id="expectedComplexityInput" promptText="Expected Time Complexity (e.g. O(log n))" GridPane.columnSpan="2" GridPane.rowIndex="6" GridPane.hgrow="ALWAYS" />
+            <TextField fx:id="maxLinesInput" promptText="Max Lines of Code (optional)" GridPane.rowIndex="7" GridPane.hgrow="ALWAYS" />
+            <TextField fx:id="timeLimitInput" promptText="Time Limit Seconds (optional)" GridPane.columnIndex="1" GridPane.rowIndex="7" GridPane.hgrow="ALWAYS" />
          </children>
       </GridPane>
       <Label fx:id="statusLabel" wrapText="true" />
-      <GridPane hgap="10.0">
+      <GridPane hgap="10.0" VBox.vgrow="NEVER">
          <children>
-            <Button onAction="#goToDashboard" text="Back" />
-            <Button onAction="#createQuestion" styleClass="primary-button" text="Create Question" GridPane.columnIndex="1" />
+            <Button onAction="#createQuestion" styleClass="primary-button" text="Create Question" GridPane.columnIndex="0" />
          </children>
       </GridPane>
    </children>

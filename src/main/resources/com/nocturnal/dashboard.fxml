@@ -17,7 +17,7 @@
         <VBox prefWidth="210.0" spacing="14.0" styleClass="dashboard-sidebar">
             <children>
                 <Label styleClass="sidebar-brand" text="Nocturnal++" />
-                <VBox spacing="2.0" styleClass="sidebar-user-card">
+                <VBox spacing="2.0" styleClass="sidebar-user-card" onMouseClicked="#goToProfile" style="-fx-cursor: hand;">
                     <children>
                         <Label fx:id="sidebarUserName" styleClass="sidebar-user-name" text="User" />
                         <Label fx:id="sidebarUserMeta" styleClass="sidebar-user-meta" text="Member" />
@@ -29,8 +29,6 @@
                         <Label styleClass="sidebar-link active" text="Home" />
                         <Label styleClass="sidebar-link" text="Question Library" onMouseClicked="#goToLibrary" />
                         <Label styleClass="sidebar-link" text="Bookmarks" onMouseClicked="#goToBookmarks" />
-                        <Label styleClass="sidebar-link" text="Profile" onMouseClicked="#goToProfile" />
-                        <Label styleClass="sidebar-link" text="Settings" onMouseClicked="#goToSettings" />
                     </children>
                 </VBox>
                 <Separator styleClass="dashboard-separator" />
@@ -45,6 +43,12 @@
     <center>
         <VBox spacing="14.0" styleClass="dashboard-main">
             <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 10; -fx-border-color: #2b3256; -fx-border-width: 0 0 1 0;">
+                    <children>
+                        <Button styleClass="ghost-button" text="← Back" onAction="#goBack" minWidth="60" />
+                        <Region HBox.hgrow="ALWAYS" />
+                    </children>
+                </HBox>
                 <HBox alignment="CENTER_LEFT" styleClass="top-nav">
                     <children>
                         <Label fx:id="welcomeLabel" styleClass="page-title" text="Welcome" />

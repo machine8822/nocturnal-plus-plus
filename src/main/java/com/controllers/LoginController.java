@@ -2,8 +2,9 @@ package com.controllers;
 
 import java.io.IOException;
 
+import com.model.SystemFacade;
+import com.model.User;
 import com.nocturnal.App;
-import com.model.*;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
@@ -39,6 +40,13 @@ public class LoginController {
     @FXML
     private void goToCreateUser() throws IOException {
         App.setRoot("createUser");
+    }
+
+    @FXML
+    private void goBack() {
+        // Clear inputs when back button is clicked on login page
+        emailInput.clear();
+        passwordInput.clear();
     }
 
 }

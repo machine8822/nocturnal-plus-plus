@@ -109,14 +109,15 @@ public class DashboardController {
     }
 
     @FXML
-    private void goToSettings() throws IOException {
-        App.setRoot("settings");
-    }
-
-    @FXML
     private void logout() throws IOException {
         SystemFacade.getInstance().logout();
         App.setRoot("login");
+    }
+
+    @FXML
+    private void goBack() throws IOException {
+        // Back button on dashboard logs out and returns to login
+        logout();
     }
 
     private void applyContributorVisibility(User currentUser) {

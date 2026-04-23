@@ -6,11 +6,19 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
 <VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/25"
     xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.LoginController">
     <children>
+        <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 10; -fx-border-color: #2b3256; -fx-border-width: 0 0 1 0;">
+            <children>
+                <Button styleClass="ghost-button" text="← Back" onAction="#goBack" minWidth="60" />
+                <Region HBox.hgrow="ALWAYS" />
+            </children>
+        </HBox>
         <Label styleClass="title" text="Nocturnal++" />
         <TextField fx:id="emailInput" promptText="Email address" />
         <PasswordField fx:id="passwordInput" promptText="Password" />
