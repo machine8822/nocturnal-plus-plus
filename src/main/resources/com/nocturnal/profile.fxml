@@ -16,11 +16,17 @@
       fx:controller="com.controllers.ProfileController">
    <children>
 
+      <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 10; -fx-border-color: #2b3256; -fx-border-width: 0 0 1 0;">
+         <children>
+            <Button styleClass="ghost-button" text="← Back" onAction="#goBack" minWidth="60" />
+            <Region HBox.hgrow="ALWAYS" />
+         </children>
+      </HBox>
+
       <HBox alignment="CENTER_LEFT" spacing="10.0" styleClass="top-nav">
          <children>
-            <Button onAction="#goToDashboard" text="← Dashboard" />
-            <Region HBox.hgrow="ALWAYS" />
             <Button onAction="#goToSettings" text="Edit Profile" />
+            <Region HBox.hgrow="ALWAYS" />
          </children>
       </HBox>
 

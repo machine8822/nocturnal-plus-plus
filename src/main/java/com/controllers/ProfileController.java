@@ -124,6 +124,11 @@ public class ProfileController {
     }
 
     @FXML
+    private void goBack() throws IOException {
+        App.setRoot("dashboard");
+    }
+
+    @FXML
     private void goToSettings() throws IOException {
         App.setRoot("settings");
     }

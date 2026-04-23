@@ -1,496 +1,95 @@
 [
   {
-    "questionId": "57fb4022-ff25-4d2a-ab30-027081caa6fb",
+    "questionId": "550e8400-e29b-41d4-a716-446655440001",
     "comments": [],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "",
-    "title": "Binary search time complexity",
+    "totalSuccesses": 5,
+    "totalAttempts": 8,
+    "description": "Given an array of integers, find two numbers that add up to a specific target number.",
+    "title": "Two Sum",
     "type": "SHORT_ANSWER",
     "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
     "sections": [
       {
-        "comments": [
-          {
-            "downvoteCount": 0,
-            "replies": [],
-            "commentId": "f5ee3a33-54a5-4511-aa38-a93d864072c8",
-            "isEdited": false,
-            "text": "Be sure to explain how the search space is reduced on each step.",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "timestamp": "2026-02-21T13:32",
-            "upvoteCount": 0
-          }
-        ],
+        "comments": [],
         "examples": [
-          "nums=[1,3,5,7,9], target=7 -> index=3",
-          "nums=[2,4,6,8], target=5 -> index=-1",
-          "nums=[10], target=10 -> index=0"
+          "Input: nums = [2,7,11,15], target = 9 → Output: [0,1]",
+          "Input: nums = [3,2,4], target = 6 → Output: [1,2]"
         ],
         "dataType": null,
-        "imageURL": "https:\/\/images.example.com\/questions\/binary-search-interval.png",
-        "expectedTimeComplexity": "O(log n)",
-        "timeLimitSeconds": 1,
-        "answers": [],
-        "maxLinesOfCode": 18,
-        "title": "Description",
-        "type": "DESCRIPTION",
-        "constraints": [
-          "1 <= nums.length <= 10^5",
-          "nums is sorted in ascending order",
-          "Use iterative or recursive binary search"
-        ],
-        "content": "What is the time complexity of binary search on a sorted array and why?"
-      },
-      {
-        "comments": [],
-        "examples": [
-          "After one comparison, n becomes n\/2",
-          "After k comparisons, n becomes n\/(2^k)"
-        ],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "O(log n)",
-        "timeLimitSeconds": 1,
-        "answers": [],
-        "maxLinesOfCode": 15,
-        "title": "Contraint Notes",
-        "type": "CONSTRAINT",
-        "constraints": [
-          "Explain why search space halves each step",
-          "Mention space complexity for iterative solution"
-        ],
-        "content": "Your explanation must include both intuition and math for O(log n)."
-      },
-      {
-        "comments": [],
-        "examples": [
-          "n = 32 -> 5 steps max",
-          "n = 1,024 -> 10 steps max"
-        ],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "O(log n)",
-        "timeLimitSeconds": null,
-        "answers": [],
-        "maxLinesOfCode": null,
-        "title": "Worked Examples",
-        "type": "EXAMPLE",
-        "constraints": [],
-        "content": "Connect powers of two to the number of decisions made by binary search."
-      }
-    ],
-    "difficulty": "EASY",
-    "createdAt": "2026-02-21T13:30",
-    "lastUpdated": "2026-03-21T19:42:04.473754600",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "d6060e08-4d54-4eb1-9e65-961e5f4ebdc6",
-    "comments": [],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "",
-    "title": "Detecting duplicates in an array",
-    "type": "SHORT_ANSWER",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "sections": [
-      {
-        "comments": [
-          {
-            "downvoteCount": 0,
-            "replies": [],
-            "commentId": "64c18bd8-6cb1-4704-a43d-c5c2cd397d43",
-            "isEdited": false,
-            "text": "Consider discussing how the solution would change if additional space was not allowed.",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "timestamp": "2026-02-21T14:07",
-            "upvoteCount": 0
-          }
-        ],
-        "examples": [
-          "nums=[1,2,3,1] -> true",
-          "nums=[1,2,3,4] -> false",
-          "nums=[1,1,1,3,3,4,3,2,4,2] -> true"
-        ],
-        "dataType": null,
-        "imageURL": "https:\/\/images.example.com\/questions\/contains-duplicate-hashset.png",
-        "expectedTimeComplexity": "O(n)",
-        "timeLimitSeconds": 2,
-        "answers": [
-          {
-            "answerId": "a8e37271-e0af-4e48-8b4a-0c046deae56c",
-            "codeSnippet": "",
-            "createdAt": "2026-02-21T14:05",
-            "downvoteCount": 0,
-            "comments": [],
-            "explanation": "A common approach is to use a HashSet. Insert elements and check if already exists. O(n) time and O(n) space.",
-            "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
-            "upvoteCount": 0
-          }
-        ],
-        "maxLinesOfCode": 25,
-        "title": "Description",
-        "type": "DESCRIPTION",
-        "constraints": [
-          "1 <= nums.length <= 10^5",
-          "-10^9 <= nums[i] <= 10^9",
-          "Try to avoid O(n^2) brute-force"
-        ],
-        "content": "Given an integer array, explain an efficient approach to determine whether the array contains any duplicate values. What is the time complexity of your solution?"
-      },
-      {
-        "comments": [],
-        "examples": [
-          "Sort then scan adjacent values: O(n log n), O(1) extra space",
-          "Nested loops baseline: O(n^2)"
-        ],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "O(n)",
-        "timeLimitSeconds": 2,
-        "answers": [],
-        "maxLinesOfCode": 20,
-        "title": "Constraint Notes",
-        "type": "CONSTRAINT",
-        "constraints": [
-          "HashSet-based approach preferred",
-          "Discuss tradeoff when extra space is not allowed"
-        ],
-        "content": "Compare at least two approaches and justify why one is better for large input sizes."
-      }
-    ],
-    "difficulty": "MEDIUM",
-    "createdAt": "2026-02-21T14:00",
-    "lastUpdated": "2026-03-21T19:42:04.477655",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "6248c769-6627-42a2-b573-6a285696f092",
-    "comments": [],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "This question is created by PersistenceFlowDemo.",
-    "title": "Demo persisted question 1773420086060",
-    "type": "SHORT_ANSWER",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "sections": [
-      {
-        "comments": [],
-        "examples": [],
-        "dataType": "STRING",
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [
-          {
-            "answerId": "23426373-5ec6-43f9-bb24-48c56eac7b77",
-            "codeSnippet": "int x = 1;",
-            "createdAt": "2026-03-13T12:41:26.061009500",
-            "downvoteCount": 0,
-            "comments": [],
-            "explanation": "Demo answer body",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "upvoteCount": 0
-          }
-        ],
+        "answers": [],
         "maxLinesOfCode": null,
-        "title": "Description",
-        "type": "DESCRIPTION",
-        "constraints": [],
-        "content": "This section is part of save demo."
-      }
-    ],
-    "difficulty": "EASY",
-    "createdAt": "2026-03-13T12:41:26.060011100",
-    "lastUpdated": "2026-03-21T19:42:04.478884400",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "af03598f-d224-4891-a74e-d9bf059a3a24",
-    "comments": [],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "This question is created as demo.",
-    "title": "Demo persisted question 1773420239973",
-    "type": "SHORT_ANSWER",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "sections": [
-      {
-        "comments": [],
-        "examples": [],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [
-          {
-            "answerId": "91780ea6-bc03-4f4c-a4dc-783529026e18",
-            "codeSnippet": "int x = 1;",
-            "createdAt": "2026-03-13T12:43:59.973793700",
-            "downvoteCount": 0,
-            "comments": [],
-            "explanation": "Demo answer body",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "upvoteCount": 0
-          }
-        ],
-        "maxLinesOfCode": null,
-        "title": "Description",
-        "type": "DESCRIPTION",
-        "constraints": [],
-        "content": "This section is part of save demo."
-      }
-    ],
-    "difficulty": "EASY",
-    "createdAt": "2026-03-13T12:43:59.973793700",
-    "lastUpdated": "2026-03-21T19:42:04.478884400",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "81db56dc-e9eb-4974-9e20-f525aaf2500f",
-    "comments": [],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "This question is created as demo.",
-    "title": "Demo persisted question 1773420338638",
-    "type": "SHORT_ANSWER",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "sections": [
-      {
-        "comments": [],
-        "examples": [],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [
-          {
-            "answerId": "6360bff9-d8d1-4bdc-989a-523c426c0b05",
-            "codeSnippet": "int x = 1;",
-            "createdAt": "2026-03-13T12:45:38.638759800",
-            "downvoteCount": 0,
-            "comments": [],
-            "explanation": "Demo answer body",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "upvoteCount": 0
-          }
-        ],
-        "maxLinesOfCode": null,
-        "title": "Description",
-        "type": "DESCRIPTION",
-        "constraints": [],
-        "content": "This section is part of save demo."
-      }
-    ],
-    "difficulty": "EASY",
-    "createdAt": "2026-03-13T12:45:38.638759800",
-    "lastUpdated": "2026-03-21T19:42:04.478884400",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "8adeddd2-6a24-4c33-a82f-46d3c7681e3b",
-    "comments": [
-      {
-        "downvoteCount": 0,
-        "replies": [],
-        "commentId": "cf0db26d-5bb5-4371-938b-45859bf9e960",
-        "isEdited": false,
-        "text": "adding a question level comment from user",
-        "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-        "timestamp": "2026-03-13T12:58:43.926619300",
-        "upvoteCount": 0
-      }
-    ],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "This qustion is created as demo.",
-    "title": "Demo persisted question 1773421123926",
-    "type": "SHORT_ANSWER",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "sections": [
-      {
-        "comments": [
-          {
-            "downvoteCount": 0,
-            "replies": [],
-            "commentId": "9883492d-8e61-4721-ae4f-8961a48ff736",
-            "isEdited": false,
-            "text": "section note from user",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "timestamp": "2026-03-13T12:58:43.926619300",
-            "upvoteCount": 0
-          }
-        ],
-        "examples": [],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "",
-        "timeLimitSeconds": null,
-        "answers": [
-          {
-            "answerId": "1c00b14b-cc27-44d5-b781-9cdafe79590f",
-            "codeSnippet": "int x = 1;",
-            "createdAt": "2026-03-13T12:58:43.926619300",
-            "downvoteCount": 0,
-            "comments": [
-              {
-                "downvoteCount": 0,
-                "replies": [
-                  {
-                    "downvoteCount": 0,
-                    "replies": [],
-                    "commentId": "16b81156-bea8-4860-a703-eb6ae06c9a64",
-                    "isEdited": false,
-                    "text": "quick reply from same user",
-                    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-                    "timestamp": "2026-03-13T12:58:43.926619300",
-                    "upvoteCount": 0
-                  }
-                ],
-                "commentId": "d74a64e9-8b85-485d-a78d-a319f18cb3f3",
-                "isEdited": false,
-                "text": "answer comment from user",
-                "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-                "timestamp": "2026-03-13T12:58:43.926619300",
-                "upvoteCount": 0
-              }
-            ],
-            "explanation": "Demo answer body",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "upvoteCount": 0
-          }
-        ],
-        "maxLinesOfCode": null,
-        "title": "Description",
-        "type": "DESCRIPTION",
-        "constraints": [],
-        "content": "This sction is part of save demo."
-      }
-    ],
-    "difficulty": "EASY",
-    "createdAt": "2026-03-13T12:58:43.926619300",
-    "lastUpdated": "2026-03-21T19:42:04.478884400",
-    "imageURL": "",
-    "category": "ARRAY"
-  },
-  {
-    "questionId": "3ec76541-ecb1-4dab-a892-b808075c2b56",
-    "comments": [
-      {
-        "downvoteCount": 0,
-        "replies": [],
-        "commentId": "b6ae9778-5be3-4493-93d3-6f6ed75a786f",
-        "isEdited": false,
-        "text": "adding a question level comment from user",
-        "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-        "timestamp": "2026-03-18T20:58:21.770093300",
-        "upvoteCount": 0
-      }
-    ],
-    "totalSuccesses": 0,
-    "totalAttempts": 0,
-    "description": "This qustion is created as demo.",
-    "title": "Demo persisted question 1773881901770",
-    "type": "SHORT_ANSWER",
-    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-    "sections": [
-      {
-        "comments": [
-          {
-            "downvoteCount": 0,
-            "replies": [],
-            "commentId": "276dbc61-aa7f-4324-8a8e-14f304e1ab95",
-            "isEdited": false,
-            "text": "section note from user",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "timestamp": "2026-03-18T20:58:21.770093300",
-            "upvoteCount": 0
-          }
-        ],
-        "examples": [
-          "Input: nums = [2,7,11,15], target = 9 | Output: [0,1]",
-          "Input: nums = [3,2,4], target = 6 | Output: [1,2]",
-          "Input: nums = [3,3], target = 6 | Output: [0,1]"
-        ],
-        "dataType": "STRING",
-        "imageURL": "https:\/\/images.example.com\/questions\/two-sum-visual.png",
-        "expectedTimeComplexity": "O(n)",
-        "timeLimitSeconds": 1,
-        "answers": [
-          {
-            "answerId": "61f83324-2f2a-41b2-98c9-f7bba6316e44",
-            "codeSnippet": "int x = 1;",
-            "createdAt": "2026-03-18T20:58:21.770093300",
-            "downvoteCount": 0,
-            "comments": [
-              {
-                "downvoteCount": 0,
-                "replies": [
-                  {
-                    "downvoteCount": 0,
-                    "replies": [],
-                    "commentId": "bd843401-bffd-46c3-9cf4-31a32f10581c",
-                    "isEdited": false,
-                    "text": "quick reply from same user",
-                    "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-                    "timestamp": "2026-03-18T20:58:21.770093300",
-                    "upvoteCount": 0
-                  }
-                ],
-                "commentId": "b79107e7-6b83-4ff4-8258-97b583007281",
-                "isEdited": false,
-                "text": "answer comment from user",
-                "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-                "timestamp": "2026-03-18T20:58:21.770093300",
-                "upvoteCount": 0
-              }
-            ],
-            "explanation": "Demo answer body",
-            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
-            "upvoteCount": 0
-          }
-        ],
-        "maxLinesOfCode": 20,
-        "title": "Description",
+        "title": "",
         "type": "DESCRIPTION",
         "constraints": [
           "2 <= nums.length <= 10^4",
           "-10^9 <= nums[i] <= 10^9",
-          "-10^9 <= target <= 10^9",
-          "Exactly one valid answer exists"
+          "-10^9 <= target <= 10^9"
         ],
-        "content": "Given an array of integers nums and a target value, return the indices of two numbers that add up to target."
-      },
-      {
-        "comments": [],
-        "examples": [],
-        "dataType": "STRING",
-        "imageURL": "",
-        "expectedTimeComplexity": "O(n)",
-        "timeLimitSeconds": 2,
-        "answers": [],
-        "maxLinesOfCode": 25,
-        "title": "Hard Constraints",
-        "type": "CONSTRAINT",
-        "constraints": [
-          "Do not use nested loops over nums",
-          "Use at most O(n) extra space",
-          "Return indices, not values"
-        ],
-        "content": "Your implementation should avoid brute force and fit within practical interview limits."
-      },
+        "content": ""
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-04-23T13:33:44.552796300",
+    "lastUpdated": "2026-04-20T10:00",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440002",
+    "comments": [],
+    "totalSuccesses": 3,
+    "totalAttempts": 6,
+    "description": "Reverse a singly linked list.",
+    "title": "Reverse Linked List",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
       {
         "comments": [],
         "examples": [
-          "nums = [1,5,3,7], target = 8 -> [0,3]",
-          "nums = [-3,4,3,90], target = 0 -> [0,2]",
-          "nums = [0,4,3,0], target = 0 -> [0,3]"
+          "Input: 1→2→3→null → Output: 3→2→1→null",
+          "Input: null → Output: null"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "0 <= number of nodes <= 5000",
+          "-5000 <= Node.val <= 5000"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-04-23T13:33:44.554793800",
+    "lastUpdated": "2026-04-19T14:30",
+    "imageURL": "",
+    "category": "LINKED_LIST"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440003",
+    "comments": [],
+    "totalSuccesses": 2,
+    "totalAttempts": 5,
+    "description": "Determine if a string is a valid parenthesis combination.",
+    "title": "Valid Parentheses",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: \"()\" → Output: true",
+          "Input: \"()[]{}\" → Output: true",
+          "Input: \"([)]\" → Output: false"
         ],
         "dataType": "STRING",
         "imageURL": "",
@@ -498,15 +97,282 @@
         "timeLimitSeconds": null,
         "answers": [],
         "maxLinesOfCode": null,
-        "title": "Walkthrough Examples",
-        "type": "EXAMPLE",
-        "constraints": [],
-        "content": "These examples clarify edge behavior and indexing expectations."
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= s.length <= 10^4",
+          "s consists of parentheses only '()[]{}'"
+        ],
+        "content": ""
       }
     ],
     "difficulty": "EASY",
-    "createdAt": "2026-03-18T20:58:21.770093300",
-    "lastUpdated": "2026-03-21T19:42:04.480132500",
+    "createdAt": "2026-04-23T13:33:44.554793800",
+    "lastUpdated": "2026-04-18T09:15",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440004",
+    "comments": [],
+    "totalSuccesses": 4,
+    "totalAttempts": 7,
+    "description": "Find the maximum sum of any contiguous subarray.",
+    "title": "Maximum Subarray",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: nums = [-2,1,-3,4,-1,2,1,-5,4] → Output: 6 (subarray [4,-1,2,1])",
+          "Input: nums = [5,4,-1,7,8] → Output: 23"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= nums.length <= 10^5",
+          "-10^4 <= nums[i] <= 10^4"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "MEDIUM",
+    "createdAt": "2026-04-23T13:33:44.554793800",
+    "lastUpdated": "2026-04-17T13:45",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440005",
+    "comments": [],
+    "totalSuccesses": 1,
+    "totalAttempts": 3,
+    "description": "Merge two sorted arrays into one sorted array.",
+    "title": "Merge Sorted Array",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: nums1 = [1,2,3], nums2 = [2,5,6] → Output: [1,2,2,3,5,6]",
+          "Input: nums1 = [0], nums2 = [1] → Output: [0,1]"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "0 <= m, n <= 200",
+          "1 <= m + n <= 200",
+          "-10^9 <= nums1[i], nums2[i] <= 10^9"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-04-23T13:33:44.554793800",
+    "lastUpdated": "2026-04-16T11:20",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440006",
+    "comments": [],
+    "totalSuccesses": 2,
+    "totalAttempts": 4,
+    "description": "Check if a string is a palindrome (ignoring spaces and punctuation).",
+    "title": "Valid Palindrome",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: \"A man, a plan, a canal: Panama\" → Output: true",
+          "Input: \"race a car\" → Output: false"
+        ],
+        "dataType": "STRING",
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= s.length <= 2 * 10^5",
+          "s consists of printable ASCII characters"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-04-23T13:33:44.554793800",
+    "lastUpdated": "2026-04-15T16:00",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440007",
+    "comments": [],
+    "totalSuccesses": 3,
+    "totalAttempts": 5,
+    "description": "Implement binary search on a sorted array.",
+    "title": "Binary Search",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: nums = [-1,0,3,5,9,12], target = 9 → Output: 4",
+          "Input: nums = [-1,0,3,5,9,12], target = 13 → Output: -1"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= nums.length <= 10^4",
+          "-10^9 <= nums[i] <= 10^9",
+          "All elements are unique",
+          "nums is sorted in ascending order"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "EASY",
+    "createdAt": "2026-04-23T13:33:44.555794",
+    "lastUpdated": "2026-04-14T10:30",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440008",
+    "comments": [],
+    "totalSuccesses": 1,
+    "totalAttempts": 3,
+    "description": "Find all unique combinations of numbers that sum to a target.",
+    "title": "Combination Sum",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: candidates = [2,3,6,7], target = 7 → Output: [[2,2,3],[7]]",
+          "Input: candidates = [2], target = 1 → Output: []"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= candidates.length <= 30",
+          "1 <= candidates[i] <= 200",
+          "1 <= target <= 500"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "MEDIUM",
+    "createdAt": "2026-04-23T13:33:44.555794",
+    "lastUpdated": "2026-04-13T14:15",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440009",
+    "comments": [],
+    "totalSuccesses": 0,
+    "totalAttempts": 2,
+    "description": "Implement a LRU (Least Recently Used) Cache.",
+    "title": "LRU Cache",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "LRUCache lruCache = new LRUCache(2); lruCache.put(1, 1); lruCache.get(1) → 1"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "1 <= capacity <= 3000",
+          "0 <= key <= 10^4",
+          "0 <= value <= 10^5",
+          "At most 2 * 10^5 calls"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "HARD",
+    "createdAt": "2026-04-23T13:33:44.555794",
+    "lastUpdated": "2026-04-12T09:00",
+    "imageURL": "",
+    "category": "ARRAY"
+  },
+  {
+    "questionId": "550e8400-e29b-41d4-a716-446655440010",
+    "comments": [],
+    "totalSuccesses": 2,
+    "totalAttempts": 4,
+    "description": "Flatten a nested list of integers into a single list.",
+    "title": "Flatten Nested List Iterator",
+    "type": "SHORT_ANSWER",
+    "authorId": "2c7e9d41-8b0a-4f21-9a6e-5c3d1f8e7b90",
+    "sections": [
+      {
+        "comments": [],
+        "examples": [
+          "Input: [[1,1],2,[1,1]] → Output: [1,1,2,1,1]",
+          "Input: [1,[4,[6]]] → Output: [1,4,6]"
+        ],
+        "dataType": null,
+        "imageURL": "",
+        "expectedTimeComplexity": "",
+        "timeLimitSeconds": null,
+        "answers": [],
+        "maxLinesOfCode": null,
+        "title": "",
+        "type": "DESCRIPTION",
+        "constraints": [
+          "nestedList consists of nested lists of integers",
+          "The values of all integers are in the range [-10^6, 10^6]"
+        ],
+        "content": ""
+      }
+    ],
+    "difficulty": "MEDIUM",
+    "createdAt": "2026-04-23T13:33:44.555794",
+    "lastUpdated": "2026-04-11T15:45",
     "imageURL": "",
     "category": "ARRAY"
   }
