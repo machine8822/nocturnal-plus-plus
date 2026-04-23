@@ -11,6 +11,7 @@ import com.model.User;
 import com.nocturnal.App;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -23,12 +24,24 @@ public class CreateUserController {
     private TextField emailAdd;
     @FXML
     private PasswordField password;
+
+    @FXML
+    private TextField passwordVisible;
+
+    @FXML
+    private CheckBox showPasswordToggle;
     @FXML
     private TextField school;
     @FXML
     private TextField major;
     @FXML
     private TextField gradYear;
+
+    @FXML
+    private void initialize() {
+        passwordVisible.textProperty().bindBidirectional(password.textProperty());
+        setPasswordVisibility(false);
+    }
 
     @FXML
     private void createUser() throws IOException {
@@ -80,6 +93,18 @@ public class CreateUserController {
     @FXML
     private void goToLogin() throws IOException {
         App.setRoot("login");
+    }
+
+    @FXML
+    private void togglePasswordVisibility() {
+        setPasswordVisibility(showPasswordToggle.isSelected());
+    }
+
+    private void setPasswordVisibility(boolean visible) {
+        password.setVisible(!visible);
+        password.setManaged(!visible);
+        passwordVisible.setVisible(visible);
+        passwordVisible.setManaged(visible);
     }
 
 }

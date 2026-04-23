@@ -210,6 +210,7 @@ public class DashboardController {
     private HBox buildQuestionRow(InterviewQuestion question) {
         HBox row = new HBox();
         row.getStyleClass().add("table-row");
+        row.setStyle("-fx-cursor: hand;");
 
         Label title = new Label(question.getTitle());
         title.getStyleClass().addAll("table-cell", "large");
@@ -226,6 +227,16 @@ public class DashboardController {
         success.getStyleClass().add("table-cell");
 
         row.getChildren().addAll(title, difficulty, category, success);
+
+        row.setOnMouseClicked(event -> {
+            SystemFacade.getInstance().selectQuestion(question.getQuestionId());
+            try {
+                App.setRoot("questionDetails");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
+
         return row;
     }
 

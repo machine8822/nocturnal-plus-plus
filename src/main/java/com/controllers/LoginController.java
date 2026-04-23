@@ -7,6 +7,7 @@ import com.model.User;
 import com.nocturnal.App;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
@@ -16,6 +17,18 @@ public class LoginController {
 
     @FXML
     private PasswordField passwordInput;
+
+    @FXML
+    private TextField passwordVisibleInput;
+
+    @FXML
+    private CheckBox showPasswordToggle;
+
+    @FXML
+    private void initialize() {
+        passwordVisibleInput.textProperty().bindBidirectional(passwordInput.textProperty());
+        setPasswordVisibility(false);
+    }
 
     @FXML
     private void login() throws IOException {
@@ -47,6 +60,18 @@ public class LoginController {
         // Clear inputs when back button is clicked on login page
         emailInput.clear();
         passwordInput.clear();
+    }
+
+    @FXML
+    private void togglePasswordVisibility() {
+        setPasswordVisibility(showPasswordToggle.isSelected());
+    }
+
+    private void setPasswordVisibility(boolean visible) {
+        passwordInput.setVisible(!visible);
+        passwordInput.setManaged(!visible);
+        passwordVisibleInput.setVisible(visible);
+        passwordVisibleInput.setManaged(visible);
     }
 
 }

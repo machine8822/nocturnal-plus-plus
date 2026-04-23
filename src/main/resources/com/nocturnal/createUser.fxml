@@ -3,6 +3,7 @@
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
@@ -34,6 +35,8 @@
 
       <TextField fx:id="emailAdd" maxWidth="410.0" promptText="Email Address" />
       <PasswordField fx:id="password" maxWidth="410.0" promptText="Password" />
+      <TextField fx:id="passwordVisible" managed="false" maxWidth="410.0" promptText="Password" visible="false" />
+      <CheckBox fx:id="showPasswordToggle" onAction="#togglePasswordVisibility" text="Show password" />
       <TextField fx:id="school" maxWidth="410.0" promptText="School" />
 
       <GridPane hgap="10.0">
