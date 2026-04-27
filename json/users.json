@@ -3,7 +3,7 @@
     "firstName": "Grant",
     "lastName": "Smith",
     "createdAt": "2024-01-15T10:30",
-    "lastLogin": "2026-04-26T20:48:05.759293500",
+    "lastLogin": "2026-04-26T21:54:43.941255",
     "profile": {
       "resumeURL": "",
       "major": "Computer Science",
@@ -16,6 +16,24 @@
     "isContributor": true,
     "email": "grant.smith@example.com",
     "passwordHash": "$2a$10$qMewBcMRiIrP01oTPKu.D.t\/VHYiVJozm8xiJrQIAhYDCTGs0uVxy"
+  },
+  {
+    "firstName": "Bob",
+    "lastName": "king",
+    "createdAt": "2026-04-26T21:53:31.740053500",
+    "lastLogin": "2026-04-26T21:53:45.103221100",
+    "profile": {
+      "resumeURL": "",
+      "major": "computer science",
+      "school": "usc",
+      "totalUpvotes": 5,
+      "gradYear": 2026
+    },
+    "isAdmin": false,
+    "userId": "47c0a31f-a7fc-4628-bcfb-12da8daf7357",
+    "isContributor": false,
+    "email": "bob@example.com",
+    "passwordHash": "$2a$12$8nB\/jlFVnYhneqscFUVGX.KCOluYpxNz5gRlYd.z38jao5agOdHDS"
   },
   {
     "firstName": "tyrek",
