@@ -118,7 +118,7 @@
                </padding>
             </VBox>
             <Region prefHeight="14.0" />
-            <Button fx:id="answer" mnemonicParsing="false" prefHeight="31.0" prefWidth="720.0" style="-fx-background-color: #1B1B3A; -fx-background-radius: 6; -fx-border-color: #30305a; -fx-border-radius: 6;" text="Show Answer" textFill="#ffbd2e">
+            <Button fx:id="answer" mnemonicParsing="false" onMouseClicked="#showAnswer" prefHeight="31.0" prefWidth="720.0" style="-fx-background-color: #1B1B3A; -fx-background-radius: 6; -fx-border-color: #30305a; -fx-border-radius: 6;" text="Show Answer" textFill="#ffbd2e">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
