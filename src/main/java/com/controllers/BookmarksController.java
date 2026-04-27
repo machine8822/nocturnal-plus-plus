@@ -60,6 +60,10 @@ public class BookmarksController {
         App.setRoot("profile");
     }
 
+    @FXML
+    private void goToDashboard() throws IOException {
+        App.setRoot("dashboard");
+    }
 
 
 }
