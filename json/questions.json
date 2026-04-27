@@ -19,7 +19,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440201",
+            "codeSnippet": "class Solution {\n    public int[] twoSum(int[] nums, int target) {\n        java.util.Map<Integer, Integer> seen = new java.util.HashMap<>();\n        for (int i = 0; i < nums.length; i++) {\n            int need = target - nums[i];\n            if (seen.containsKey(need)) {\n                return new int[] { seen.get(need), i };\n            }\n            seen.put(nums[i], i);\n        }\n        return new int[0];\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Use a hash map to store seen values and return the first matching pair.",
+            "authorId": "9f4a2c10-6e3d-4f2a-9b6e-8a1c2d3e4f50",
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -57,7 +68,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440202",
+            "codeSnippet": "class Solution {\n    public ListNode reverseList(ListNode head) {\n        ListNode prev = null;\n        ListNode current = head;\n        while (current != null) {\n            ListNode nextNode = current.next;\n            current.next = prev;\n            prev = current;\n            current = nextNode;\n        }\n        return prev;\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Reverse the pointers in one pass using three references.",
+            "authorId": "be0b2f64-baaf-4049-a39a-c11e725cd525",
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -95,7 +117,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440203",
+            "codeSnippet": "class Solution {\n    public boolean isValid(String s) {\n        java.util.Deque<Character> stack = new java.util.ArrayDeque<>();\n        for (char c : s.toCharArray()) {\n            if (c == '(' || c == '[' || c == '{') {\n                stack.push(c);\n            } else if (stack.isEmpty() || !matches(stack.pop(), c)) {\n                return false;\n            }\n        }\n        return stack.isEmpty();\n    }\n\n    private boolean matches(char open, char close) {\n        return (open == '(' && close == ')')\n            || (open == '[' && close == ']')\n            || (open == '{' && close == '}');\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Use a stack to match each closing bracket against the most recent opening bracket.",
+            "authorId": null,
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -132,7 +165,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440204",
+            "codeSnippet": "class Solution {\n    public int maxSubArray(int[] nums) {\n        int best = nums[0];\n        int current = nums[0];\n        for (int i = 1; i < nums.length; i++) {\n            current = Math.max(nums[i], current + nums[i]);\n            best = Math.max(best, current);\n        }\n        return best;\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Kadane's algorithm keeps the best running sum ending at each position.",
+            "authorId": "be0b2f64-baaf-4049-a39a-c11e725cd525",
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -169,7 +213,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440205",
+            "codeSnippet": "class Solution {\n    public void merge(int[] nums1, int m, int[] nums2, int n) {\n        int i = m - 1;\n        int j = n - 1;\n        int k = m + n - 1;\n        while (j >= 0) {\n            if (i >= 0 && nums1[i] > nums2[j]) {\n                nums1[k--] = nums1[i--];\n            } else {\n                nums1[k--] = nums2[j--];\n            }\n        }\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Fill nums1 from the back so elements are never overwritten early.",
+            "authorId": null,
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -207,7 +262,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440206",
+            "codeSnippet": "class Solution {\n    public boolean isPalindrome(String s) {\n        int left = 0;\n        int right = s.length() - 1;\n        while (left < right) {\n            while (left < right && !Character.isLetterOrDigit(s.charAt(left))) left++;\n            while (left < right && !Character.isLetterOrDigit(s.charAt(right))) right--;\n            if (Character.toLowerCase(s.charAt(left)) != Character.toLowerCase(s.charAt(right))) {\n                return false;\n            }\n            left++;\n            right--;\n        }\n        return true;\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Use two pointers and ignore non-alphanumeric characters while comparing in place.",
+            "authorId": "be0b2f64-baaf-4049-a39a-c11e725cd525",
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -244,7 +310,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440207",
+            "codeSnippet": "class Solution {\n    public int search(int[] nums, int target) {\n        int left = 0;\n        int right = nums.length - 1;\n        while (left <= right) {\n            int mid = left + (right - left) \/ 2;\n            if (nums[mid] == target) return mid;\n            if (nums[mid] < target) {\n                left = mid + 1;\n            } else {\n                right = mid - 1;\n            }\n        }\n        return -1;\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Binary search halves the search space on every step.",
+            "authorId": null,
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -283,7 +360,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440208",
+            "codeSnippet": "class Solution {\n    public List<List<Integer>> combinationSum(int[] candidates, int target) {\n        List<List<Integer>> result = new ArrayList<>();\n        backtrack(candidates, target, 0, new ArrayList<>(), result);\n        return result;\n    }\n\n    private void backtrack(int[] candidates, int target, int start, List<Integer> path, List<List<Integer>> result) {\n        if (target == 0) {\n            result.add(new ArrayList<>(path));\n            return;\n        }\n        for (int i = start; i < candidates.length && candidates[i] <= target; i++) {\n            path.add(candidates[i]);\n            backtrack(candidates, target - candidates[i], i, path, result);\n            path.remove(path.size() - 1);\n        }\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Use backtracking and reuse the same candidate while exploring combinations.",
+            "authorId": "be0b2f64-baaf-4049-a39a-c11e725cd525",
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -320,7 +408,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440209",
+            "codeSnippet": "class LRUCache {\n    private final java.util.LinkedHashMap<Integer, Integer> cache;\n\n    public LRUCache(int capacity) {\n        cache = new java.util.LinkedHashMap<>(capacity, 0.75f, true) {\n            protected boolean removeEldestEntry(java.util.Map.Entry<Integer, Integer> eldest) {\n                return size() > capacity;\n            }\n        };\n    }\n\n    public int get(int key) {\n        return cache.getOrDefault(key, -1);\n    }\n\n    public void put(int key, int value) {\n        cache.put(key, value);\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "LinkedHashMap with access order gives a compact LRU implementation.",
+            "authorId": null,
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",
@@ -359,7 +458,18 @@
         "imageURL": "",
         "expectedTimeComplexity": "",
         "timeLimitSeconds": null,
-        "answers": [],
+        "answers": [
+          {
+            "answerId": "650e8400-e29b-41d4-a716-446655440210",
+            "codeSnippet": "class Solution {\n    public class NestedIterator implements java.util.Iterator<Integer> {\n        private final java.util.Deque<java.util.Iterator<NestedInteger>> stack = new java.util.ArrayDeque<>();\n        private Integer nextValue;\n\n        public NestedIterator(java.util.List<NestedInteger> nestedList) {\n            stack.push(nestedList.iterator());\n        }\n\n        public Integer next() {\n            Integer result = nextValue;\n            nextValue = null;\n            return result;\n        }\n\n        public boolean hasNext() {\n            while (!stack.isEmpty()) {\n                java.util.Iterator<NestedInteger> iterator = stack.peek();\n                if (!iterator.hasNext()) {\n                    stack.pop();\n                    continue;\n                }\n                NestedInteger current = iterator.next();\n                if (current.isInteger()) {\n                    nextValue = current.getInteger();\n                    return true;\n                }\n                stack.push(current.getList().iterator());\n            }\n            return false;\n        }\n    }\n}",
+            "createdAt": "2026-04-26T21:05",
+            "downvoteCount": 0,
+            "comments": [],
+            "explanation": "Flatten lazily using a stack of iterators so nested lists are expanded only when needed.",
+            "authorId": "be0b2f64-baaf-4049-a39a-c11e725cd525",
+            "upvoteCount": 0
+          }
+        ],
         "maxLinesOfCode": null,
         "title": "",
         "type": "DESCRIPTION",

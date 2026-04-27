@@ -99,24 +99,33 @@ public class QuestionDetailsController {
             return;
         }
 
-        String code = firstNonBlankCode(answers);
+        Answer selectedAnswer = firstAnswerWithCode(answers);
+        String code = selectedAnswer == null ? "" : selectedAnswer.getCodeSnippet();
         if (code.isBlank()) {
             showInfo("Answer Available", "An answer exists, but no code snippet was saved for it.");
             return;
         }
 
+        String explanation = selectedAnswer == null ? "" : selectedAnswer.getExplanation();
+
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Answer Code");
         alert.setHeaderText(activeQuestion.getTitle() + " - Example Solution");
 
-        TextArea codeArea = new TextArea(code);
-        codeArea.setEditable(false);
-        codeArea.setWrapText(false);
-        codeArea.setPrefWidth(700);
-        codeArea.setPrefHeight(420);
-        codeArea.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: 12;");
+        StringBuilder message = new StringBuilder();
+        if (explanation != null && !explanation.isBlank()) {
+            message.append("Explanation:\n").append(explanation).append("\n\n");
+        }
+        message.append("Code:\n").append(code);
 
-        alert.getDialogPane().setContent(codeArea);
+        TextArea contentArea = new TextArea(message.toString());
+        contentArea.setEditable(false);
+        contentArea.setWrapText(false);
+        contentArea.setPrefWidth(700);
+        contentArea.setPrefHeight(420);
+        contentArea.setStyle("-fx-font-family: 'Consolas'; -fx-font-size: 12;");
+
+        alert.getDialogPane().setContent(contentArea);
         alert.getDialogPane().setPrefWidth(760);
         alert.getDialogPane().setPrefHeight(520);
         alert.showAndWait();
@@ -145,14 +154,14 @@ public class QuestionDetailsController {
         return answers;
     }
 
-    private String firstNonBlankCode(List<Answer> answers) {
+    private Answer firstAnswerWithCode(List<Answer> answers) {
         for (Answer answerItem : answers) {
             String code = answerItem.getCodeSnippet();
             if (code != null && !code.isBlank()) {
-                return code;
+                return answerItem;
             }
         }
-        return "";
+        return null;
     }
 
     private void showInfo(String title, String message) {
