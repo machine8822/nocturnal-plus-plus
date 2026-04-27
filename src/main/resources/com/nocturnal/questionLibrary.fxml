@@ -9,16 +9,14 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="14.0" prefHeight="640.0" prefWidth="960.0" maxHeight="Infinity" maxWidth="Infinity" styleClass="dashboard-main"
-      xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="com.controllers.QuestionLibrary">
+<VBox maxHeight="Infinity" maxWidth="Infinity" prefHeight="640.0" prefWidth="960.0" spacing="14.0" styleClass="dashboard-root" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.controllers.QuestionLibrary">
    <children>
 
       <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-padding: 10; -fx-border-color: #2b3256; -fx-border-width: 0 0 1 0;">
          <children>
-            <Button styleClass="ghost-button" text="← Back" onAction="#goToDashboard" minWidth="60" />
+            <Button minWidth="60" onAction="#goToDashboard" styleClass="ghost-button" text="← Back" />
             <Region HBox.hgrow="ALWAYS" />
-            <Button styleClass="ghost-button" text="Sign Out" onAction="#logout" />
+            <Button onAction="#logout" styleClass="ghost-button" text="Sign Out" />
          </children>
       </HBox>
 
