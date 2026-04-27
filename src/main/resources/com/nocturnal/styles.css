@@ -205,6 +205,29 @@
     -fx-border-radius: 8px;
 }
 
+.question-list {
+    -fx-background-color: transparent;
+    -fx-control-inner-background: transparent;
+}
+
+.question-list .list-cell {
+    -fx-background-color: rgba(11, 16, 34, 0.92);
+    -fx-text-fill: #eef1ff;
+    -fx-padding: 10 12 10 12;
+    -fx-border-color: #2a325b;
+    -fx-border-width: 0 0 1 0;
+}
+
+.question-list .list-cell:filled:hover {
+    -fx-background-color: rgba(24, 34, 70, 0.95);
+}
+
+.question-list .list-cell:filled:selected,
+.question-list .list-cell:filled:selected:hover {
+    -fx-background-color: rgba(35, 48, 95, 0.95);
+    -fx-text-fill: #f4c15a;
+}
+
 .panel-title {
     -fx-text-fill: #eef1ff;
     -fx-font-size: 14px;

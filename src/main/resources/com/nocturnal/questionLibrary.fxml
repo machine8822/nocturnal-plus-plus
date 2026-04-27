@@ -29,7 +29,7 @@
       </HBox>
 
       <Label styleClass="panel-title" text="All Questions" />
-      <ListView fx:id="questionList" styleClass="panel-card" VBox.vgrow="ALWAYS" />
+      <ListView fx:id="questionList" styleClass="panel-card question-list" VBox.vgrow="ALWAYS" />
 
    </children>
    <padding>

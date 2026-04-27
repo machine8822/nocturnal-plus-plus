@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="14.0" prefHeight="640.0" prefWidth="960.0" styleClass="dashboard-main"
+<VBox spacing="14.0" prefHeight="640.0" prefWidth="960.0" styleClass="dashboard-root"
       xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="com.controllers.SettingsController">
    <children>
@@ -21,7 +21,15 @@
       </HBox>
 
       <Label styleClass="page-title" text="Settings" />
-      <Label text="Settings page coming soon" />
+      <VBox spacing="8.0" styleClass="panel-card">
+         <children>
+            <Label styleClass="panel-title" text="Settings" />
+            <Label styleClass="muted-text" text="Settings page coming soon" />
+         </children>
+         <padding>
+            <Insets bottom="12.0" left="12.0" right="12.0" top="12.0" />
+         </padding>
+      </VBox>
 
    </children>
    <padding>
