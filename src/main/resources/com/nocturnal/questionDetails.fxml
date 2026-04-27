@@ -4,34 +4,31 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1060.0" style="-fx-background-color: #0C0C1C;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="AnchorPane" prefHeight="650.0" prefWidth="1060.0" style="-fx-background-color: #0C0C1C;" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="1060.0" spacing="12.0" style="-fx-background-color: #101021;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label text="☰" textFill="#7d7da3">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
             <Label text="Nocturnal" textFill="#f1f1ff">
                <font>
                   <Font name="System Bold" size="13.0" />
                </font>
             </Label>
-            <Label text="/ Two Sum" textFill="#777797">
+            <Label fx:id="title" text="Title" textFill="#777797">
                <font>
                   <Font size="11.0" />
                </font>
             </Label>
             <Region HBox.hgrow="ALWAYS" />
-            <Label text="👤" textFill="#7d7da3">
+            <Label onMouseClicked="#goToProfile" text="👤" textFill="#7d7da3">
                <font>
                   <Font size="13.0" />
                </font>
@@ -43,21 +40,35 @@
       </HBox>
       <VBox layoutX="134.0" layoutY="43.0" prefWidth="720.0" spacing="8.0">
          <children>
-            <Label text="← Back to Library" textFill="#f3ad32">
+            <Label onMouseClicked="#goToLibrary" text="← Back to Library" textFill="#f3ad32">
                <font>
                   <Font name="System Bold" size="10.0" />
                </font>
             </Label>
-            <Label text="Two Sum" textFill="#ffffff">
+            <Label fx:id="title" text="Title" textFill="#ffffff">
                <font>
                   <Font name="System Bold" size="21.0" />
                </font>
             </Label>
-            <Label text="Easy  ·  Coding  ·  Array  ·  52% Success  ·  2,841 attempts" textFill="#8f8fa8">
-               <font>
-                  <Font size="10.0" />
-               </font>
-            </Label>
+            <GridPane alignment="CENTER">
+              <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label fx:id="difficulty" alignment="CENTER" contentDisplay="CENTER" text="Difficulty" textAlignment="CENTER" />
+                  <Label fx:id="type" text="Type" GridPane.columnIndex="1" />
+                  <Label fx:id="category" text="Category" GridPane.columnIndex="2" />
+                  <Label fx:id="successRate" text="successRate" GridPane.columnIndex="3" />
+                  <Label fx:id="totalAttempts" text="totalAttempts" GridPane.columnIndex="4" />
+               </children>
+            </GridPane>
             <HBox prefHeight="26.0" prefWidth="720.0" spacing="42.0" style="-fx-border-color: transparent transparent #5c5c79 transparent; -fx-border-width: 0 0 1 0;">
                <children>
                   <Label text="Problem" textFill="#ffffff">
@@ -65,26 +76,16 @@
                         <Font name="System Bold" size="11.0" />
                      </font>
                   </Label>
-                  <Label text="Answers (2)" textFill="#8888a7">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
-                  <Label text="Discussion" textFill="#8888a7">
-                     <font>
-                        <Font size="11.0" />
-                     </font>
-                  </Label>
                </children>
             </HBox>
             <VBox prefHeight="62.0" prefWidth="720.0" spacing="4.0" style="-fx-background-color: rgba(10,10,24,0.85); -fx-background-radius: 5; -fx-border-color: #9a9ab6; -fx-border-radius: 5; -fx-border-width: 1;">
                <children>
-                  <Label text="PROBLEM" textFill="#8d8da9">
+                  <Label text="Desciption" textFill="#8d8da9">
                      <font>
                         <Font size="8.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="40.0" prefWidth="690.0" style="-fx-background-color: transparent; -fx-control-inner-background: #0C0C1C; -fx-text-fill: #e8e8f2; -fx-border-color: transparent; -fx-background-insets: 0; -fx-padding: 0;" wrapText="true" />
+                  <TextArea fx:id="description" editable="false" prefHeight="40.0" prefWidth="690.0" style="-fx-background-color: transparent; -fx-control-inner-background: #0C0C1C; -fx-text-fill: #e8e8f2; -fx-border-color: transparent; -fx-background-insets: 0; -fx-padding: 0;" wrapText="true" />
                </children>
                <padding>
                   <Insets bottom="6.0" left="8.0" right="8.0" top="5.0" />
@@ -92,12 +93,12 @@
             </VBox>
             <VBox prefHeight="48.0" prefWidth="720.0" spacing="4.0" style="-fx-background-color: rgba(10,10,24,0.85); -fx-background-radius: 5; -fx-border-color: #9a9ab6; -fx-border-radius: 5; -fx-border-width: 1;">
                <children>
-                  <Label text="EXAMPLE" textFill="#8d8da9">
+                  <Label text="Constraints" textFill="#8d8da9">
                      <font>
                         <Font size="8.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="25.0" prefWidth="690.0" style="-fx-background-color: transparent; -fx-control-inner-background: #0C0C1C; -fx-text-fill: #e8e8f2; -fx-border-color: transparent; -fx-background-insets: 0; -fx-padding: 0;" wrapText="true" />
+                  <TextArea fx:id="constraints" editable="false" prefHeight="25.0" prefWidth="690.0" style="-fx-background-color: transparent; -fx-control-inner-background: #0C0C1C; -fx-text-fill: #e8e8f2; -fx-border-color: transparent; -fx-background-insets: 0; -fx-padding: 0;" wrapText="true" />
                </children>
                <padding>
                   <Insets bottom="6.0" left="8.0" right="8.0" top="5.0" />
@@ -105,59 +106,24 @@
             </VBox>
             <VBox prefHeight="36.0" prefWidth="720.0" spacing="4.0" style="-fx-background-color: rgba(10,10,24,0.85); -fx-background-radius: 5; -fx-border-color: #9a9ab6; -fx-border-radius: 5; -fx-border-width: 1;">
                <children>
-                  <Label text="CONSTRAINTS" textFill="#8d8da9">
+                  <Label text="Example" textFill="#8d8da9">
                      <font>
                         <Font size="8.0" />
                      </font>
                   </Label>
-                  <TextArea prefHeight="16.0" prefWidth="690.0" style="-fx-background-color: transparent; -fx-control-inner-background: #0C0C1C; -fx-text-fill: #e8e8f2; -fx-border-color: transparent; -fx-background-insets: 0; -fx-padding: 0;" wrapText="true" />
+                  <TextArea fx:id="examples" prefHeight="16.0" prefWidth="690.0" style="-fx-background-color: transparent; -fx-control-inner-background: #0C0C1C; -fx-text-fill: #e8e8f2; -fx-border-color: transparent; -fx-background-insets: 0; -fx-padding: 0;" wrapText="true" />
                </children>
                <padding>
                   <Insets bottom="5.0" left="8.0" right="8.0" top="4.0" />
                </padding>
             </VBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="22.0" prefWidth="720.0" spacing="14.0" style="-fx-background-color: rgba(10,10,24,0.85); -fx-background-radius: 4; -fx-border-color: #81819f; -fx-border-radius: 4; -fx-border-width: 1;">
-               <children>
-                  <Label text="HINT" textFill="#8d8da9">
-                     <font>
-                        <Font size="8.0" />
-                     </font>
-                  </Label>
-                  <Label text="[Click to reveal]" textFill="#777792">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </Label>
-               </children>
-               <padding>
-                  <Insets left="10.0" right="10.0" />
-               </padding>
-            </HBox>
             <Region prefHeight="14.0" />
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="720.0" style="-fx-background-color: #1B1B3A; -fx-background-radius: 6; -fx-border-color: #30305a; -fx-border-radius: 6;" text="Show Answers (2)" textFill="#ffbd2e">
+            <Button fx:id="answer" mnemonicParsing="false" prefHeight="31.0" prefWidth="720.0" style="-fx-background-color: #1B1B3A; -fx-background-radius: 6; -fx-border-color: #30305a; -fx-border-radius: 6;" text="Show Answers (2)" textFill="#ffbd2e">
                <font>
                   <Font name="System Bold" size="11.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="720.0" style="-fx-background-color: #171733; -fx-background-radius: 6; -fx-border-color: #2b2b53; -fx-border-radius: 6;" text="Show Discussion (12)" textFill="#777792">
-               <font>
-                  <Font name="System Bold" size="11.0" />
-               </font>
-            </Button>
-            <HBox prefHeight="28.0" prefWidth="720.0" spacing="10.0">
-               <children>
-                  <TextField promptText="Add a comment..." style="-fx-background-color: #101025; -fx-background-radius: 4; -fx-border-color: #2f2f52; -fx-border-radius: 4; -fx-text-fill: #eeeeff; -fx-prompt-text-fill: #656583;" HBox.hgrow="ALWAYS">
-                     <font>
-                        <Font size="10.0" />
-                     </font>
-                  </TextField>
-                  <Button mnemonicParsing="false" prefHeight="28.0" prefWidth="56.0" style="-fx-background-color: #ffbd2e; -fx-background-radius: 5;" text="Post" textFill="#1d1606">
-                     <font>
-                        <Font name="System Bold" size="10.0" />
-                     </font>
-                  </Button>
-               </children>
-            </HBox>
+            <HBox prefHeight="28.0" prefWidth="720.0" spacing="10.0" />
          </children>
       </VBox>
    </children>
